@@ -4,11 +4,14 @@ import ShiftListDetail from '../ShiftListDetail/ShiftListDetail';
 import { toast } from 'react-toastify';
 
 
-const ShiftList = ({ morningEmployeeList, afternoonEmployeeList, espacioEmployees }) => {
+const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
     useEffect(() => {
-        traspasoTurnos()
-    }, [morningEmployeeList, afternoonEmployeeList, espacioEmployees])
+        if (morningEmployeeList.length !== 0 && afternoonEmployeeList.length !== 0) {
+
+            traspasoTurnos()
+        }
+    }, [morningEmployeeList, afternoonEmployeeList])
 
 
 
@@ -36,7 +39,10 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList, espacioEmployee
         console.log(shiftFix);
 
         if (shiftFix.length === 0 || shiftFix.length < afternoonEmployeeList.length - 1) {
-            toast(`Falta gente para el cambio`)
+            console.log("diferencia", afternoonEmployeeList.length - shiftFix.length - 1);
+            const missing = afternoonEmployeeList.length - shiftFix.length - 1;
+
+            toast(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambioooo`)
         }
 
 

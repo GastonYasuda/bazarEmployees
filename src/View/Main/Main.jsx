@@ -63,8 +63,8 @@ const Main = () => {
 
 
 
-        //console.log(puntoEmployees);
-        //console.log(ciudadEmployees);
+        console.log(puntoEmployees);
+        console.log(ciudadEmployees);
 
         // console.log(espacioEmployees);
 
@@ -226,7 +226,6 @@ const Main = () => {
                 <ShiftList
                     morningEmployeeList={espacioMorningEmployees}
                     afternoonEmployeeList={espacioAfternoonEmployees}
-                    espacioEmployees={espacioEmployees}
                 />
 
                 <br />
