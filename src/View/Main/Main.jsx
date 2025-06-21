@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 // import Swal from 'sweetalert2'
 import ShiftList from "../../Component/ShiftList/ShiftList";
+import { Bounce, ToastContainer } from 'react-toastify';
+
 
 
 
@@ -57,8 +59,12 @@ const Main = () => {
         searchStoreEmployee("Punto")
         searchStoreEmployee("Ciudad")
 
-        console.log(puntoEmployees);
-        console.log(ciudadEmployees);
+        //console.log(espacioEmployees);
+
+
+
+        //console.log(puntoEmployees);
+        //console.log(ciudadEmployees);
 
         // console.log(espacioEmployees);
 
@@ -67,14 +73,17 @@ const Main = () => {
 
     const searchStoreEmployee = (state) => {
         const byStore = employees.filter((employee) => employee.store === state)
+
         if (state === "Espacio") {
             // console.log("Espacio", byStore);
             setEspacioEmployees(byStore)
             morningShift(byStore)
             afternoonShift(byStore)
+
         } else if (state === "Punto") {
             // console.log("Punto", byStore);
             setPuntoEmployees(byStore)
+
         } else if (state === "Ciudad") {
             // console.log("Ciudad", byStore);
             setCiudadEmployees(byStore)
@@ -86,6 +95,7 @@ const Main = () => {
     const morningShift = (data) => {
         const morning = data.filter((employee) => employee.entry === 9 && employee.assist === true);
         setEspacioMorningEmployees(morning);
+
     }
 
 
@@ -127,6 +137,7 @@ const Main = () => {
         );
 
     };
+
 
 
 
@@ -212,9 +223,14 @@ const Main = () => {
                 <br />
 
 
-                <ShiftList employeeList={espacioMorningEmployees} shift={'Manana'} />
+                <ShiftList
+                    morningEmployeeList={espacioMorningEmployees}
+                    afternoonEmployeeList={espacioAfternoonEmployees}
+                    espacioEmployees={espacioEmployees}
+                />
 
-                <ShiftList employeeList={espacioAfternoonEmployees} shift={'Tarde'} />
+                <br />
+                <br />
 
                 {/* <ShiftList employeeList={espacioEmployees} shift={'Tarde'} /> */}
 
@@ -238,6 +254,20 @@ const Main = () => {
 
                 </div>
             </div>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
 
 
         </div>
