@@ -38,9 +38,14 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
         console.log(shiftFix);
 
-        if (shiftFix.length === 0 || shiftFix.length < afternoonEmployeeList.length - 1) {
-            console.log("diferencia", afternoonEmployeeList.length - shiftFix.length - 1);
-            const missing = afternoonEmployeeList.length - shiftFix.length - 1;
+        //si hace de 9 a 20 me lo sume en shiftFix.lenght 
+        const doubleShift = morningEmployeeList.filter((morningEmployee) => morningEmployee.entry === 9 && morningEmployee.exit === 20)
+        console.log(doubleShift.length);
+
+
+        if (shiftFix.length === 0 || shiftFix.length < afternoonEmployeeList.length - doubleShift.length) {
+            console.log("diferencia", afternoonEmployeeList.length - shiftFix.length);
+            const missing = afternoonEmployeeList.length - shiftFix.length - doubleShift.length;
 
             toast(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambioooo`)
         }
