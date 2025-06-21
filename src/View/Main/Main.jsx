@@ -50,12 +50,17 @@ const Main = () => {
 
     const [espacioEmployees, setEspacioEmployees] = useState([])
     const [puntoEmployees, setPuntoEmployees] = useState([])
-    const [CiudadEmployees, setCiudadEmployees] = useState([])
+    const [ciudadEmployees, setCiudadEmployees] = useState([])
 
     useEffect(() => {
         searchStoreEmployee("Espacio")
         searchStoreEmployee("Punto")
         searchStoreEmployee("Ciudad")
+
+        console.log(puntoEmployees);
+        console.log(ciudadEmployees);
+
+
 
         // console.log(espacioEmployees);
 
