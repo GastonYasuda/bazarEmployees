@@ -60,8 +60,6 @@ const Main = () => {
         console.log(puntoEmployees);
         console.log(ciudadEmployees);
 
-
-
         // console.log(espacioEmployees);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
