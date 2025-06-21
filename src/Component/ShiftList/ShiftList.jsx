@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 
 
 const ShiftList = ({ employeeList, shift }) => {
@@ -8,9 +8,9 @@ const ShiftList = ({ employeeList, shift }) => {
 
     useEffect(() => {
         if (employeeList.length) {
-            console.log(employeeList);
+            // console.log(employeeList);
             if (shift === 'Manana' && employeeList.length < 4) {
-                toast(`Falta gente para turno ${shift}`)
+                toast(`Falta gente para turno ${shift} en ${employeeList[0].store}`)
             }
             if (shift === 'Tarde' && employeeList.length < 3) {
                 toast(`Falta gente para turno ${shift}`)
@@ -30,7 +30,19 @@ const ShiftList = ({ employeeList, shift }) => {
                         <span key={employee.id}>{employee.name}</span>
                     )
                 })}
-                <ToastContainer />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={1500}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition={Bounce}
+                />
             </div>
 
         </div>
