@@ -1,12 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import ShiftListDetail from '../ShiftListDetail/ShiftListDetail';
 import { toast } from 'react-toastify';
+import { apiEmployee } from '../../Context/EmployeeApiContext';
 
 
 const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
+    const { errors, setErrors } = useContext(apiEmployee)
+
     useEffect(() => {
+        console.log(errors);
+
+
         if (morningEmployeeList.length !== 0 && afternoonEmployeeList.length !== 0) {
 
             traspasoTurnos()
@@ -48,10 +54,9 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
             const missing = afternoonEmployeeList.length - shiftFix.length - doubleShift.length;
 
             toast(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambioooo`)
+
+            setErrors('error')
         }
-
-
-
 
     }
 
@@ -61,16 +66,18 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
     return (
         <div>
-            INFORME: ACA TIENE QUE DECIR CUANTOS FALTAN EN QUE TURNO O SI HAY ALGUN CAMBIO
 
-            <br />
-            <br />
 
             <ShiftListDetail shiftEmployeeList={morningEmployeeList} shift={"Manana"} />
 
             <br />
 
             <ShiftListDetail shiftEmployeeList={afternoonEmployeeList} shift={"Tarde"} />
+
+            <br />
+
+            INFORME: ACA TIENE QUE DECIR CUANTOS FALTAN EN QUE TURNO O SI HAY ALGUN CAMBIO
+
 
 
 

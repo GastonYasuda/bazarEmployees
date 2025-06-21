@@ -152,6 +152,15 @@ const Main = () => {
             </header>
             <div className="mainContainer">
 
+
+                <ShiftList
+                    morningEmployeeList={espacioMorningEmployees}
+                    afternoonEmployeeList={espacioAfternoonEmployees}
+                />
+
+                <br />
+                <br />
+
                 {/* aca hacer un componente con todo lo que hay abajo, para poder ponerlos por store */}
                 {espacioEmployees.map(((employee) => {
                     return (
@@ -219,17 +228,7 @@ const Main = () => {
                 <br />
                 <br />
                 {/* <Button variant="primary">Cargar</Button> */}
-                <br />
-                <br />
 
-
-                <ShiftList
-                    morningEmployeeList={espacioMorningEmployees}
-                    afternoonEmployeeList={espacioAfternoonEmployees}
-                />
-
-                <br />
-                <br />
 
                 {/* <ShiftList employeeList={espacioEmployees} shift={'Tarde'} /> */}
 
