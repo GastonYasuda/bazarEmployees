@@ -6,6 +6,7 @@ import ShiftList from "../../Component/ShiftList/ShiftList";
 
 
 
+
 const Main = () => {
 
 
@@ -41,13 +42,7 @@ const Main = () => {
 
 
 
-    const handleChange = (id) => {
-        setEmployees((prevEmployees) =>
-            prevEmployees.map((emp) =>
-                emp.id === id ? { ...emp, assist: !emp.assist } : emp
-            )
-        );
-    };
+
 
     useEffect(() => {
         morningShift()
@@ -66,6 +61,7 @@ const Main = () => {
         employees.forEach(employee => {
 
             if (morning.length !== 4) {
+
                 // Swal.fire({
                 //     title: 'Falta uno a la manana!',
                 //     text: 'Que hacemo?',
@@ -116,6 +112,14 @@ const Main = () => {
         setEmployees(prev =>
             prev.map(emp =>
                 emp.id === id ? { ...emp, exit: exitTime } : emp
+            )
+        );
+    };
+
+    const handleChange = (id) => {
+        setEmployees((prevEmployees) =>
+            prevEmployees.map((emp) =>
+                emp.id === id ? { ...emp, assist: !emp.assist } : emp
             )
         );
     };
@@ -202,9 +206,9 @@ const Main = () => {
                 <br />
 
 
-                <ShiftList employeeList={morningEmployees} />
+                <ShiftList employeeList={morningEmployees} shift={'Manana'} />
 
-                <ShiftList employeeList={afternoonEmployees} />
+                <ShiftList employeeList={afternoonEmployees} shift={'Tarde'} />
 
 
 
@@ -217,8 +221,6 @@ const Main = () => {
                 <br />
 
                 <div style={{ width: '80%' }}>
-                    **PENSAR... como hacer para saber automaticamente si estan todos los puestos completos
-                    <br /><br />
                     **El que no esta tildado, que quede deshabilitado, y abajo este la persona seleccionada con su horario
                     <br /><br />
                     **Cuando se destilda uno que salga un popup con las opciones disponibles.
@@ -226,19 +228,6 @@ const Main = () => {
                     **Tiene que haber un boton que guarde y actualice los cambios
 
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
 
 
