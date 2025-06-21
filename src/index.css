@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.titulo {
+  color: red;
+}
+
+.employeeContainer {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 5px auto;
+}
+
+.employeeContainer_label {
+  width: 20%;
+}
+
+.selectContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.checkBox {
+  margin-left: 15px;
+}
+
+.form-check-input {
+  width: 1.5em !important;
+  height: 1.5em !important;
+}
+
+.form-select:disabled {
+  background-color: #b0365f !important;
+}
