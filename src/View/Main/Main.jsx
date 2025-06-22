@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { Button, Form } from "react-bootstrap";
 // import Swal from 'sweetalert2'
 import ShiftList from "../../Component/ShiftList/ShiftList";
-import { Bounce, ToastContainer } from 'react-toastify';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 
 
 
 
 const Main = () => {
+
+    const { saveInfo } = useContext(apiEmployee)
+
 
 
 
@@ -29,19 +33,19 @@ const Main = () => {
     ]
 
     const employeeData = [
-        { id: 1, name: "Mely", entry: entryAllTime[0].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //medio turno
-        { id: 2, name: "Luca", entry: entryAllTime[0].entryTime, exit: exitAllTime[2].exitTime, assist: true, store: "Espacio" }, //cubre almuerzo
-        { id: 3, name: "Ori", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Espacio" }, //Luca
-        { id: 4, name: "Anto", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Espacio" }, // Mely cubre almuerzo Luca
-        { id: 5, name: "Dari", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //doble turno
-        { id: 6, name: "Jorge", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //Dari cuando Anto hace doble turno
-        { id: 7, name: "Belen", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
-        { id: 8, name: "Jenn", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
-        { id: 9, name: "Orne", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
-        { id: 10, name: "Thian", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
-        { id: 11, name: "Ari", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
-        { id: 12, name: "Luz", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
-        { id: 13, name: "Mili", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 0, name: "Mely", entry: entryAllTime[0].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //medio turno
+        { id: 1, name: "Luca", entry: entryAllTime[0].entryTime, exit: exitAllTime[2].exitTime, assist: true, store: "Espacio" }, //cubre almuerzo
+        { id: 2, name: "Ori", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Espacio" }, //Luca
+        { id: 3, name: "Anto", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Espacio" }, // Mely cubre almuerzo Luca
+        { id: 4, name: "Dari", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //doble turno
+        { id: 5, name: "Jorge", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //Dari cuando Anto hace doble turno
+        { id: 6, name: "Belen", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
+        { id: 7, name: "Jenn", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
+        { id: 8, name: "Orne", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
+        { id: 9, name: "Thian", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 10, name: "Ari", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 11, name: "Luz", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 12, name: "Mili", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
 
     ]
 
@@ -62,9 +66,11 @@ const Main = () => {
         //console.log(espacioEmployees);
 
 
+        if (puntoEmployees.length !== 0 && ciudadEmployees !== 0) {
 
-        console.log(puntoEmployees);
-        console.log(ciudadEmployees);
+            console.log(puntoEmployees);
+            console.log(ciudadEmployees);
+        }
 
         // console.log(espacioEmployees);
 
@@ -130,11 +136,21 @@ const Main = () => {
     const handleChange = (id) => {
         console.log('PRUEBA', espacioEmployees[id]);
 
+        console.log('el id check', id);
+
         setEmployees((prevEmployees) =>
             prevEmployees.map((emp) =>
                 emp.id === id ? { ...emp, assist: !emp.assist } : emp
             )
         );
+
+        if (espacioEmployees[id].assist) {
+
+            toast(`Falta ${espacioEmployees[id].name} en ${espacioEmployees[id].store}`)
+            saveInfo(`Falta ${espacioEmployees[id].name} en ${espacioEmployees[id].store}`, 'missingEmployee')
+
+        }
+
 
     };
 
@@ -212,7 +228,6 @@ const Main = () => {
                                     type="checkbox"
                                     checked={employee.assist}
                                     onChange={() => handleChange(employee.id)}
-                                    aria-label="option 2"
                                 />
                             </div>
 
@@ -255,7 +270,7 @@ const Main = () => {
 
             <ToastContainer
                 position="top-right"
-                autoClose={5000}
+                autoClose={3000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick

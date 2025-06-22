@@ -3,14 +3,16 @@ import React, { useContext, useEffect } from 'react'
 import ShiftListDetail from '../ShiftListDetail/ShiftListDetail';
 import { toast } from 'react-toastify';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
+import InfoMessage from '../InfoMessage/InfoMessage';
 
 
 const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
-    const { errors, setErrors } = useContext(apiEmployee)
+    const { info, saveInfo } = useContext(apiEmployee)
 
     useEffect(() => {
-        console.log(errors);
+
+
 
 
         if (morningEmployeeList.length !== 0 && afternoonEmployeeList.length !== 0) {
@@ -22,7 +24,6 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
 
     const traspasoTurnos = () => {
-        console.log(afternoonEmployeeList);
 
         const shiftFix = morningEmployeeList
             .map((morningEmployee) => {
@@ -42,20 +43,26 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
             })
             .filter(Boolean); // elimina los nulls
 
-        console.log(shiftFix);
 
         //si hace de 9 a 20 me lo sume en shiftFix.lenght 
         const doubleShift = morningEmployeeList.filter((morningEmployee) => morningEmployee.entry === 9 && morningEmployee.exit === 20)
-        console.log(doubleShift.length);
+
+        console.log("doble turno", doubleShift.length);
+        console.log("turno tarde", afternoonEmployeeList.length)
+        console.log("los cambios", shiftFix.length);
 
 
-        if (shiftFix.length === 0 || shiftFix.length < afternoonEmployeeList.length - doubleShift.length) {
-            console.log("diferencia", afternoonEmployeeList.length - shiftFix.length);
-            const missing = afternoonEmployeeList.length - shiftFix.length - doubleShift.length;
 
-            toast(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambioooo`)
 
-            setErrors('error')
+        const missing = afternoonEmployeeList.length - shiftFix.length - doubleShift.length;
+
+        if (shiftFix.length < afternoonEmployeeList.length - doubleShift.length && doubleShift.length < 2) { //
+            console.log("diferencia", afternoonEmployeeList.length - shiftFix.length - doubleShift.length);
+
+
+            toast(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio`)
+
+            saveInfo(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio`, 'shiftFixMissing')
         }
 
     }
@@ -68,6 +75,7 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
         <div>
 
 
+
             <ShiftListDetail shiftEmployeeList={morningEmployeeList} shift={"Manana"} />
 
             <br />
@@ -76,7 +84,8 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
             <br />
 
-            INFORME: ACA TIENE QUE DECIR CUANTOS FALTAN EN QUE TURNO O SI HAY ALGUN CAMBIO
+
+            {info.length !== 0 && <InfoMessage messages={info} />}
 
 
 
