@@ -14,7 +14,10 @@ const InfoMessage = ({ messages }) => {
         <div>
             {messages.map((message, i) => {
                 return (
-                    <p key={i}>{message}</p>
+                    <div key={i}>
+                        <span key={i}>{message}</span>
+                    </div>
+
                 )
             })}
 

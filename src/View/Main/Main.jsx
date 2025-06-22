@@ -5,6 +5,7 @@ import { Button, Form } from "react-bootstrap";
 import ShiftList from "../../Component/ShiftList/ShiftList";
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import { apiEmployee } from "../../Context/EmployeeApiContext";
+// import ScheduleGraphic from "../../Component/ScheduleGraphic/ScheduleGraphic";
 
 
 
@@ -167,6 +168,8 @@ const Main = () => {
 
             </header>
             <div className="mainContainer">
+
+                {/* <ScheduleGraphic /> */}
 
 
                 <ShiftList

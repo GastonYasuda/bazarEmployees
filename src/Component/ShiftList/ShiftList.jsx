@@ -8,10 +8,11 @@ import InfoMessage from '../InfoMessage/InfoMessage';
 
 const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
-    const { info, saveInfo } = useContext(apiEmployee)
+    const { infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo } = useContext(apiEmployee)
 
     useEffect(() => {
 
+        console.log(infoShiftFixMissing);
 
 
 
@@ -85,7 +86,17 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
             <br />
 
 
-            {info.length !== 0 && <InfoMessage messages={info} />}
+            {infoMissingMorning.length !== 0 &&
+                infoMissingAfternoon.length !== 0 &&
+                infoShiftFixMissing.length !== 0 &&
+                infoMissingEmployee.length !== 0 &&
+                <>
+                    <InfoMessage messages={infoMissingMorning} />
+                    <InfoMessage messages={infoMissingAfternoon} />
+                    <InfoMessage messages={infoShiftFixMissing} />
+                    <InfoMessage messages={infoMissingEmployee} />
+                </>
+            }
 
 
 

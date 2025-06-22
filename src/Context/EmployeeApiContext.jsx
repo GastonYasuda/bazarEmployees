@@ -4,30 +4,36 @@ export const apiEmployee = createContext();
 
 const EmployeeApiContext = ({ children }) => {
 
-    const [info, setInfo] = useState([])
+    const [infoMissingMorning, setInfoMissingMorning] = useState([])
+    const [infoMissingAfternoon, setInfoMissingAfternoon] = useState([])
+    const [infoShiftFixMissing, setInfoShiftFixMissing] = useState([])
+    const [infoMissingEmployee, setInfoMissingEmployee] = useState([])
+
+
+
 
     const saveInfo = (infoMessage, state) => {
 
-        //setInfo((prevMessage) => [...prevMessage, infoMessage])
-        setInfo([infoMessage])
-
         //si state es diferente que me guarde otro 
         //si se resuelve el problema que se borre el mensaje
-        if (state === 'missingMorning' || state === 'missingAfternoon') {
+        if (state === 'missingMorning') {
 
-            setInfo((prevMessage) => [...prevMessage, infoMessage])
+            setInfoMissingMorning((prevMessage) => [...prevMessage, infoMessage])
 
-        } else if (state === ' shiftFixMissing') {
-            setInfo([infoMessage])
+        } else if (state === 'missingAfternoon') {
+            setInfoMissingAfternoon((prevMessage) => [...prevMessage, infoMessage])
+
+        } else if (state === 'shiftFixMissing') {
+            setInfoShiftFixMissing([infoMessage])
 
         } else if (state === 'missingEmployee') {
-            setInfo([infoMessage])
+            setInfoMissingEmployee([infoMessage])
         }
 
     }
 
     return (
-        <apiEmployee.Provider value={{ info, saveInfo }}>
+        <apiEmployee.Provider value={{ infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo }}>
             {children}
         </apiEmployee.Provider>
     )

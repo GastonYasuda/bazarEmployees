@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
 
 
@@ -7,26 +7,23 @@ const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
     const { saveInfo } = useContext(apiEmployee)
 
 
-    // useEffect(() => {
-    //     if (shiftEmployeeList.length) {
+    useEffect(() => {
+        if (shiftEmployeeList.length) {
 
-    //         if (shift === "Manana" && shiftEmployeeList.length < 4) {
-    //             toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
-    //             saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingMorning')
+            if (shift === "Manana" && shiftEmployeeList.length < 4) {
+                toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
+                saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingMorning')
 
-    //         }
-    //         if (shift === "Tarde" && shiftEmployeeList.length < 3) {
-    //             toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
-    //             saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingAfternoon')
+            }
+            if (shift === "Tarde" && shiftEmployeeList.length < 3) {
+                toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
+                saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingAfternoon')
 
-    //         }
-    //     }
+            }
+        }
 
-
-
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [shiftEmployeeList, shift])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [shiftEmployeeList, shift])
 
 
     return (
