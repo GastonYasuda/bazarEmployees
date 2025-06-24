@@ -1,93 +1,69 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef } from 'react';
-import Calendar from '@toast-ui/react-calendar';
-import '@toast-ui/calendar/dist/toastui-calendar.min.css';
+import React from 'react';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+// Registrar módulos de Chart.js
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 
 const ScheduleGraphic = ({ employees }) => {
-    const calendarRef = useRef(null);
 
-    const calendars = [
-        {
-            id: 'emp1',
-            name: 'Juan',
-            color: '#ffffff',
-            bgColor: '#1e90ff',
-            dragBgColor: '#1e90ff',
-            borderColor: '#1e90ff',
-        },
-        {
-            id: 'emp2',
-            name: 'María',
-            color: '#ffffff',
-            bgColor: '#ff7f50',
-            dragBgColor: '#ff7f50',
-            borderColor: '#ff7f50',
-        },
-        {
-            id: 'emp3',
-            name: 'Pedro',
-            color: '#ffffff',
-            bgColor: '#32cd32',
-            dragBgColor: '#32cd32',
-            borderColor: '#32cd32',
-        },
-    ];
+    const employeesu = [
+        { name: 'Juan', hours: 35 },
+        { name: 'Ana', hours: 42 },
+        { name: 'Luis', hours: 28 },
+    ]
 
-    const schedules = [
-        {
-            id: '1',
-            calendarId: 'emp1',
-            title: 'Juan',
-            category: 'time',
-            start: '2025-06-22T09:30:00',
-            end: '2025-06-22T14:30:00',
-        },
-        {
-            id: '2',
-            calendarId: 'emp2',
-            title: 'María',
-            category: 'time',
-            start: '2025-06-22T10:00:00',
-            end: '2025-06-22T18:00:00',
-        },
-        {
-            id: '3',
-            calendarId: 'emp3',
-            title: 'Pedro',
-            category: 'time',
-            start: '2025-06-22T12:00:00',
-            end: '2025-06-22T20:00:00',
-        },
-    ];
 
-    useEffect(() => {
-        const calendarInstance = calendarRef.current?.getInstance();
+    // Generar etiquetas y datos a partir de employees
+    const labels = employeesu.map(emp => emp.name);
+    const hours = employeesu.map(emp => emp.hours);
 
-        if (calendarInstance) {
-            calendarInstance.clear();
-            calendarInstance.createSchedules(schedules);
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Horas trabajadas',
+                data: hours,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Horas trabajadas por empleado'
+            },
+            legend: {
+                display: true,
+                position: 'top'
+            }
+        },
+        scales: {
+            // y: {
+            //     beginAtZero: true
+            // }
         }
-    }, []);
+    };
+
 
     return (
-        <div style={{ width: '100%', height: '90vh' }}>
-            <Calendar
-                ref={calendarRef}
-                height="100%"
-                view="day"
-                calendars={calendars}
-                theme={{
-                    common: {
-                        backgroundColor: '#fff',
-                    },
-                }}
-                day={{
-                    hourStart: 9,
-                    hourEnd: 20,
-                }}
-                taskView={false}
-                scheduleView
-            />
+        <div style={{ width: '100%', height: '100%', maxWidth: '600px', margin: '0 auto' }}>
+            <Bar data={data} options={options} />
         </div>
     );
 };
