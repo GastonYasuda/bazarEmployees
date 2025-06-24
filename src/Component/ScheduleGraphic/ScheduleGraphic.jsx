@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import {
     Chart as ChartJS,
@@ -11,61 +10,73 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-// Registrar módulos de Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+const EmployeeScheduleChart = ({ employeeData }) => {
+    const labels = employeeData.map((e) => e.name);
 
-const ScheduleGraphic = ({ employees }) => {
-
-    const employeesu = [
-        { name: 'Juan', hours: 35 },
-        { name: 'Ana', hours: 42 },
-        { name: 'Luis', hours: 28 },
-    ]
-
-
-    // Generar etiquetas y datos a partir de employees
-    const labels = employeesu.map(emp => emp.name);
-    const hours = employeesu.map(emp => emp.hours);
+    // Usamos directamente los valores numéricos
+    const entryTimes = employeeData.map((e) => e.assist ? e.entry : 0);
+    const workedHours = employeeData.map((e) => e.assist ? e.exit - e.entry : 0);
 
     const data = {
         labels,
         datasets: [
             {
-                label: 'Horas trabajadas',
-                data: hours,
+                label: 'Inicio',
+                data: entryTimes,
+                backgroundColor: 'rgba(0,0,0,0)', // Invisible
+            },
+            {
+                label: 'Turno trabajado',
+                data: workedHours,
                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }
-        ]
+            },
+        ],
     };
 
     const options = {
+        indexAxis: 'y',
         responsive: true,
         plugins: {
             title: {
-                display: true,
-                text: 'Horas trabajadas por empleado'
+                display: false,
+                text: 'Horarios trabajados por empleados',
             },
             legend: {
-                display: true,
-                position: 'top'
-            }
+                display: false,
+            },
         },
         scales: {
-            // y: {
-            //     beginAtZero: true
-            // }
-        }
+            x: {
+                stacked: true,
+                min: 9,
+                max: 20,
+                ticks: {
+                    stepSize: 1,
+                    callback: (val) => `${val}`,
+                    maxRotation: 0,
+                    minRotation: 0,
+                },
+                title: {
+                    display: false,
+                    text: 'Hora del día',
+                },
+            },
+            y: {
+                stacked: true,
+                ticks: {
+                    autoSkip: false,
+                }
+            },
+        },
     };
 
-
     return (
-        <div style={{ width: '100%', height: '100%', maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ width: '100%', maxWidth: '800px', height: `${employeeData.length * 40}px`, margin: '0 auto' }}>
             <Bar data={data} options={options} />
         </div>
     );
 };
 
-export default ScheduleGraphic;
+export default EmployeeScheduleChart;

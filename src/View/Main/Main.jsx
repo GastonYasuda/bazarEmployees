@@ -21,14 +21,14 @@ const Main = () => {
 
     const entryAllTime = [
         { id: 1, entryTime: 9 },
-        { id: 2, entryTime: 13.30 },
-        { id: 3, entryTime: 14.30 },
+        { id: 2, entryTime: 13.5 },
+        { id: 3, entryTime: 14.5 },
         { id: 4, entryTime: 16 }
     ]
 
     const exitAllTime = [
-        { id: 1, exitTime: 14.30 },
-        { id: 2, exitTime: 15.30 },
+        { id: 1, exitTime: 14.5 },
+        { id: 2, exitTime: 15.5 },
         { id: 3, exitTime: 16 },
         { id: 4, exitTime: 20 }
     ]
@@ -169,7 +169,7 @@ const Main = () => {
             </header>
             <div className="mainContainer">
 
-                <ScheduleGraphic employees={employees} />
+                <ScheduleGraphic employeeData={espacioEmployees} />
 
 
                 <ShiftList
