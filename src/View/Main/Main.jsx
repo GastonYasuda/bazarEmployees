@@ -169,16 +169,11 @@ const Main = () => {
             </header>
             <div className="mainContainer">
 
-                <ScheduleGraphic employeeData={espacioEmployees} />
-
-
                 <ShiftList
                     morningEmployeeList={espacioMorningEmployees}
                     afternoonEmployeeList={espacioAfternoonEmployees}
                 />
-
-                <br />
-                <br />
+                <ScheduleGraphic employeeData={espacioEmployees} />
 
                 {/* aca hacer un componente con todo lo que hay abajo, para poder ponerlos por store */}
                 {espacioEmployees.map(((employee) => {
@@ -252,15 +247,6 @@ const Main = () => {
                 {/* <ShiftList employeeList={espacioEmployees} shift={'Tarde'} /> */}
 
 
-
-
-
-
-
-
-
-                <br />
-                <br />
 
                 <div style={{ width: '80%' }}>
                     **El que no esta tildado, que quede deshabilitado, y abajo este la persona seleccionada con su horario

@@ -77,7 +77,7 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
 
 
-            <ShiftListDetail shiftEmployeeList={morningEmployeeList} shift={"Manana"} />
+            <ShiftListDetail shiftEmployeeList={morningEmployeeList} shift={"Mañana"} />
 
             <br />
 

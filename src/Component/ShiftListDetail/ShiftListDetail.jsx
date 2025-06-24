@@ -10,7 +10,7 @@ const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
     useEffect(() => {
         if (shiftEmployeeList.length) {
 
-            if (shift === "Manana" && shiftEmployeeList.length < 4) {
+            if (shift === "Mañana" && shiftEmployeeList.length < 4) {
                 toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
                 saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingMorning')
 
