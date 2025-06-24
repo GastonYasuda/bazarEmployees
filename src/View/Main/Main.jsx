@@ -13,7 +13,7 @@ import ScheduleGraphic from "../../Component/ScheduleGraphic/ScheduleGraphic";
 
 const Main = () => {
 
-    const { saveInfo } = useContext(apiEmployee)
+    const { saveInfo, formatHour } = useContext(apiEmployee)
 
 
 
@@ -194,11 +194,12 @@ const Main = () => {
                                     value={employee.entry}
                                     onChange={(e) => handleEntryChange(employee.id, parseFloat(e.target.value))}
                                 >
-                                    <option>{employee.entry}</option>
+                                    <option>{formatHour(employee.entry)}</option>
 
                                     {entryAllTime.map((time, i) => {
                                         return (
-                                            <option key={i} value={i}>{time.entryTime}</option>
+                                            <option key={i} value={i}>  {formatHour(time.entryTime)}
+                                            </option>
 
                                         )
                                     })}
@@ -211,11 +212,11 @@ const Main = () => {
                                     value={employee.exit}
                                     onChange={(e) => handleExitChange(employee.id, parseFloat(e.target.value))}
                                 >
-                                    <option>{employee.exit}</option>
+                                    <option>{formatHour(employee.exit)}</option>
 
                                     {exitAllTime.map((time, i) => {
                                         return (
-                                            <option key={i} value={i}>{time.exitTime}</option>
+                                            <option key={i} value={i}>{formatHour(time.exitTime)}</option>
 
                                         )
                                     })}
@@ -272,8 +273,8 @@ const Main = () => {
             </div>
 
             <ToastContainer
-                position="top-right"
-                autoClose={3000}
+                position="bottom-center"
+                autoClose={4000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick

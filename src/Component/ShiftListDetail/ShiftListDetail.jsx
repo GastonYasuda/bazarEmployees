@@ -4,7 +4,7 @@ import { apiEmployee } from '../../Context/EmployeeApiContext';
 
 
 const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
-    const { saveInfo } = useContext(apiEmployee)
+    const { saveInfo, formatHour } = useContext(apiEmployee)
 
 
     useEffect(() => {
@@ -27,13 +27,13 @@ const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
 
 
     return (
-        <div>
+        <div >
             <h3>Turno {shift}</h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {shiftEmployeeList.map((employee) => {
                     return (
                         <div key={employee.id}>
-                            <span>{employee.name} de {employee.entry} a {employee.exit}</span>
+                            <span>{employee.name} de {formatHour(employee.entry)} a {formatHour(employee.exit)}</span>
                         </div>
                     )
                 })}

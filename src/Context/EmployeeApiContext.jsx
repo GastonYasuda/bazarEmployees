@@ -32,8 +32,16 @@ const EmployeeApiContext = ({ children }) => {
 
     }
 
+    function formatHour(decimalHour) {
+        const hour = Math.floor(decimalHour);
+        const minutes = Math.round((decimalHour - hour) * 60);
+        const paddedMinutes = minutes.toString().padStart(2, '0');
+        return `${hour}:${paddedMinutes}`;
+    }
+
+
     return (
-        <apiEmployee.Provider value={{ infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo }}>
+        <apiEmployee.Provider value={{ infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour }}>
             {children}
         </apiEmployee.Provider>
     )
