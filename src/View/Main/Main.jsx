@@ -116,22 +116,56 @@ const Main = () => {
     const handleEntryChange = (id, newEntryTime) => {
         const { entryTime } = entryAllTime[newEntryTime]
 
-        setEmployees(prev =>
-            prev.map(emp =>
-                emp.id === id ? { ...emp, entry: entryTime } : emp
-            )
-        );
+
+        if (entryTime === espacioEmployees[id].exit) {
+            toast.error(`No puede tener la misma hora de entrada y salida de ${espacioEmployees[id].name}!`, {
+                position: "top-center",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+
+        } else {
+
+            setEmployees(prev =>
+                prev.map(emp =>
+                    emp.id === id ? { ...emp, entry: entryTime } : emp
+                )
+            );
+        }
     };
 
 
     const handleExitChange = (id, newExitTime) => {
         const { exitTime } = exitAllTime[newExitTime]
 
-        setEmployees(prev =>
-            prev.map(emp =>
-                emp.id === id ? { ...emp, exit: exitTime } : emp
-            )
-        );
+
+        if (exitTime === espacioEmployees[id].entry) {
+            toast.error(`No puede tener la misma hora de entrada y salida de ${espacioEmployees[id].name}!`, {
+                position: "top-center",
+                autoClose: 6000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+
+        } else {
+            setEmployees(prev =>
+                prev.map(emp =>
+                    emp.id === id ? { ...emp, exit: exitTime } : emp
+                )
+            );
+        }
+
     };
 
     const handleChange = (id) => {
