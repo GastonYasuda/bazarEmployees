@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from 'react'
 
 export const apiEmployee = createContext();
@@ -45,6 +46,10 @@ const EmployeeApiContext = ({ children }) => {
 
     const [espacioMorningEmployees, setEspacioMorningEmployees] = useState([])
     const [espacioAfternoonEmployees, setEspacioAfternoonEmployees] = useState([])
+    const [puntoMorningEmployees, setPuntoMorningEmployees] = useState([])
+    const [puntoAfternoonEmployees, setPuntoAfternoonEmployees] = useState([])
+    const [ciudadMorningEmployees, setCiudadMorningEmployees] = useState([])
+    const [ciudadAfternoonEmployees, setCiudadAfternoonEmployees] = useState([])
 
     const [espacioEmployees, setEspacioEmployees] = useState([])
     const [puntoEmployees, setPuntoEmployees] = useState([])
@@ -54,49 +59,73 @@ const EmployeeApiContext = ({ children }) => {
         searchStoreEmployee("Espacio")
         searchStoreEmployee("Punto")
         searchStoreEmployee("Ciudad")
-
-
-
-
-
     }, [employees])
 
+    const searchStoreEmployee = (state) => {
+        const byStore = employees.filter((employee) => employee.store === state)
+        console.log('soy state', state);
+        console.log('soy bystore', byStore);
 
 
 
+        if (state === "Espacio") {
+            console.log("Espacio", byStore);
+            setEspacioEmployees(byStore) //me guarda todos los empleados de espacio 
+            morningShift(byStore) //me guarda los empleados de espacio de ma;ana
+            afternoonShift(byStore) //me guarda los empleados de espacio de tarde
 
+        } else if (state === "Punto") {
+            console.log("Punto", byStore);
+            setPuntoEmployees(byStore)
+            morningShift(byStore)
+            afternoonShift(byStore)
+
+        } else if (state === "Ciudad") {
+            console.log("Ciudad", byStore);
+            setCiudadEmployees(byStore)
+            morningShift(byStore)
+            afternoonShift(byStore)
+        }
+    }
 
     const morningShift = (data) => {
+
         const morning = data.filter((employee) => employee.entry === 9 && employee.assist === true);
-        setEspacioMorningEmployees(morning);
+        console.log('que morning?', morning[0].store); //todos los que trabajan manana
+
+
+        if (morning[0].store === 'Espacio') {
+            setEspacioMorningEmployees(morning);
+
+        } else if (morning[0].store === 'Punto') {
+            setPuntoMorningEmployees(morning)
+
+        } else if (morning[0].store === 'Ciudad') {
+            setCiudadMorningEmployees(morning)
+
+        }
+
     }
 
 
     const afternoonShift = (data) => {
         const afternoon = data.filter((employee) => employee.exit === 20 && employee.assist === true);
-        setEspacioAfternoonEmployees(afternoon)
-    }
 
 
-    const searchStoreEmployee = (state) => {
-        const byStore = employees.filter((employee) => employee.store === state)
+        if (afternoon[0].store === 'Espacio') {
+            setEspacioAfternoonEmployees(afternoon)
 
-        if (state === "Espacio") {
-            // console.log("Espacio", byStore);
-            setEspacioEmployees(byStore)
-            morningShift(byStore)
-            afternoonShift(byStore)
+        } else if (afternoon[0].store === 'Punto') {
+            setPuntoAfternoonEmployees(afternoon)
 
-        } else if (state === "Punto") {
-            // console.log("Punto", byStore);
-            setPuntoEmployees(byStore)
-
-        } else if (state === "Ciudad") {
-            // console.log("Ciudad", byStore);
-            setCiudadEmployees(byStore)
+        } else if (afternoon[0].store === 'Ciudad') {
+            setCiudadAfternoonEmployees(afternoon)
 
         }
     }
+
+
+
 
     const saveInfo = (infoMessage, state) => {
 
@@ -127,7 +156,7 @@ const EmployeeApiContext = ({ children }) => {
 
 
     return (
-        <apiEmployee.Provider value={{ infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees }}>
+        <apiEmployee.Provider value={{ infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees }}>
             {children}
         </apiEmployee.Provider>
     )

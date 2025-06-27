@@ -13,6 +13,7 @@ const Main = () => {
     const [showEspacioStore, setShowEspacioStore] = useState(false)
     const [showPuntoStore, setShowPuntoStore] = useState(false)
     const [showCiudadStore, setShowCiudadStore] = useState(false)
+    const [showMainCalendarNotification, setShowMainCalendarNotification] = useState(false)
 
 
 
@@ -23,11 +24,8 @@ const Main = () => {
             </header>
 
             <div className="mainContainer">
-                <BottomMenuBar
-                    setShowEspacioStore={setShowEspacioStore}
-                    setShowPuntoStore={setShowPuntoStore}
-                    setShowCiudadStore={setShowCiudadStore}
-                />
+
+
 
 
 
@@ -43,8 +41,12 @@ const Main = () => {
 
 
 
+                {!showMainCalendarNotification &&
 
-
+                    <div>
+                        aca van las notificaciones y calendario
+                    </div>
+                }
 
 
 
@@ -56,9 +58,15 @@ const Main = () => {
 
 
             </div>
+            <BottomMenuBar
+                setShowEspacioStore={setShowEspacioStore}
+                setShowPuntoStore={setShowPuntoStore}
+                setShowCiudadStore={setShowCiudadStore}
+                setShowMainCalendarNotification={setShowMainCalendarNotification}
+            />
 
             <ToastContainer
-                position="bottom-center"
+                position="top-center"
                 autoClose={4000}
                 hideProgressBar={false}
                 newestOnTop={false}

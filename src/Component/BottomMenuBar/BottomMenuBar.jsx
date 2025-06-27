@@ -2,7 +2,7 @@ import { useState } from "react";
 
 
 
-const BottomMenuBar = ({ setShowEspacioStore, setShowCiudadStore, setShowPuntoStore }) => {
+const BottomMenuBar = ({ setShowEspacioStore, setShowCiudadStore, setShowPuntoStore, setShowMainCalendarNotification }) => {
 
     const [activeStore, setActiveStore] = useState(null);
 
@@ -10,6 +10,7 @@ const BottomMenuBar = ({ setShowEspacioStore, setShowCiudadStore, setShowPuntoSt
 
 
     const handleShowStore = (storeId) => {
+        setShowMainCalendarNotification(true)
         setActiveStore(storeId); // cambia el botón activo
 
         if (storeId === 'espacio') {
@@ -27,6 +28,15 @@ const BottomMenuBar = ({ setShowEspacioStore, setShowCiudadStore, setShowPuntoSt
             setShowEspacioStore(false);
         }
     };
+
+    const handleBack = () => {
+        setShowMainCalendarNotification(false);
+        setShowEspacioStore(false);
+        setShowCiudadStore(false);
+        setShowPuntoStore(false);
+        setActiveStore(null)
+    }
+
 
     return (
         <div className="bottomMenu">
@@ -49,6 +59,8 @@ const BottomMenuBar = ({ setShowEspacioStore, setShowCiudadStore, setShowPuntoSt
                 style={{ backgroundColor: activeStore === 'punto' ? '#007bff' : 'white', color: activeStore === 'punto' ? 'white' : 'black' }}>
                 <img src="/logoPunto.png" alt="Logo Punto" />
             </button>
+
+            <button onClick={() => { handleBack() }}>Home</button>
         </div>
     )
 }

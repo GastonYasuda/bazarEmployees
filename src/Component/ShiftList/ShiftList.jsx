@@ -3,12 +3,13 @@ import React, { useContext, useEffect } from 'react'
 import ShiftListDetail from '../ShiftListDetail/ShiftListDetail';
 import { toast } from 'react-toastify';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
-import InfoMessage from '../InfoMessage/InfoMessage';
+// import InfoMessage from '../InfoMessage/InfoMessage';
 
 
 const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
-    const { infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo } = useContext(apiEmployee)
+    // const { infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo } = useContext(apiEmployee)
+    const { infoShiftFixMissing, saveInfo } = useContext(apiEmployee)
 
     useEffect(() => {
 
@@ -48,13 +49,14 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
         //si hace de 9 a 20 me lo sume en shiftFix.lenght 
         const doubleShift = morningEmployeeList.filter((morningEmployee) => morningEmployee.entry === 9 && morningEmployee.exit === 20)
 
-        console.log("doble turno", doubleShift.length);
-        console.log("turno tarde", afternoonEmployeeList.length)
-        console.log("los cambios", shiftFix.length);
+        // console.log("doble turno", doubleShift.length);
+        // console.log("turno tarde", afternoonEmployeeList.length)
+        // console.log("los cambios", shiftFix.length);
 
 
+        // console.log('soy de ', morningEmployeeList);
 
-
+        // if(morningEmployeeList[0].store)
         const missing = afternoonEmployeeList.length - shiftFix.length - doubleShift.length;
 
         if (shiftFix.length < afternoonEmployeeList.length - doubleShift.length && doubleShift.length < 2) { //
@@ -86,7 +88,7 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
             <br />
 
 
-            {infoMissingMorning.length !== 0 &&
+            {/* {infoMissingMorning.length !== 0 &&
                 infoMissingAfternoon.length !== 0 &&
                 infoShiftFixMissing.length !== 0 &&
                 infoMissingEmployee.length !== 0 &&
@@ -96,7 +98,7 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
                     <InfoMessage messages={infoShiftFixMissing} />
                     <InfoMessage messages={infoMissingEmployee} />
                 </>
-            }
+            } */}
 
 
 

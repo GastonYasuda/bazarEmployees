@@ -14,8 +14,6 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const EmployeeScheduleChart = ({ employeeData }) => {
 
-    console.log(employeeData);
-
 
     const labels = employeeData.map((e) => e.name);
 
