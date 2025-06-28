@@ -34,33 +34,52 @@ const BottomMenuBar = ({ setShowEspacioStore, setShowCiudadStore, setShowPuntoSt
         setShowEspacioStore(false);
         setShowCiudadStore(false);
         setShowPuntoStore(false);
-        setActiveStore(null)
+        setActiveStore('home')
     }
 
 
     return (
-        <div className="bottomMenu">
-            <button onClick={() => handleShowStore('espacio')}
-                style={{ backgroundColor: activeStore === 'espacio' ? '#007bff' : 'white', color: activeStore === 'espacio' ? 'white' : 'black' }}>
+        <div className="bottonMenuContainer">
+            <section className="bottomMenu">
 
-                <img src="/logoEspacio.png" alt="Logo Espacio" />
+                <div onClick={() => handleShowStore('espacio')}
+                    style={{
+                        transform: activeStore === 'espacio' ? 'scale(2.3)' : 'scale(1)',
+                        transition: 'transform 0.6s ease', // suave animación
+                    }}>
 
-            </button>
+                    <img src="/espacioIcon.png" alt="Espacio Icon" />
 
-
-
-            <button onClick={() => handleShowStore('ciudad')}
-                style={{ backgroundColor: activeStore === 'ciudad' ? '#007bff' : 'white', color: activeStore === 'ciudad' ? 'white' : 'black' }}>
-                <img src="/logoCiudad.png" alt="Logo Ciudad" />
-            </button>
+                </div>
 
 
-            <button onClick={() => handleShowStore('punto')}
-                style={{ backgroundColor: activeStore === 'punto' ? '#007bff' : 'white', color: activeStore === 'punto' ? 'white' : 'black' }}>
-                <img src="/logoPunto.png" alt="Logo Punto" />
-            </button>
 
-            <button onClick={() => { handleBack() }}>Home</button>
+                <div onClick={() => handleShowStore('ciudad')}
+                    style={{
+                        transform: activeStore === 'ciudad' ? 'scale(2.3)' : 'scale(1)',
+                        transition: 'transform 0.6s ease', // suave animación
+                    }}>
+                    <img src="/ciudadIcon.png" alt="Ciudad Icon" />
+                </div>
+
+
+                <div onClick={() => handleShowStore('punto')}
+                    style={{
+                        transform: activeStore === 'punto' ? 'scale(2.3)' : 'scale(1)',
+                        transition: 'transform 0.6s ease', // suave animación
+                    }}>
+                    <img src="/puntoIcon.png" alt="Punto Icon" />
+                </div>
+
+                <div onClick={() => { handleBack() }}
+                    style={{
+                        transform: activeStore === 'home' ? 'scale(2.3)' : 'scale(1)',
+                        transition: 'transform 0.6s ease', // suave animación
+                    }}>
+                    <img src="/calendarIcon.png" alt="Calendario Icon" />
+
+                </div>
+            </section>
         </div>
     )
 }

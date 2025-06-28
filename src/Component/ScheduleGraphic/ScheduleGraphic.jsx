@@ -75,7 +75,7 @@ const EmployeeScheduleChart = ({ employeeData }) => {
     };
 
     return (
-        <div style={{ width: '100%', maxWidth: '800px', height: `${employeeData.length * 40}px`, margin: '0 auto' }}>
+        <div style={{ width: '100%', maxWidth: '800px', height: `${employeeData.length * 30}px`, margin: '0 auto' }}>
             <Bar data={data} options={options} />
         </div>
     );

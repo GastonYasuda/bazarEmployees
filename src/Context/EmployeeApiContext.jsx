@@ -32,13 +32,14 @@ const EmployeeApiContext = ({ children }) => {
         { id: 3, name: "Anto", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Espacio" }, // Mely cubre almuerzo Luca
         { id: 4, name: "Dari", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //doble turno
         { id: 5, name: "Jorge", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Espacio" }, //Dari cuando Anto hace doble turno
-        { id: 6, name: "Belen", entry: entryAllTime[0].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
-        { id: 7, name: "Jenn", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
-        { id: 8, name: "Orne", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
-        { id: 9, name: "Thian", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
-        { id: 10, name: "Ari", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
-        { id: 11, name: "Luz", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
-        { id: 12, name: "Mili", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 6, name: "Belen", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
+        { id: 7, name: "Orne", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
+        { id: 8, name: "Jenn", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
+        { id: 9, name: "AntoPunto", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Punto" }, //Dari cuando Anto hace doble turno
+        { id: 10, name: "Thian", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 11, name: "Ari", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 12, name: "Luz", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 13, name: "Mili", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "Ciudad" }, //Dari cuando Anto hace doble turno
 
     ]
 
@@ -63,25 +64,25 @@ const EmployeeApiContext = ({ children }) => {
 
     const searchStoreEmployee = (state) => {
         const byStore = employees.filter((employee) => employee.store === state)
-        console.log('soy state', state);
-        console.log('soy bystore', byStore);
+        // console.log('soy state', state);
+        // console.log('soy bystore', byStore);
 
 
 
         if (state === "Espacio") {
-            console.log("Espacio", byStore);
+            // console.log("Espacio", byStore);
             setEspacioEmployees(byStore) //me guarda todos los empleados de espacio 
             morningShift(byStore) //me guarda los empleados de espacio de ma;ana
             afternoonShift(byStore) //me guarda los empleados de espacio de tarde
 
         } else if (state === "Punto") {
-            console.log("Punto", byStore);
+            // console.log("Punto", byStore);
             setPuntoEmployees(byStore)
             morningShift(byStore)
             afternoonShift(byStore)
 
         } else if (state === "Ciudad") {
-            console.log("Ciudad", byStore);
+            // console.log("Ciudad", byStore);
             setCiudadEmployees(byStore)
             morningShift(byStore)
             afternoonShift(byStore)
@@ -91,7 +92,7 @@ const EmployeeApiContext = ({ children }) => {
     const morningShift = (data) => {
 
         const morning = data.filter((employee) => employee.entry === 9 && employee.assist === true);
-        console.log('que morning?', morning[0].store); //todos los que trabajan manana
+        // console.log('que morning?', morning[0].store); //todos los que trabajan manana
 
 
         if (morning[0].store === 'Espacio') {

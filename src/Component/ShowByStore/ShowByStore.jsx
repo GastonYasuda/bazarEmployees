@@ -14,9 +14,9 @@ const ShowByStore = ({ store }) => {
     useEffect(() => {
         //console.log(store[0].store);
         // console.log('soy ShowByStore, y soy', puntoMorningEmployees);
-        console.log('manana espacio', espacioMorningEmployees);
-        console.log('manana punto', puntoMorningEmployees);
-        console.log('manana ciudad', ciudadMorningEmployees);
+        // console.log('manana espacio', espacioMorningEmployees);
+        // console.log('manana punto', puntoMorningEmployees);
+        // console.log('manana ciudad', ciudadMorningEmployees);
 
 
 
