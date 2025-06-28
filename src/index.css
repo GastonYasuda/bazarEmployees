@@ -46,6 +46,22 @@ code {
   background-color: #b0365f !important;
 }
 
+
+.showByStoreComponent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.showByStoreComponent canvas {
+  margin: auto;
+  /* width: 85% !important;
+  display: flex !important;
+  height: 125% !important; */
+}
+
 .bottonMenuContainer {
   width: 100%;
   position: fixed;
@@ -55,20 +71,28 @@ code {
 .bottonMenuContainer::before {
   content: "";
   position: absolute;
-  top: 13px;
+  top: -20px;
   left: 0;
   right: 0;
-  height: 54px;
-  background-color: aliceblue;
+  height: 75px;
+  background-color: #242629;
 }
 
 .bottomMenu {
-
   display: flex;
   justify-content: space-around;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 
   img {
     height: 30px;
   }
+}
+
+.changeTimeContainer {
+  width: 100%;
+}
+
+.shiftListComponent {
+  font-size: small;
+  margin-top: 25px;
 }

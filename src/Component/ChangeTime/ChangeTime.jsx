@@ -110,7 +110,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
     };
 
     return (
-        <>
+        <section className='changeTimeContainer'>
             {changeTimeEmployee.map(((employee) => {
                 return (
                     <div className="employeeContainer" key={employee.id}>
@@ -154,22 +154,22 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
 
 
+
+
+                            <div className="checkBox">
+                                <Form.Check
+                                    type="checkbox"
+                                    checked={employee.assist}
+                                    onChange={() => handleChange(employee.id)}
+                                />
+                            </div>
                         </section >
-
-
-                        <div className="checkBox">
-                            <Form.Check
-                                type="checkbox"
-                                checked={employee.assist}
-                                onChange={() => handleChange(employee.id)}
-                            />
-                        </div>
                     </div>
                 )
             }))
             }
 
-        </>
+        </section>
 
     )
 }

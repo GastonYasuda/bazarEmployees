@@ -75,7 +75,7 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
 
     return (
-        <div>
+        <div className='shiftListComponent'>
 
 
 

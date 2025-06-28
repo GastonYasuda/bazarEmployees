@@ -33,7 +33,7 @@ const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
 
     return (
         <div >
-            <h3>Turno {shift}</h3>
+            <h4>Turno {shift}</h4>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {shiftEmployeeList.map((employee) => {
                     return (

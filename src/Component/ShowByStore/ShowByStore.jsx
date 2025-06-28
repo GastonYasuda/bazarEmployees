@@ -12,7 +12,7 @@ const ShowByStore = ({ store }) => {
 
 
     useEffect(() => {
-        //console.log(store[0].store);
+        // console.log(store[0].store);
         // console.log('soy ShowByStore, y soy', puntoMorningEmployees);
         // console.log('manana espacio', espacioMorningEmployees);
         // console.log('manana punto', puntoMorningEmployees);
@@ -26,30 +26,11 @@ const ShowByStore = ({ store }) => {
 
 
     return (
-        <div>
+        <div className='showByStoreComponent'>
 
 
-            {
-                store[0].store === 'Espacio' &&
-                <ShiftList
-                    morningEmployeeList={espacioMorningEmployees}
-                    afternoonEmployeeList={espacioAfternoonEmployees}
-                />
-            }
-            {
-                store[0].store === 'Punto' &&
-                <ShiftList
-                    morningEmployeeList={puntoMorningEmployees}
-                    afternoonEmployeeList={puntoAfternoonEmployees}
-                />
-            }
-            {
-                store[0].store === 'Ciudad' &&
-                <ShiftList
-                    morningEmployeeList={ciudadMorningEmployees}
-                    afternoonEmployeeList={ciudadAfternoonEmployees}
-                />
-            }
+            <h1>{store[0].store}</h1>
+
 
 
 
@@ -57,6 +38,31 @@ const ShowByStore = ({ store }) => {
             <ScheduleGraphic employeeData={store} />
 
             <ChangeTime changeTimeEmployee={store} />
+
+            <div>
+                {
+                    store[0].store === 'Espacio' &&
+                    <ShiftList
+                        morningEmployeeList={espacioMorningEmployees}
+                        afternoonEmployeeList={espacioAfternoonEmployees}
+                    />
+                }
+                {
+                    store[0].store === 'Punto' &&
+                    <ShiftList
+                        morningEmployeeList={puntoMorningEmployees}
+                        afternoonEmployeeList={puntoAfternoonEmployees}
+                    />
+                }
+                {
+                    store[0].store === 'Ciudad' &&
+                    <ShiftList
+                        morningEmployeeList={ciudadMorningEmployees}
+                        afternoonEmployeeList={ciudadAfternoonEmployees}
+                    />
+                }
+
+            </div>
 
 
 
