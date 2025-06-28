@@ -29,7 +29,7 @@ const ShowByStore = ({ store }) => {
         <div className='showByStoreComponent'>
 
 
-            <h1>{store[0].store}</h1>
+            <h3>{store[0].store}</h3>
 
 
 
