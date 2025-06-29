@@ -143,7 +143,7 @@ const EmployeeApiContext = ({ children }) => {
             setInfoShiftFixMissing([infoMessage])
 
         } else if (state === 'missingEmployee') {
-            setInfoMissingEmployee([infoMessage])
+            setInfoMissingEmployee((prevMessage) => [...prevMessage, infoMessage])
         }
 
     }

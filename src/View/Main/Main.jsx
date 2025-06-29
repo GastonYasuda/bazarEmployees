@@ -5,6 +5,7 @@ import ShowByStore from "../../Component/ShowByStore/ShowByStore";
 import { useContext, useState } from 'react';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
 import BottomMenuBar from '../../Component/BottomMenuBar/BottomMenuBar';
+import NotificationButton from '../../Component/NotificationButton/NotificationButton';
 
 const Main = () => {
 
@@ -25,6 +26,8 @@ const Main = () => {
 
             <div className="mainContainer">
 
+                <NotificationButton />
+
 
 
 
@@ -43,7 +46,7 @@ const Main = () => {
 
                 {!showMainCalendarNotification &&
 
-                    <div>
+                    <div style={{ paddingTop: '40vh' }}>
                         aca van las notificaciones y calendario
                     </div>
                 }
@@ -66,7 +69,8 @@ const Main = () => {
             />
 
             <ToastContainer
-                position="top-center"
+                className='toastMyStyle'
+                position="bottom-center"
                 autoClose={4000}
                 hideProgressBar={false}
                 newestOnTop={false}
@@ -80,7 +84,7 @@ const Main = () => {
             />
 
 
-        </div>
+        </div >
     )
 };
 

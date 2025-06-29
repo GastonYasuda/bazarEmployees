@@ -16,6 +16,10 @@ code {
   color: red;
 }
 
+.toastMyStyle {
+  padding-bottom: 77px;
+}
+
 .employeeContainer {
   display: flex;
   flex-direction: row;
@@ -95,4 +99,23 @@ code {
 .shiftListComponent {
   font-size: small;
   margin-top: 25px;
+}
+
+.notificationButtonContainer {
+  width: 15%;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+
+  button {
+    all: unset;
+    cursor: pointer;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+
+    ;
+  }
 }
