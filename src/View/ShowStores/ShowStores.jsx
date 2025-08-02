@@ -4,6 +4,8 @@ import ShowByStore from "../../Component/ShowByStore/ShowByStore";
 import { useContext } from "react";
 import { apiEmployee } from "../../Context/EmployeeApiContext";
 import BottomMenuBar from "../../Component/BottomMenuBar/BottomMenuBar";
+import { Bounce, ToastContainer } from 'react-toastify';
+
 
 const ShowStores = () => {
 
@@ -46,6 +48,21 @@ const ShowStores = () => {
                     </>
                 }
                 <BottomMenuBar />
+
+                <ToastContainer
+                    className='toastMyStyle'
+                    position="top-center"
+                    autoClose={4000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition={Bounce}
+                />
             </div>
         </div>
     );

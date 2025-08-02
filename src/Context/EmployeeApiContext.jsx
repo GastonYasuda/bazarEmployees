@@ -103,7 +103,7 @@ const EmployeeApiContext = ({ children }) => {
             } else if (morning[0].store === 'punto') {
                 setPuntoMorningEmployees(morning)
 
-            } else if (morning[0].store === 'Ciuciudaddad') {
+            } else if (morning[0].store === 'ciudad') {
                 setCiudadMorningEmployees(morning)
 
             }

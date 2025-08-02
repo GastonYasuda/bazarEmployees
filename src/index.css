@@ -17,7 +17,7 @@ code {
 }
 
 .toastMyStyle {
-  padding-bottom: 77px;
+  padding-bottom: 80px;
 }
 
 .employeeContainer {
@@ -53,6 +53,7 @@ code {
 
 .showByStoreComponent {
   width: 100%;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,6 +72,7 @@ code {
   width: 100%;
   position: fixed;
   bottom: -6px;
+  z-index: 500;
 }
 
 .bottonMenuContainer::before {
