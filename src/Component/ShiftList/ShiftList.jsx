@@ -8,15 +8,18 @@ import { useParams } from 'react-router-dom';
 
 const ShiftList = () => {
 
-    const { saveInfo, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees } = useContext(apiEmployee)
+    const { saveInfo, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, shiftInfo } = useContext(apiEmployee)
     const { storeId } = useParams()
 
     useEffect(() => {
-        traspasoTurnos(espacioMorningEmployees, espacioAfternoonEmployees)
+        traspasoTurnos(espacioMorningEmployees, espacioAfternoonEmployees, 'espacio')
+        traspasoTurnos(puntoMorningEmployees, puntoAfternoonEmployees, 'punto')
+        traspasoTurnos(ciudadMorningEmployees, ciudadAfternoonEmployees, 'ciudad')
+
     }, [espacioMorningEmployees])
 
 
-    const traspasoTurnos = (morningEmployees, afternoonEmployees) => {
+    const traspasoTurnos = (morningEmployees, afternoonEmployees, store) => {
 
 
 
@@ -54,6 +57,8 @@ const ShiftList = () => {
             //tambien si se resuelve me tiene que desaparecer la notificacion
             toast(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio`)
             saveInfo(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio`, 'shiftFixMissing')
+
+            shiftInfo(store, `${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio`)
         }
 
     }

@@ -134,6 +134,10 @@ const EmployeeApiContext = ({ children }) => {
     }
 
     const [notAssistEmployeesState, setNotAssistEmployeesState] = useState([])
+    const [shiftInformationEspacio, setShiftInformationEspacio] = useState()
+    const [shiftInformationPunto, setShiftInformationPunto] = useState()
+    const [shiftInformationCiudad, setShiftInformationCiudad] = useState()
+
 
     const ask = () => {
         const notAssistEmployees = employees.filter(employee => employee.assist === false);
@@ -141,6 +145,19 @@ const EmployeeApiContext = ({ children }) => {
         //preguntar que horarios hace
         // console.log(notAssistEmployees);
     };
+
+    const shiftInfo = (store, infoMessage) => {
+        if (store === 'espacio') {
+            setShiftInformationEspacio(infoMessage)
+        } else if (store === 'ciudad') {
+            setShiftInformationPunto(infoMessage)
+
+        } else if (store === 'punto') {
+            setShiftInformationCiudad(infoMessage)
+
+        }
+
+    }
 
 
 
@@ -176,7 +193,7 @@ const EmployeeApiContext = ({ children }) => {
     }
 
     return (
-        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState }}>
+        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, shiftInformationEspacio, shiftInformationCiudad, shiftInformationPunto, shiftInfo }}>
             {children}
         </apiEmployee.Provider>
     )

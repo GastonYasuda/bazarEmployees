@@ -1,11 +1,19 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const InformationContainer = ({ store, notAssist }) => {
+const InformationContainer = ({ store, notAssist, shiftInformation }) => {
+
+    useEffect(() => {
+
+        console.log(shiftInformation);
+
+
+    }, [shiftInformation])
 
 
     return (
         <div>
-            {notAssist.length === 0 ?
+            {notAssist.length === 0 && shiftInformation === undefined ?
                 <p>No hay notificacion para mostrar</p>
                 :
                 <>
@@ -20,6 +28,7 @@ const InformationContainer = ({ store, notAssist }) => {
                         }
                         return null;
                     })}
+                    <p>{shiftInformation}</p>
                     <Link to={`/${store}`}>
                         Ir a la planilla de {store}
                     </Link>

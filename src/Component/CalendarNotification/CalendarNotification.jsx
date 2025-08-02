@@ -8,7 +8,7 @@ import InformationContainer from "../InformationContainer/InformationContainer";
 
 
 const CalendarNotification = () => {
-    const { notAssistEmployeesState } = useContext(apiEmployee)
+    const { notAssistEmployeesState, shiftInformationEspacio, shiftInformationPunto, shiftInformationCiudad } = useContext(apiEmployee)
     const [selected, setSelected] = useState();
     const [notAssistEspacio, setNotAssistEspacio] = useState([])
     const [notAssistPunto, setNotAssistPunto] = useState([])
@@ -16,6 +16,8 @@ const CalendarNotification = () => {
 
 
     useEffect(() => {
+
+
         if (notAssistEmployeesState.length !== 0) {
 
             notAssistEmployeesState.forEach(notAssist => {
@@ -54,7 +56,7 @@ const CalendarNotification = () => {
                         <Accordion.Header>Espacio</Accordion.Header>
                         <Accordion.Body>
 
-                            <InformationContainer store={'espacio'} notAssist={notAssistEspacio} />
+                            <InformationContainer store={'espacio'} notAssist={notAssistEspacio} shiftInformation={shiftInformationEspacio} />
 
                         </Accordion.Body>
                     </Accordion.Item>
@@ -64,7 +66,7 @@ const CalendarNotification = () => {
                         <Accordion.Header>Ciudad</Accordion.Header>
                         <Accordion.Body>
 
-                            <InformationContainer store={'ciudad'} notAssist={notAssistCiudad} />
+                            <InformationContainer store={'ciudad'} notAssist={notAssistCiudad} shiftInformation={shiftInformationPunto} />
 
                         </Accordion.Body>
                     </Accordion.Item>
@@ -75,7 +77,7 @@ const CalendarNotification = () => {
                         <Accordion.Header>Punto</Accordion.Header>
                         <Accordion.Body>
 
-                            <InformationContainer store={'punto'} notAssist={notAssistPunto} />
+                            <InformationContainer store={'punto'} notAssist={notAssistPunto} shiftInformation={shiftInformationCiudad} />
 
                         </Accordion.Body>
                     </Accordion.Item>
