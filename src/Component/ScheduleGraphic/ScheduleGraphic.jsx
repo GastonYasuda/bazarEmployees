@@ -15,6 +15,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const EmployeeScheduleChart = ({ employeeData }) => {
 
 
+
     const labels = employeeData.map((e) => e.name);
 
     // Usamos directamente los valores numéricos
@@ -75,9 +76,10 @@ const EmployeeScheduleChart = ({ employeeData }) => {
     };
 
     return (
+
         <div style={{
             width: '100%', maxWidth: '800px',
-            height: employeeData[0].store === 'Espacio' ? `${employeeData.length * 27}px` : `${employeeData.length * 40}px`,
+            height: employeeData[0].store === 'espacio' ? `${employeeData.length * 27}px` : `${employeeData.length * 40}px`,
 
 
             // height: `${employeeData.length * 40}px`,
@@ -85,6 +87,8 @@ const EmployeeScheduleChart = ({ employeeData }) => {
         }}>
             <Bar data={data} options={options} />
         </div>
+
+
     );
 };
 

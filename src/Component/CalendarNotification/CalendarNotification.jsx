@@ -1,19 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import 'react-day-picker/dist/style.css';
 import Accordion from 'react-bootstrap/Accordion';
-import { apiEmployee } from "../../Context/EmployeeApiContext";
 import { Link } from "react-router-dom";
 
 
 
 const CalendarNotification = () => {
     const [selected, setSelected] = useState();
-    const { setActiveStore } = useContext(apiEmployee)
 
-    const handleButton = (store) => {
-        setActiveStore(store)
-    }
 
     return (
         <div>
@@ -31,7 +26,7 @@ const CalendarNotification = () => {
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Espacio</Accordion.Header>
                         <Accordion.Body>
-                            Aca van las notificaciones de Espacio
+                            Aca van las notificaciones de Espacio<br />
 
                             <Link to={'/espacio'}>
                                 Ir a la planilla de espacio
@@ -46,7 +41,7 @@ const CalendarNotification = () => {
                     <Accordion.Item eventKey="1">
                         <Accordion.Header>Ciudad</Accordion.Header>
                         <Accordion.Body>
-                            Aca van las notificaciones de Ciudad
+                            Aca van las notificaciones de Ciudad<br />
 
                             <Link to={'/ciudad'}>
                                 Ir a la planilla de ciudad
@@ -57,7 +52,7 @@ const CalendarNotification = () => {
                     <Accordion.Item eventKey="2">
                         <Accordion.Header>Punto</Accordion.Header>
                         <Accordion.Body>
-                            Aca van las notificaciones de Punto
+                            Aca van las notificaciones de Punto <br />
 
                             <Link to={'/punto'}>
                                 Ir a la planilla de punto

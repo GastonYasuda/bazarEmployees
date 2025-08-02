@@ -1,57 +1,34 @@
 import ChangeTime from '../ChangeTime/ChangeTime'
 import ScheduleGraphic from "../../Component/ScheduleGraphic/ScheduleGraphic";
+
+import ShiftList from '../ShiftList/ShiftList';
 import { useContext } from 'react';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
-import ShiftList from '../ShiftList/ShiftList';
 
 
 
-const ShowByStore = ({ store }) => {
+const ShowByStore = ({ store, employee, morningEmployee, afternoonEmployee }) => {
 
 
-
-
-
-    const { espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees } = useContext(apiEmployee)
-
-
+    const { mayPrimera } = useContext(apiEmployee)
 
     return (
-        <div className='showByStoreComponent'>
+        <>
+            <div className='showByStoreComponent'>
 
 
-            <h3>{store[0].store}</h3>
+                <h3>{mayPrimera(store)}</h3>
 
 
-            <ScheduleGraphic employeeData={store} />
+                <ScheduleGraphic employeeData={employee} />
 
-            <ChangeTime changeTimeEmployee={store} />
+                <ChangeTime changeTimeEmployee={employee} />
 
-            <div>
-                {
-                    store[0].store === 'Espacio' &&
-                    <ShiftList
-                        morningEmployeeList={espacioMorningEmployees}
-                        afternoonEmployeeList={espacioAfternoonEmployees}
-                    />
-                }
-                {
-                    store[0].store === 'Punto' &&
-                    <ShiftList
-                        morningEmployeeList={puntoMorningEmployees}
-                        afternoonEmployeeList={puntoAfternoonEmployees}
-                    />
-                }
-                {
-                    store[0].store === 'Ciudad' &&
-                    <ShiftList
-                        morningEmployeeList={ciudadMorningEmployees}
-                        afternoonEmployeeList={ciudadAfternoonEmployees}
-                    />
-                }
+                <ShiftList />
 
             </div>
-        </div>
+
+        </>
     )
 }
 

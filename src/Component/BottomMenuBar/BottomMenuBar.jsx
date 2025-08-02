@@ -1,5 +1,3 @@
-import { useContext, useEffect } from "react";
-import { apiEmployee } from "../../Context/EmployeeApiContext";
 import { Link, useParams } from "react-router-dom";
 
 
@@ -8,11 +6,7 @@ const BottomMenuBar = () => {
 
     const { storeId } = useParams()
 
-    useEffect(() => {
-        console.log(storeId);
 
-
-    }, [storeId])
 
 
 
