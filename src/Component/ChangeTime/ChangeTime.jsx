@@ -101,7 +101,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                 );
 
                 if (changeTime.assist) {
-                    toast(`Falta ${changeTime.name} en ${changeTime.store} changeTime`)
+                    toast(`Falta ${changeTime.name} en ${changeTime.store}`)
                     saveInfo(`Falta ${changeTime.name} en ${changeTime.store}`, 'missingEmployee')
 
                 }
