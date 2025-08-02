@@ -1,8 +1,9 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './View/Main/Main';
 import './index.css';
 import EmployeeApiContext from './Context/EmployeeApiContext';
+import MainApp from './MainApp';
+import ShowStores from './View/ShowStores/ShowStores';
 
 
 
@@ -10,11 +11,17 @@ import EmployeeApiContext from './Context/EmployeeApiContext';
 
 function App() {
   return (
+
     <EmployeeApiContext>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
+
+          <Route path="/" element={<MainApp />} />
+          <Route path='/:storeId' element={<ShowStores />} />
+
+
         </Routes>
+
       </BrowserRouter>
     </EmployeeApiContext>
   );

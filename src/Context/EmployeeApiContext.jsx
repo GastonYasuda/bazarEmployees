@@ -62,6 +62,12 @@ const EmployeeApiContext = ({ children }) => {
         searchStoreEmployee("Ciudad")
     }, [employees])
 
+    const [showEspacioStore, setShowEspacioStore] = useState(false)
+    const [showPuntoStore, setShowPuntoStore] = useState(false)
+    const [showCiudadStore, setShowCiudadStore] = useState(false)
+    const [showMainCalendarNotification, setShowMainCalendarNotification] = useState(false)
+
+
     const searchStoreEmployee = (state) => {
         const byStore = employees.filter((employee) => employee.store === state)
         // console.log('soy state', state);
@@ -157,7 +163,7 @@ const EmployeeApiContext = ({ children }) => {
 
 
     return (
-        <apiEmployee.Provider value={{ infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees }}>
+        <apiEmployee.Provider value={{ infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, showEspacioStore, setShowEspacioStore, showPuntoStore, setShowPuntoStore, showCiudadStore, setShowCiudadStore, showMainCalendarNotification, setShowMainCalendarNotification }}>
             {children}
         </apiEmployee.Provider>
     )

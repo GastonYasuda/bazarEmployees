@@ -7,17 +7,17 @@ const NotificationButton = () => {
 
     const { infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee } = useContext(apiEmployee)
 
-    useEffect(() => {
-        console.log('infoShiftFixMissing', infoShiftFixMissing);
-        console.log('infoMissingEmployee', infoMissingEmployee);
-        console.log('infoMissingMorning', infoMissingMorning);
-        console.log('infoMissingAfternoon', infoMissingAfternoon);
+    // useEffect(() => {
+    //     console.log('infoShiftFixMissing', infoShiftFixMissing);
+    //     console.log('infoMissingEmployee', infoMissingEmployee);
+    //     console.log('infoMissingMorning', infoMissingMorning);
+    //     console.log('infoMissingAfternoon', infoMissingAfternoon);
 
 
 
 
 
-    }, [infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee])
+    // }, [infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee])
 
     const [show, setShow] = useState(false);
 
@@ -39,10 +39,10 @@ const NotificationButton = () => {
 
 
                     <>
-                        <InfoMessage messages={infoMissingMorning} />
+                        {/* <InfoMessage messages={infoMissingMorning} />
                         <InfoMessage messages={infoMissingAfternoon} />
                         <InfoMessage messages={infoShiftFixMissing} />
-                        <InfoMessage messages={infoMissingEmployee} />
+                        <InfoMessage messages={infoMissingEmployee} /> */}
                     </>
 
 

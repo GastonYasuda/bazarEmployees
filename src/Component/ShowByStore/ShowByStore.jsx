@@ -1,6 +1,6 @@
 import ChangeTime from '../ChangeTime/ChangeTime'
 import ScheduleGraphic from "../../Component/ScheduleGraphic/ScheduleGraphic";
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
 import ShiftList from '../ShiftList/ShiftList';
 
@@ -8,21 +8,12 @@ import ShiftList from '../ShiftList/ShiftList';
 
 const ShowByStore = ({ store }) => {
 
+
+
+
+
     const { espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees } = useContext(apiEmployee)
 
-
-    useEffect(() => {
-        // console.log(store[0].store);
-        // console.log('soy ShowByStore, y soy', puntoMorningEmployees);
-        // console.log('manana espacio', espacioMorningEmployees);
-        // console.log('manana punto', puntoMorningEmployees);
-        // console.log('manana ciudad', ciudadMorningEmployees);
-
-
-
-
-
-    }, [store, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees])
 
 
     return (
@@ -30,9 +21,6 @@ const ShowByStore = ({ store }) => {
 
 
             <h3>{store[0].store}</h3>
-
-
-
 
 
             <ScheduleGraphic employeeData={store} />
@@ -63,15 +51,6 @@ const ShowByStore = ({ store }) => {
                 }
 
             </div>
-
-
-
-
-
-
-
-
-
         </div>
     )
 }

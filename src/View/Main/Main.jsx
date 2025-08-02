@@ -1,72 +1,38 @@
 // eslint-disable-next-line no-unused-vars
 // import Swal from 'sweetalert2'
 import { Bounce, ToastContainer } from 'react-toastify';
-import ShowByStore from "../../Component/ShowByStore/ShowByStore";
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
-import BottomMenuBar from '../../Component/BottomMenuBar/BottomMenuBar';
-import NotificationButton from '../../Component/NotificationButton/NotificationButton';
+import CalendarNotification from '../../Component/CalendarNotification/CalendarNotification';
+// import NotificationButton from '../../Component/NotificationButton/NotificationButton';
 
 const Main = () => {
 
-    const { espacioEmployees, puntoEmployees, ciudadEmployees } = useContext(apiEmployee)
 
-    const [showEspacioStore, setShowEspacioStore] = useState(false)
-    const [showPuntoStore, setShowPuntoStore] = useState(false)
-    const [showCiudadStore, setShowCiudadStore] = useState(false)
-    const [showMainCalendarNotification, setShowMainCalendarNotification] = useState(false)
-
+    const { showMainCalendarNotification } = useContext(apiEmployee)
 
 
     return (
         <div className="App">
-            <header className="App-header">
 
-            </header>
 
             <div className="mainContainer">
 
-                <NotificationButton />
-
-
-
-
-
-                {espacioEmployees && puntoEmployees && ciudadEmployees &&
-                    <>
-                        {showEspacioStore && <ShowByStore store={espacioEmployees} />}
-                        {showPuntoStore && <ShowByStore store={puntoEmployees} />}
-                        {showCiudadStore && <ShowByStore store={ciudadEmployees} />}
-
-
-                    </>
-                }
+                {/* <NotificationButton /> */}
 
 
 
                 {!showMainCalendarNotification &&
 
-                    <div style={{ paddingTop: '40vh' }}>
-                        aca van las notificaciones y calendario
-                    </div>
+                    <CalendarNotification />
                 }
 
-
-
-
-
-
-
-
-
-
             </div>
-            <BottomMenuBar
-                setShowEspacioStore={setShowEspacioStore}
-                setShowPuntoStore={setShowPuntoStore}
-                setShowCiudadStore={setShowCiudadStore}
-                setShowMainCalendarNotification={setShowMainCalendarNotification}
-            />
+
+
+
+
+
 
             <ToastContainer
                 className='toastMyStyle'

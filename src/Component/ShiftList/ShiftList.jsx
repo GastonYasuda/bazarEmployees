@@ -12,7 +12,7 @@ const ShiftList = ({ morningEmployeeList, afternoonEmployeeList }) => {
 
     useEffect(() => {
 
-        //   console.log(infoShiftFixMissing);
+        // console.log(infoShiftFixMissing);
 
 
 

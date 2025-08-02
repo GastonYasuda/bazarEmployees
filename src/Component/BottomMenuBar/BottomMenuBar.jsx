@@ -1,90 +1,77 @@
-import { useState } from "react";
+import { useContext, useEffect } from "react";
+import { apiEmployee } from "../../Context/EmployeeApiContext";
+import { Link, useParams } from "react-router-dom";
 
 
 
-const BottomMenuBar = ({ setShowEspacioStore, setShowCiudadStore, setShowPuntoStore, setShowMainCalendarNotification }) => {
+const BottomMenuBar = () => {
 
-    const [activeStore, setActiveStore] = useState(null);
+    const { storeId } = useParams()
+
+    useEffect(() => {
+        console.log(storeId);
 
 
+    }, [storeId])
 
 
-    const handleShowStore = (storeId) => {
-        setShowMainCalendarNotification(true)
-        setActiveStore(storeId); // cambia el botón activo
-
-        if (storeId === 'espacio') {
-            setShowEspacioStore(true);
-            setShowCiudadStore(false);
-            setShowPuntoStore(false);
-
-        } else if (storeId === 'ciudad') {
-            setShowCiudadStore(true);
-            setShowEspacioStore(false);
-            setShowPuntoStore(false);
-        } else if (storeId === 'punto') {
-            setShowPuntoStore(true);
-            setShowCiudadStore(false);
-            setShowEspacioStore(false);
-        }
-    };
-
-    const handleBack = () => {
-        setShowMainCalendarNotification(false);
-        setShowEspacioStore(false);
-        setShowCiudadStore(false);
-        setShowPuntoStore(false);
-        setActiveStore('home')
-    }
 
 
     return (
         <div className="bottonMenuContainer">
             <section className="bottomMenu">
-
-                <div onClick={() => handleShowStore('espacio')}
+                <div
                     style={{
-                        transform: activeStore === 'espacio' ? 'scale(2.3)' : 'scale(1.8)',
-                        transition: 'transform 0.6s ease', // suave animación,
-                        opacity: activeStore === 'espacio' ? '1' : '.4',
-                    }}>
-
-                    <img src="/espacioIcon.png" alt="Espacio Icon" />
-
-                </div>
-
-
-
-                <div onClick={() => handleShowStore('ciudad')}
-                    style={{
-                        transform: activeStore === 'ciudad' ? 'scale(2.3)' : 'scale(1.8)',
-                        transition: 'transform 0.6s ease', // suave animación,
-                        opacity: activeStore === 'ciudad' ? '1' : '.4',
-                    }}>
-                    <img src="/ciudadIcon.png" alt="Ciudad Icon" />
-                </div>
-
-
-                <div onClick={() => handleShowStore('punto')}
-                    style={{
-                        transform: activeStore === 'punto' ? 'scale(2.3)' : 'scale(1.8)',
+                        transform: storeId === undefined ? 'scale(2.3)' : 'scale(1.8)',
                         transition: 'transform 0.6s ease', // suave animación
-                        opacity: activeStore === 'punto' ? '1' : '.4',
+                        opacity: storeId === undefined ? '1' : '.4',
 
                     }}>
-                    <img src="/puntoIcon.png" alt="Punto Icon" />
+                    <Link to={'/'}>
+                        <img src="/calendarIcon.png" alt="Calendario Icon" />
+                    </Link>
                 </div>
 
-                <div onClick={() => { handleBack() }}
+                <div
                     style={{
-                        transform: activeStore === 'home' ? 'scale(2.3)' : 'scale(1.8)',
-                        transition: 'transform 0.6s ease', // suave animación
-                        opacity: activeStore === 'home' ? '1' : '.4',
-
+                        transform: storeId === 'espacio' ? 'scale(2.3)' : 'scale(1.8)',
+                        transition: 'transform 0.6s ease', // suave animación,
+                        opacity: storeId === 'espacio' ? '1' : '.4',
                     }}>
-                    <img src="/calendarIcon.png" alt="Calendario Icon" />
+                    <Link to='/espacio'>
+                        <img src="/espacioIcon.png" alt="Espacio Icon" />
+                    </Link>
+
 
                 </div>
+
+
+
+                <div
+                    style={{
+                        transform: storeId === 'ciudad' ? 'scale(2.3)' : 'scale(1.8)',
+                        transition: 'transform 0.6s ease', // suave animación,
+                        opacity: storeId === 'ciudad' ? '1' : '.4',
+                    }}>
+                    <Link to='/ciudad'>
+                        <img src="/ciudadIcon.png" alt="Ciudad Icon" />
+                    </Link>
+                </div>
+
+
+                <div
+                    style={{
+                        transform: storeId === 'punto' ? 'scale(2.3)' : 'scale(1.8)',
+                        transition: 'transform 0.6s ease', // suave animación
+                        opacity: storeId === 'punto' ? '1' : '.4',
+
+                    }}>
+                    <Link to={'/punto'}>
+                        <img src="/puntoIcon.png" alt="Punto Icon" />
+                    </Link>
+                </div>
+
+
             </section>
         </div>
     )
