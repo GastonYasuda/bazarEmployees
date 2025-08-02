@@ -86,6 +86,8 @@ const ChangeTime = ({ changeTimeEmployee }) => {
     };
 
     const handleChange = (id) => {
+        //  console.log('id', id);
+
 
         changeTimeEmployee.forEach(changeTime => {
 
@@ -99,7 +101,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                 );
 
                 if (changeTime.assist) {
-                    toast(`Falta ${changeTime.name} en ${changeTime.store}`)
+                    toast(`Falta ${changeTime.name} en ${changeTime.store} changeTime`)
                     saveInfo(`Falta ${changeTime.name} en ${changeTime.store}`, 'missingEmployee')
 
                 }

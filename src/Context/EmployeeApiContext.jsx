@@ -39,7 +39,7 @@ const EmployeeApiContext = ({ children }) => {
         { id: 10, name: "Thian", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "ciudad" }, //Dari cuando Anto hace doble turno
         { id: 11, name: "Ari", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "ciudad" }, //Dari cuando Anto hace doble turno
         { id: 12, name: "Luz", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "ciudad" }, //Dari cuando Anto hace doble turno
-        { id: 13, name: "Mili", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "ciudad" }, //Dari cuando Anto hace doble turno
+        { id: 13, name: "Vale", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "ciudad" }, //Dari cuando Anto hace doble turno
 
     ]
 
@@ -56,10 +56,13 @@ const EmployeeApiContext = ({ children }) => {
     const [puntoEmployees, setPuntoEmployees] = useState([])
     const [ciudadEmployees, setCiudadEmployees] = useState([])
 
+
     useEffect(() => {
         searchStoreEmployee("espacio")
         searchStoreEmployee("punto")
         searchStoreEmployee("ciudad")
+        ask()
+
     }, [employees])
 
 
@@ -130,6 +133,14 @@ const EmployeeApiContext = ({ children }) => {
         }
     }
 
+    const [notAssistEmployeesState, setNotAssistEmployeesState] = useState([])
+
+    const ask = () => {
+        const notAssistEmployees = employees.filter(employee => employee.assist === false);
+        setNotAssistEmployeesState(notAssistEmployees)
+        //preguntar que horarios hace
+        // console.log(notAssistEmployees);
+    };
 
 
 
@@ -165,7 +176,7 @@ const EmployeeApiContext = ({ children }) => {
     }
 
     return (
-        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees }}>
+        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState }}>
             {children}
         </apiEmployee.Provider>
     )

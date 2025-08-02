@@ -17,7 +17,6 @@ const ShiftList = () => {
 
 
     const traspasoTurnos = (morningEmployees, afternoonEmployees) => {
-        console.log('aca');
 
 
 
@@ -29,7 +28,6 @@ const ShiftList = () => {
 
 
                 if (match) {
-                    console.log(match);
                     return {
                         from: morningEmployee.name,
                         to: match.name,
@@ -47,15 +45,10 @@ const ShiftList = () => {
 
 
         const missing = afternoonEmployees.length - shiftFix.length - doubleShift.length;
-        console.log(missing);
-        console.log(espacioAfternoonEmployees);
-
-
 
         if (shiftFix.length < afternoonEmployees.length - doubleShift.length && doubleShift.length < 2) { //
             console.log("diferencia", afternoonEmployees.length - shiftFix.length - doubleShift.length);
 
-            console.log('ACA2');
 
             //el texto lo mande desde el context, asi si faltan 2 personas en ciudad me dice dos personas, y no dos veces la misma notificacion
             //tambien si se resuelve me tiene que desaparecer la notificacion

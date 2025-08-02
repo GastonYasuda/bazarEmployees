@@ -26,11 +26,11 @@ const NotificationButton = () => {
 
     return (
         <div className='notificationButtonContainer'>
-            <button onClick={handleShow}>
+            {/* <button onClick={handleShow}>
                 <img src="/notificationIcon.png" alt="Notification Icon" />
-            </button>
+            </button> */}
 
-            <Modal show={show} onHide={handleClose} centered>
+            {/* <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Notificaciones</Modal.Title>
                 </Modal.Header>
@@ -39,10 +39,10 @@ const NotificationButton = () => {
 
 
                     <>
-                        {/* <InfoMessage messages={infoMissingMorning} />
+                        <InfoMessage messages={infoMissingMorning} />
                         <InfoMessage messages={infoMissingAfternoon} />
                         <InfoMessage messages={infoShiftFixMissing} />
-                        <InfoMessage messages={infoMissingEmployee} /> */}
+                        <InfoMessage messages={infoMissingEmployee} />
                     </>
 
 
@@ -56,7 +56,7 @@ const NotificationButton = () => {
                         Ok
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
         </div>
     )
 }

@@ -1,10 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-// import Swal from 'sweetalert2'
 import { useContext } from 'react';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
 import CalendarNotification from '../../Component/CalendarNotification/CalendarNotification';
-// import NotificationButton from '../../Component/NotificationButton/NotificationButton';
-// import { Bounce, ToastContainer } from 'react-toastify';
+import NotificationButton from '../../Component/NotificationButton/NotificationButton';
+
 
 const Main = () => {
 
@@ -18,7 +17,7 @@ const Main = () => {
 
             <div className="mainContainer">
 
-                {/* <NotificationButton /> */}
+                <NotificationButton />
 
 
 
@@ -28,26 +27,6 @@ const Main = () => {
                 }
 
             </div>
-
-
-
-            {/* <ToastContainer
-                className='toastMyStyle'
-                position="bottom-center"
-                autoClose={4000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-                transition={Bounce}
-            /> */}
-
-
-
 
 
         </div >

@@ -10,11 +10,11 @@ const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
 
         if (shiftEmployeeList[0].store === storeName) {
             if (shift === "Mañana" && shiftEmployeeList.length < howManyMorning) {
-                toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
+                toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store} shiftListDetail`)
                 saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingMorning')
             }
             if (shift === "Tarde" && shiftEmployeeList.length < howManyAfternoon) {
-                toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
+                toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store} shiftListDetail`)
                 saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingAfternoon')
             }
         }
