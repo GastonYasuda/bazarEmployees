@@ -1,21 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DayPicker } from "react-day-picker";
-import 'react-day-picker/dist/style.css';
 import Accordion from 'react-bootstrap/Accordion';
 import { apiEmployee } from "../../Context/EmployeeApiContext";
 import InformationContainer from "../InformationContainer/InformationContainer";
+import TestMyCalendar from "../TestMyCalendar/TestMyCalendar";
 
 
 
 const CalendarNotification = () => {
-    const { notAssistEmployeesState, shiftInformationEspacio, shiftInformationPunto, shiftInformationCiudad } = useContext(apiEmployee)
-    const [selected, setSelected] = useState();
+    const { notAssistEmployeesState, shiftInformationEspacio, shiftInformationPunto, shiftInformationCiudad, } = useContext(apiEmployee)
     const [notAssistEspacio, setNotAssistEspacio] = useState([])
     const [notAssistPunto, setNotAssistPunto] = useState([])
     const [notAssistCiudad, setNotAssistCiudad] = useState([])
 
 
     useEffect(() => {
+        console.log(shiftInformationEspacio);
 
 
         if (notAssistEmployeesState.length !== 0) {
@@ -36,27 +35,24 @@ const CalendarNotification = () => {
 
         }
 
-    }, [notAssistEmployeesState])
+    }, [notAssistEmployeesState, shiftInformationEspacio])
 
     return (
         <div>
             <section className="calendarNotification_container">
-                <DayPicker
-                    mode="single"
-                    selected={selected}
-                    onSelect={setSelected}
-                />
+                <TestMyCalendar />
             </section>
 
             <section className="cardNotifications">
 
-                <Accordion defaultActiveKey={['0']} alwaysOpen>
+                {/* <Accordion defaultActiveKey={['0']} alwaysOpen>
 
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Espacio</Accordion.Header>
                         <Accordion.Body>
 
                             <InformationContainer store={'espacio'} notAssist={notAssistEspacio} shiftInformation={shiftInformationEspacio} />
+
 
                         </Accordion.Body>
                     </Accordion.Item>
@@ -82,7 +78,7 @@ const CalendarNotification = () => {
                         </Accordion.Body>
                     </Accordion.Item>
 
-                </Accordion>
+                </Accordion> */}
 
 
 

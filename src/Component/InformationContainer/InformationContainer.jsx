@@ -4,17 +4,19 @@ import { Link } from 'react-router-dom';
 const InformationContainer = ({ store, notAssist, shiftInformation }) => {
 
     useEffect(() => {
+        if (shiftInformation) {
 
-        console.log(shiftInformation);
-
+            console.log(shiftInformation);
+        }
 
     }, [shiftInformation])
 
 
     return (
         <div>
-            {notAssist.length === 0 && shiftInformation === undefined ?
-                <p>No hay notificacion para mostrar</p>
+            {(notAssist.length === 0 && shiftInformation === undefined) || (shiftInformation === '')
+                ?
+                < p > No hay notificacion para mostrar</p>
                 :
                 <>
                     {notAssist.map((dontAssist, i) => {
@@ -36,7 +38,7 @@ const InformationContainer = ({ store, notAssist, shiftInformation }) => {
                 </>
             }
 
-        </div>
+        </div >
     )
 }
 
