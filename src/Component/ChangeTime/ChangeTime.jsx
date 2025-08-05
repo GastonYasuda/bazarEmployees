@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Form } from "react-bootstrap";
 import { Bounce, toast } from 'react-toastify';
 import { apiEmployee } from "../../Context/EmployeeApiContext";
@@ -87,13 +87,9 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
     const handleChange = (id) => {
         //  console.log('id', id);
-
-
         changeTimeEmployee.forEach(changeTime => {
 
             if (changeTime.id === id) {
-
-
                 setEmployees((prevEmployees) =>
                     prevEmployees.map((emp) =>
                         emp.id === id ? { ...emp, assist: !emp.assist } : emp
@@ -103,13 +99,31 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                 if (changeTime.assist) {
                     toast(`Falta ${changeTime.name} en ${changeTime.store}`)
                     saveInfo(`Falta ${changeTime.name} en ${changeTime.store}`, 'missingEmployee')
-
                 }
             }
         });
-
-
     };
+
+    const [breakTime, setBreakTime] = useState()
+
+    const handleChangeDT = (id) => {
+
+        setEmployees(prev =>
+            prev.map(emp =>
+                emp.id === id ? { ...emp, entry: 9 } : emp
+            )
+
+        );
+
+        setEmployees(prev =>
+            prev.map(emp =>
+                emp.id === id ? { ...emp, exit: 20 } : emp
+            )
+        );
+
+        //si se clickea salga un popup
+
+    }
 
     return (
         <section className='changeTimeContainer'>
@@ -163,6 +177,11 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                                     type="checkbox"
                                     checked={employee.assist}
                                     onChange={() => handleChange(employee.id)}
+                                />
+                                <Form.Check
+                                    type="checkbox"
+                                    checked={employee.dobleShift}
+                                    onChange={() => handleChangeDT(employee.id)}
                                 />
                             </div>
                         </section >

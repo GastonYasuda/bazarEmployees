@@ -23,7 +23,7 @@ const BottomMenuBar = () => {
                     </Link>
                 </div>
 
-                {/* <div
+                <div
                     style={{
                         transform: storeId === 'espacio' ? 'scale(2.3)' : 'scale(1.8)',
                         transition: 'transform 0.6s ease', // suave animación,
@@ -34,11 +34,11 @@ const BottomMenuBar = () => {
                     </Link>
 
 
-                </div> */}
+                </div>
 
 
 
-                {/* <div
+                <div
                     style={{
                         transform: storeId === 'ciudad' ? 'scale(2.3)' : 'scale(1.8)',
                         transition: 'transform 0.6s ease', // suave animación,
@@ -47,10 +47,10 @@ const BottomMenuBar = () => {
                     <Link to='/ciudad'>
                         <img src="/ciudadIcon.png" alt="Ciudad Icon" />
                     </Link>
-                </div> */}
+                </div>
 
 
-                {/* <div
+                <div
                     style={{
                         transform: storeId === 'punto' ? 'scale(2.3)' : 'scale(1.8)',
                         transition: 'transform 0.6s ease', // suave animación
@@ -60,7 +60,7 @@ const BottomMenuBar = () => {
                     <Link to={'/punto'}>
                         <img src="/puntoIcon.png" alt="Punto Icon" />
                     </Link>
-                </div> */}
+                </div>
 
 
             </section>
