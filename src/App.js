@@ -4,6 +4,7 @@ import './index.css';
 import EmployeeApiContext from './Context/EmployeeApiContext';
 import MainApp from './MainApp';
 import ShowStores from './View/ShowStores/ShowStores';
+import ByDateStore from './Component/ByDateStore/ByDateStore';
 
 
 
@@ -17,7 +18,13 @@ function App() {
         <Routes>
 
           <Route path="/" element={<MainApp />} />
+          <Route path='/:byDateId' element={<ByDateStore />} />
+          <Route path='/:byDateId/:storeId' element={<ShowStores />} />
+
+
+
           <Route path='/:storeId' element={<ShowStores />} />
+
 
 
         </Routes>

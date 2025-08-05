@@ -188,6 +188,10 @@ const EmployeeApiContext = ({ children }) => {
         return `${hour}:${paddedMinutes}`;
     }
 
+
+
+    //--------------------------------------------------------------------------------------
+
     function mayPrimera(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }

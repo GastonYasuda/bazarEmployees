@@ -1,23 +1,20 @@
-// eslint-disable-next-line no-unused-vars
+import React from 'react'
 import { useContext } from 'react';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
 import CalendarNotification from '../../Component/CalendarNotification/CalendarNotification';
-import NotificationButton from '../../Component/NotificationButton/NotificationButton';
 
 
-const Main = () => {
+
+const CalendarContainer = () => {
 
 
     const { showMainCalendarNotification } = useContext(apiEmployee)
-
-
     return (
         <div className="App">
 
 
             <div className="mainContainer">
 
-                <NotificationButton />
 
 
 
@@ -31,6 +28,6 @@ const Main = () => {
 
         </div >
     )
-};
+}
 
-export default Main;
+export default CalendarContainer
