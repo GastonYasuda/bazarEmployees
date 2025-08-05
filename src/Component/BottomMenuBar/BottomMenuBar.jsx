@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 const BottomMenuBar = () => {
 
-    const { storeId } = useParams()
+    const { storeId, byDateId } = useParams()
 
 
 
@@ -29,7 +29,7 @@ const BottomMenuBar = () => {
                         transition: 'transform 0.6s ease', // suave animación,
                         opacity: storeId === 'espacio' ? '1' : '.4',
                     }}>
-                    <Link to='/espacio'>
+                    <Link to={`/${byDateId}/espacio`}>
                         <img src="/espacioIcon.png" alt="Espacio Icon" />
                     </Link>
 
@@ -44,7 +44,7 @@ const BottomMenuBar = () => {
                         transition: 'transform 0.6s ease', // suave animación,
                         opacity: storeId === 'ciudad' ? '1' : '.4',
                     }}>
-                    <Link to='/ciudad'>
+                    <Link to={`/${byDateId}/ciudad`}>
                         <img src="/ciudadIcon.png" alt="Ciudad Icon" />
                     </Link>
                 </div>
@@ -57,7 +57,7 @@ const BottomMenuBar = () => {
                         opacity: storeId === 'punto' ? '1' : '.4',
 
                     }}>
-                    <Link to={'/punto'}>
+                    <Link to={`/${byDateId}/punto`}>
                         <img src="/puntoIcon.png" alt="Punto Icon" />
                     </Link>
                 </div>
