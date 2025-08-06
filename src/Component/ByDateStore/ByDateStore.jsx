@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { apiEmployee } from '../../Context/EmployeeApiContext'
-import ShowByStore from '../ShowByStore/ShowByStore'
+// import ShowByStore from '../ShowByStore/ShowByStore'
 import ScheduleGraphic from "../../Component/ScheduleGraphic/ScheduleGraphic";
 import BottomMenuBar from '../BottomMenuBar/BottomMenuBar';
 
@@ -9,7 +9,7 @@ import BottomMenuBar from '../BottomMenuBar/BottomMenuBar';
 const ByDateStore = () => {
 
     const { byDateId } = useParams()
-    const { mayPrimera, espacioEmployees, puntoEmployees, ciudadEmployees, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees } = useContext(apiEmployee)
+    const { mayPrimera, espacioEmployees, puntoEmployees, ciudadEmployees } = useContext(apiEmployee)
 
 
     const myNewDateId = new Date(byDateId).toLocaleDateString("es-ES", { weekday: "long" })

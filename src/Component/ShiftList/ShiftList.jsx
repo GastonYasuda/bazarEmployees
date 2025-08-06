@@ -96,12 +96,12 @@ const ShiftList = () => {
 
         //cuantas personas faltan
         if (storeId === 'espacio') {
-            console.log('espacioAfternoonEmployees.length', espacioAfternoonEmployees.length);
-            console.log('shiftFix.length', shiftFix.length);
-            console.log('doubleShift.length', doubleShift.length);
+            // console.log('espacioAfternoonEmployees.length', espacioAfternoonEmployees.length);
+            // console.log('shiftFix.length', shiftFix.length);
+            // console.log('doubleShift.length', doubleShift.length);
 
             const missing = espacioAfternoonEmployees.length - shiftFix.length - doubleShift.length;
-            console.log('faltan fix de espacio', missing);
+            // console.log('faltan fix de espacio', missing);
 
             if (missing > 0) {
                 const txt = `${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio en ${storeId}`;

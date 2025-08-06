@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Form } from "react-bootstrap";
 import { Bounce, toast } from 'react-toastify';
 import { apiEmployee } from "../../Context/EmployeeApiContext";
@@ -7,7 +7,13 @@ import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 const ChangeTime = ({ changeTimeEmployee }) => {
 
-    const { saveInfo, formatHour, setEmployees, entryAllTime, exitAllTime } = useContext(apiEmployee)
+    const { saveInfo, formatHour, setEmployees, entryAllTime, exitAllTime, employee, employeeData } = useContext(apiEmployee)
+
+    useEffect(() => {
+        console.log(employee);
+
+
+    }, [employee])
 
 
     const handleEntryChange = (id, newEntryTime) => {
@@ -77,12 +83,6 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
         });
 
-        //  console.log('handleExitChange', changeTimeEmployee[id]);//VERRR, NO DEJA VER .ENTRY
-
-
-
-
-
     };
 
     const handleChange = (id) => {
@@ -104,22 +104,48 @@ const ChangeTime = ({ changeTimeEmployee }) => {
         });
     };
 
-    const [breakTime, setBreakTime] = useState()
 
     const handleChangeDT = (id) => {
 
-        setEmployees(prev =>
-            prev.map(emp =>
-                emp.id === id ? { ...emp, entry: 9 } : emp
-            )
+        changeTimeEmployee.forEach(changeDoubleShift => {
 
-        );
+            if (changeDoubleShift.id === id) {
+                setEmployees((prevEmployees) =>
+                    prevEmployees.map((emp) =>
+                        emp.id === id ? { ...emp, doubleShift: !emp.doubleShift, entry: 9, exit: 20 } : emp
+                    )
+                );
 
-        setEmployees(prev =>
-            prev.map(emp =>
-                emp.id === id ? { ...emp, exit: 20 } : emp
-            )
-        );
+                console.log(changeDoubleShift.doubleShift);
+
+                console.log(employeeData[id]);
+
+                if (changeDoubleShift.doubleShift) {
+
+                    setEmployees((prevEmployees) =>
+                        prevEmployees.map((emp) =>
+
+
+                            emp.id === id ? { ...emp, doubleShift: !emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
+                        ))
+                }
+
+
+            }
+        });
+
+        // setEmployees(prev =>
+        //     prev.map(emp =>
+        //         emp.id === id ? { ...emp, doubleShift: true } : emp
+        //     )
+
+        // );
+
+        // setEmployees(prev =>
+        //     prev.map(emp =>
+        //         emp.id === id ? { ...emp, doubleShift: false } : emp
+        //     )
+        // );
 
         //si se clickea salga un popup
 
@@ -167,7 +193,6 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                                     )
                                 })}
                             </Form.Select>
-
 
 
 

@@ -39,6 +39,8 @@ code {
 
 .checkBox {
   margin-left: 15px;
+  display: flex;
+
 }
 
 .form-check-input {

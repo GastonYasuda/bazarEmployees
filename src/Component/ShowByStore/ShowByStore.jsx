@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 
 
-const ShowByStore = ({ employee, morningEmployee, afternoonEmployee }) => {
+const ShowByStore = ({ employee }) => {
 
 
     const { mayPrimera } = useContext(apiEmployee)

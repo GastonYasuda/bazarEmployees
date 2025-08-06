@@ -71,10 +71,10 @@ const CalendarNotification = () => {
         const esta = saveInfoToSelectDate.includes(dateJson);
 
         if (esta) {
-            console.log(`La fecha ${dateJson} ya esta creada`);
+            // console.log(`La fecha ${dateJson} ya esta creada`);
 
         } else {
-            console.log(`La fecha ${dateJson} va a ser creada`);
+            // console.log(`La fecha ${dateJson} va a ser creada`);
 
             setSaveInfoToSelectDate(prevDate => [...prevDate, dateJson])
         }
