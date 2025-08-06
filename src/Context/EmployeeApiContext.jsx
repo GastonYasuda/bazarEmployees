@@ -26,20 +26,20 @@ const EmployeeApiContext = ({ children }) => {
     ]
 
     const employeeData = [
-        { id: 0, name: "Mely", entry: entryAllTime[0].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "espacio", doubleShift: false }, //medio turno
+        { id: 0, name: "Mely", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "espacio", doubleShift: false }, //medio turno
         { id: 1, name: "Luca", entry: entryAllTime[0].entryTime, exit: exitAllTime[2].exitTime, assist: true, store: "espacio", doubleShift: false }, //cubre almuerzo
         { id: 2, name: "Ori", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "espacio", doubleShift: false }, //Luca
         { id: 3, name: "Anto", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "espacio", doubleShift: false }, // Mely cubre almuerzo Luca
         { id: 4, name: "Dari", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "espacio", doubleShift: false }, //doble turno
-        { id: 5, name: "Jorge", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "espacio", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 6, name: "Belen", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "punto", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 7, name: "Orne", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "punto", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 8, name: "Jenn", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "punto", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 9, name: "AntoP", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "punto", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 10, name: "Thian", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "ciudad", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 11, name: "Ari", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "ciudad", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 12, name: "Luz", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "ciudad", doubleShift: false }, //Dari cuando Anto hace doble turno
-        { id: 13, name: "Vale", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "ciudad", doubleShift: false }, //Dari cuando Anto hace doble turno
+        { id: 5, name: "Jorge", entry: entryAllTime[3].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "espacio", doubleShift: false },
+        { id: 6, name: "Belen", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "punto", doubleShift: false },
+        { id: 7, name: "Orne", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "punto", doubleShift: false },
+        { id: 8, name: "Jenn", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "punto", doubleShift: false },
+        { id: 9, name: "AntoP", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "punto", doubleShift: false },
+        { id: 10, name: "Thian", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "ciudad", doubleShift: false },
+        { id: 11, name: "Ari", entry: entryAllTime[0].entryTime, exit: exitAllTime[0].exitTime, assist: true, store: "ciudad", doubleShift: false },
+        { id: 12, name: "Luz", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "ciudad", doubleShift: false },
+        { id: 13, name: "Vale", entry: entryAllTime[2].entryTime, exit: exitAllTime[3].exitTime, assist: true, store: "ciudad", doubleShift: false },
 
     ]
 

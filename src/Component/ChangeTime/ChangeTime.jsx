@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react'
 import { Form } from "react-bootstrap";
 import { Bounce, toast } from 'react-toastify';
@@ -7,13 +8,32 @@ import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 const ChangeTime = ({ changeTimeEmployee }) => {
 
-    const { saveInfo, formatHour, setEmployees, entryAllTime, exitAllTime, employee, employeeData } = useContext(apiEmployee)
+    const { saveInfo, formatHour, setEmployees, entryAllTime, exitAllTime, employees, employeeData } = useContext(apiEmployee)
+
+    const doubleShiftToday = (who) => {
+
+        employees.forEach(employee => {
+            if (employee.name === who) {
+                console.log(`Hola! soy ${employee.name}`);
+
+                setEmployees(prev =>
+                    prev.map(emp =>
+                        emp.name === who ? { ...emp, entry: 9, exit: 20, doubleShift: true } : emp
+                    )
+                );
+            }
+        });
+
+    }
+
 
     useEffect(() => {
-        console.log(employee);
+        console.log(employees);
 
+        //Mely hace doble siempre
+        doubleShiftToday('Mely')
 
-    }, [employee])
+    }, [])
 
 
     const handleEntryChange = (id, newEntryTime) => {
@@ -118,7 +138,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
                 console.log(changeDoubleShift.doubleShift);
 
-                console.log(employeeData[id]);
+                console.log(changeDoubleShift);
 
                 if (changeDoubleShift.doubleShift) {
 
@@ -126,29 +146,11 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                         prevEmployees.map((emp) =>
 
 
-                            emp.id === id ? { ...emp, doubleShift: !emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
+                            emp.id === id ? { ...emp, doubleShift: emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
                         ))
                 }
-
-
             }
         });
-
-        // setEmployees(prev =>
-        //     prev.map(emp =>
-        //         emp.id === id ? { ...emp, doubleShift: true } : emp
-        //     )
-
-        // );
-
-        // setEmployees(prev =>
-        //     prev.map(emp =>
-        //         emp.id === id ? { ...emp, doubleShift: false } : emp
-        //     )
-        // );
-
-        //si se clickea salga un popup
-
     }
 
     return (
@@ -205,7 +207,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                                 />
                                 <Form.Check
                                     type="checkbox"
-                                    checked={employee.dobleShift}
+                                    checked={employee.doubleShift}
                                     onChange={() => handleChangeDT(employee.id)}
                                 />
                             </div>

@@ -107,9 +107,9 @@ const ShiftList = () => {
                 const txt = `${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio en ${storeId}`;
 
                 toast(txt)
-                shiftInfo('espacio', txt)
+                // shiftInfo('espacio', txt)
             } else if (missing === 0) {
-                shiftInfo('espacio', '')
+                // shiftInfo('espacio', '')
             }
 
         } else {
