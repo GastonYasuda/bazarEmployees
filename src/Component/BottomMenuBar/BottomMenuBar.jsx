@@ -16,7 +16,9 @@ const BottomMenuBar = () => {
             <section className="bottomMenu">
                 <div
                     style={{
-                        transform: 'scale(2.3)',
+                        transform: storeId === '/' ? 'scale(2.3)' : 'scale(1.8)',
+                        transition: 'transform 0.6s ease', // suave animación
+                        opacity: storeId === '/' ? '1' : '.7',
                     }}>
                     <Link to={'/'}>
                         <img src="/calendarIcon.png" alt="Calendario Icon" />

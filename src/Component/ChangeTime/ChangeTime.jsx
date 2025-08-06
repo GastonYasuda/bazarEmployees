@@ -10,11 +10,12 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
     const { saveInfo, formatHour, setEmployees, entryAllTime, exitAllTime, employees, employeeData } = useContext(apiEmployee)
 
+
     const doubleShiftToday = (who) => {
 
         employees.forEach(employee => {
             if (employee.name === who) {
-                console.log(`Hola! soy ${employee.name}`);
+                // console.log(`Hola! soy ${employee.name}`);
 
                 setEmployees(prev =>
                     prev.map(emp =>
@@ -28,7 +29,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
 
     useEffect(() => {
-        console.log(employees);
+        // console.log(employees);
 
         //Mely hace doble siempre
         doubleShiftToday('Mely')
