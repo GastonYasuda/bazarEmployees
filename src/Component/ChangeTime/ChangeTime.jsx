@@ -137,7 +137,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                     )
                 );
 
-                console.log(changeDoubleShift.doubleShift);
+                // console.log(changeDoubleShift.doubleShift);
 
                 console.log(changeDoubleShift);
 

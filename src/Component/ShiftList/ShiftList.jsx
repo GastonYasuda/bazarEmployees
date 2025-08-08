@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 const ShiftList = () => {
 
-    const { employee, saveInfo, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, shiftInfo, shiftInformationEspacio } = useContext(apiEmployee)
+    const { employees, saveInfo, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, shiftInfo, shiftInformationEspacio } = useContext(apiEmployee)
     const { storeId } = useParams()
 
 
@@ -16,10 +16,13 @@ const ShiftList = () => {
     // console.log('shiftFix.length', shiftFix.length);
     // console.log('doubleShift.length', doubleShift.length);
 
-    const [espacioFixMissing, setEspacioFixMissing] = useState()
+
+
 
 
     useEffect(() => {
+
+
 
 
 
@@ -44,6 +47,11 @@ const ShiftList = () => {
 
 
     }, [espacioMorningEmployees])
+
+
+
+
+
 
 
     const traspasoTurnos = () => {

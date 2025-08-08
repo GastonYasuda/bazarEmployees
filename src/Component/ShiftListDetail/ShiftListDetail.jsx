@@ -6,19 +6,28 @@ import { apiEmployee } from '../../Context/EmployeeApiContext';
 const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
     const { saveInfo, formatHour } = useContext(apiEmployee)
 
+
+
+
     const countByStore = (storeName, howManyMorning, howManyAfternoon) => {
 
         if (shiftEmployeeList[0].store === storeName) {
+
             if (shift === "Mañana" && shiftEmployeeList.length < howManyMorning) {
+
                 toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
                 saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingMorning')
             }
             if (shift === "Tarde" && shiftEmployeeList.length < howManyAfternoon) {
+
                 toast(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`)
                 saveInfo(`Falta gente para turno ${shift} en ${shiftEmployeeList[0].store}`, 'missingAfternoon')
             }
         }
     }
+
+
+
 
 
 
@@ -29,6 +38,7 @@ const ShiftListDetail = ({ shiftEmployeeList, shift }) => {
             countByStore('ciudad', 2, 2)
             countByStore('punto', 2, 2)
         }
+
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shiftEmployeeList, shift])
