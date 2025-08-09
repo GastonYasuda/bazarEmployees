@@ -30,14 +30,19 @@ const ShowByStore = ({ employee }) => {
 
         toast(txt)
 
+        const stored = localStorage.getItem(byDateId);
+        const parsed = stored ? JSON.parse(stored) : {};
+
         const updatedEmployeeData = employees.map(e =>
             e.id === employees.id ? employee : e
         );
 
-        localStorage.setItem(byDateId, JSON.stringify({ employeeData: updatedEmployeeData }));
 
 
-
+        localStorage.setItem(byDateId, JSON.stringify({
+            ...parsed,
+            employeeData: updatedEmployeeData
+        }));
 
     }
 
