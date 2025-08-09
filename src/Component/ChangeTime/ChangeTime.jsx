@@ -22,6 +22,9 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                         emp.name === who ? { ...emp, entry: 9, exit: 20, doubleShift: true } : emp
                     )
                 );
+
+
+
             }
         });
 
@@ -29,16 +32,20 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
 
     useEffect(() => {
-        // console.log(employees);
 
         //Mely hace doble siempre
         doubleShiftToday('Mely')
+        // console.log('aca');
+        //console.log('puntoMorningEmployees', puntoMorningEmployees);
+
 
     }, [])
 
 
     const handleEntryChange = (id, newEntryTime) => {
         const { entryTime } = entryAllTime[newEntryTime]
+        // console.log('dentro de habldeEntryChange');
+
 
         changeTimeEmployee.forEach(changeTime => {
 
@@ -64,6 +71,14 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                             emp.id === id ? { ...emp, entry: entryTime } : emp
                         )
                     );
+
+
+                    //me guarda en local store
+                    // const updatedEmployeeData = employees.map(e =>
+                    //     e.id === id ? { ...e, entry: entryTime } : e
+                    // );
+
+                    // localStorage.setItem(date, JSON.stringify({ employeeData: updatedEmployeeData }));
                 }
             }
         })
@@ -73,6 +88,8 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
     const handleExitChange = (id, newExitTime) => {
         const { exitTime } = exitAllTime[newExitTime]
+        // console.log('dentro de handleExitChange');
+
 
         changeTimeEmployee.forEach(changeTime => {
 
@@ -97,6 +114,9 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                             emp.id === id ? { ...emp, exit: exitTime } : emp
                         )
                     );
+                    // console.log('exit time es ', exitTime);
+
+
                 }
 
             }
@@ -139,7 +159,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
                 // console.log(changeDoubleShift.doubleShift);
 
-                console.log(changeDoubleShift);
+                // console.log(changeDoubleShift);
 
                 if (changeDoubleShift.doubleShift) {
 
@@ -149,6 +169,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
                             emp.id === id ? { ...emp, doubleShift: emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
                         ))
+
                 }
             }
         });

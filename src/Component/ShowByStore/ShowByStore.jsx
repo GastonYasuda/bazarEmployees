@@ -2,7 +2,7 @@ import ChangeTime from '../ChangeTime/ChangeTime'
 import ScheduleGraphic from "../../Component/ScheduleGraphic/ScheduleGraphic";
 
 import ShiftList from '../ShiftList/ShiftList';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { apiEmployee } from '../../Context/EmployeeApiContext';
 import { useParams } from 'react-router-dom';
 import { FaSave } from 'react-icons/fa';
@@ -13,15 +13,11 @@ import { toast } from 'react-toastify';
 const ShowByStore = ({ employee }) => {
 
 
-    const { mayPrimera, employees, employeeData } = useContext(apiEmployee)
+    const { mayPrimera, employees } = useContext(apiEmployee)
     const { storeId, byDateId } = useParams()
 
     const myNewDateId = new Date(byDateId).toLocaleDateString("es-ES", { weekday: "long" })
 
-    // useEffect(() => {
-    //     console.log(employee);
-
-    // }, [employee])
 
 
 
@@ -37,7 +33,6 @@ const ShowByStore = ({ employee }) => {
         const updatedEmployeeData = employees.map(e =>
             e.id === employees.id ? employee : e
         );
-        console.log('employeesssID', employees);
 
         localStorage.setItem(byDateId, JSON.stringify({ employeeData: updatedEmployeeData }));
 
@@ -64,7 +59,7 @@ const ShowByStore = ({ employee }) => {
 
                 <ScheduleGraphic employeeData={employee} />
 
-                <ChangeTime changeTimeEmployee={employee} />
+                <ChangeTime changeTimeEmployee={employee} date={byDateId} />
                 {/* select con los diferentes horarios*/}
 
                 <ShiftList />

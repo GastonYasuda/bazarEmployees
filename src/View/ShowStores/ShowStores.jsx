@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { useParams } from "react-router-dom";
 import ShowByStore from "../../Component/ShowByStore/ShowByStore";
@@ -9,7 +10,7 @@ import { Bounce, ToastContainer } from 'react-toastify';
 
 const ShowStores = () => {
 
-    const { espacioEmployees, puntoEmployees, ciudadEmployees, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees } = useContext(apiEmployee)
+    const { espacioEmployees, puntoEmployees, ciudadEmployees } = useContext(apiEmployee)
 
 
     const { storeId } = useParams()
@@ -24,26 +25,20 @@ const ShowStores = () => {
                     <>
                         {storeId === 'espacio' &&
                             <ShowByStore
-                                store={storeId}
                                 employee={espacioEmployees}
-                                morningEmployee={espacioMorningEmployees}
-                                afternoonEmployee={espacioAfternoonEmployees} />
+                            />
                         }
 
                         {storeId === 'punto' &&
                             <ShowByStore
-                                store={storeId}
                                 employee={puntoEmployees}
-                                morningEmployee={puntoMorningEmployees}
-                                afternoonEmployee={puntoAfternoonEmployees} />
+                            />
                         }
 
                         {storeId === 'ciudad' &&
                             <ShowByStore
-                                store={storeId}
                                 employee={ciudadEmployees}
-                                morningEmployee={ciudadMorningEmployees}
-                                afternoonEmployee={ciudadAfternoonEmployees} />
+                            />
                         }
                     </>
                 }

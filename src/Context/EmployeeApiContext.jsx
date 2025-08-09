@@ -71,8 +71,6 @@ const EmployeeApiContext = ({ children }) => {
         // console.log('soy state', state);
         // console.log('soy bystore', byStore);
 
-
-
         if (state === "espacio") {
             // console.log("Espacio", byStore);
             setEspacioEmployees(byStore) //me guarda todos los empleados de espacio 
@@ -134,9 +132,9 @@ const EmployeeApiContext = ({ children }) => {
     }
 
     const [notAssistEmployeesState, setNotAssistEmployeesState] = useState([])
-    const [shiftInformationEspacio, setShiftInformationEspacio] = useState()
-    const [shiftInformationPunto, setShiftInformationPunto] = useState()
-    const [shiftInformationCiudad, setShiftInformationCiudad] = useState()
+    // const [shiftInformationEspacio, setShiftInformationEspacio] = useState()
+    // const [shiftInformationPunto, setShiftInformationPunto] = useState()
+    // const [shiftInformationCiudad, setShiftInformationCiudad] = useState()
 
 
     const ask = () => {
@@ -146,18 +144,6 @@ const EmployeeApiContext = ({ children }) => {
         // console.log(notAssistEmployees);
     };
 
-    const shiftInfo = (store, infoMessage) => {
-        if (store === 'espacio') {
-            setShiftInformationEspacio(infoMessage)
-        } else if (store === 'ciudad') {
-            setShiftInformationPunto(infoMessage)
-
-        } else if (store === 'punto') {
-            setShiftInformationCiudad(infoMessage)
-
-        }
-
-    }
 
 
 
@@ -196,8 +182,33 @@ const EmployeeApiContext = ({ children }) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+
+
+    const [employeesEspacioStored, setEmployeesEspacioStored] = useState([]);
+    const [employeesPuntoStored, setEmployeesPuntoStored] = useState([]);
+    const [employeesCiudadStored, setEmployeesCiudadStored] = useState([]);
+
+
+
+    const getLocalStoreInfoByDate = (date) => {
+        const stored = localStorage.getItem(date);
+
+        if (stored) {
+
+            const parsed = JSON.parse(stored);
+            const employeeData = parsed.employeeData
+            setEmployeesEspacioStored(employeeData.filter(emp => emp.store === 'espacio'))
+            setEmployeesPuntoStored(employeeData.filter(emp => emp.store === 'punto'))
+            setEmployeesCiudadStored(employeeData.filter(emp => emp.store === 'ciudad'))
+
+        }
+
+    }
+
+
+
     return (
-        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, shiftInformationEspacio, shiftInformationCiudad, shiftInformationPunto, employeeData }}>
+        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, employeeData, employeesEspacioStored, setEmployeesEspacioStored, employeesPuntoStored, setEmployeesPuntoStored, employeesCiudadStored, setEmployeesCiudadStored, getLocalStoreInfoByDate }}>
             {children}
         </apiEmployee.Provider>
     )
