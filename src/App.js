@@ -21,6 +21,7 @@ function App() {
           <Route path='/:byDateId' element={<ByDateStore />} />
           <Route path='/:byDateId/:storeId' element={<ShowStores />} />
 
+          <Route path='*' element={<MainApp />} />
 
 
           <Route path='/:storeId' element={<ShowStores />} />

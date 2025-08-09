@@ -25,7 +25,7 @@ const ByDateStore = () => {
             for (let i = 0; i < localStorage.length; i++) {
 
                 if (localStorage.key(i) === byDateId) {
-                    console.log('hay info de esa fecha');
+
                     getLocalStoreInfoByDate(byDateId)
                     setIsStored(true)
                 }
