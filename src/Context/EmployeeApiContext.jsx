@@ -45,12 +45,7 @@ const EmployeeApiContext = ({ children }) => {
 
     const [employees, setEmployees] = useState(employeeData);
 
-    const [espacioMorningEmployees, setEspacioMorningEmployees] = useState([])
-    const [espacioAfternoonEmployees, setEspacioAfternoonEmployees] = useState([])
-    const [puntoMorningEmployees, setPuntoMorningEmployees] = useState([])
-    const [puntoAfternoonEmployees, setPuntoAfternoonEmployees] = useState([])
-    const [ciudadMorningEmployees, setCiudadMorningEmployees] = useState([])
-    const [ciudadAfternoonEmployees, setCiudadAfternoonEmployees] = useState([])
+
 
     const [espacioEmployees, setEspacioEmployees] = useState([])
     const [puntoEmployees, setPuntoEmployees] = useState([])
@@ -74,62 +69,25 @@ const EmployeeApiContext = ({ children }) => {
         if (state === "espacio") {
             // console.log("Espacio", byStore);
             setEspacioEmployees(byStore) //me guarda todos los empleados de espacio 
-            morningShift(byStore) //me guarda los empleados de espacio de ma;ana
-            afternoonShift(byStore) //me guarda los empleados de espacio de tarde
+
 
         } else if (state === "punto") {
             // console.log("Punto", byStore);
             setPuntoEmployees(byStore)
-            morningShift(byStore)
-            afternoonShift(byStore)
+
 
         } else if (state === "ciudad") {
             // console.log("Ciudad", byStore);
             setCiudadEmployees(byStore)
-            morningShift(byStore)
-            afternoonShift(byStore)
+
+
         }
     }
 
-    const morningShift = (data) => {
-
-        const morning = data.filter((employee) => employee.entry === 9 && employee.assist === true);
-        // console.log('que morning?', morning[0].store); //todos los que trabajan manana
-
-        if (morning.length !== 0) {
-
-            if (morning[0].store === 'espacio') {
-                setEspacioMorningEmployees(morning);
-
-            } else if (morning[0].store === 'punto') {
-                setPuntoMorningEmployees(morning)
-
-            } else if (morning[0].store === 'ciudad') {
-                setCiudadMorningEmployees(morning)
-
-            }
-        }
-
-    }
 
 
-    const afternoonShift = (data) => {
-        const afternoon = data.filter((employee) => employee.exit === 20 && employee.assist === true);
 
-        if (afternoon.length !== 0) {
 
-            if (afternoon[0].store === 'espacio') {
-                setEspacioAfternoonEmployees(afternoon)
-
-            } else if (afternoon[0].store === 'punto') {
-                setPuntoAfternoonEmployees(afternoon)
-
-            } else if (afternoon[0].store === 'ciudad') {
-                setCiudadAfternoonEmployees(afternoon)
-
-            }
-        }
-    }
 
     const [notAssistEmployeesState, setNotAssistEmployeesState] = useState([])
     // const [shiftInformationEspacio, setShiftInformationEspacio] = useState()
@@ -187,28 +145,30 @@ const EmployeeApiContext = ({ children }) => {
     const [employeesEspacioStored, setEmployeesEspacioStored] = useState([]);
     const [employeesPuntoStored, setEmployeesPuntoStored] = useState([]);
     const [employeesCiudadStored, setEmployeesCiudadStored] = useState([]);
+    const [guardados, setGuardados] = useState([])
 
 
 
     const getLocalStoreInfoByDate = (date) => {
         const stored = localStorage.getItem(date);
+        if (!stored) return false;
 
-        if (stored) {
+        const parsed = JSON.parse(stored);
+        setGuardados(parsed)
 
-            const parsed = JSON.parse(stored);
-            const employeeData = parsed.employeeData
-            setEmployeesEspacioStored(employeeData.filter(emp => emp.store === 'espacio'))
-            setEmployeesPuntoStored(employeeData.filter(emp => emp.store === 'punto'))
-            setEmployeesCiudadStored(employeeData.filter(emp => emp.store === 'ciudad'))
+        setEmployeesEspacioStored(parsed.employeeData.filter(emp => emp.store === 'espacio'));
+        setEmployeesPuntoStored(parsed.employeeData.filter(emp => emp.store === 'punto'));
+        setEmployeesCiudadStored(parsed.employeeData.filter(emp => emp.store === 'ciudad'));
 
-        }
+        return true;
+    };
 
-    }
+
 
 
 
     return (
-        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioMorningEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, espacioAfternoonEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, employeeData, employeesEspacioStored, setEmployeesEspacioStored, employeesPuntoStored, setEmployeesPuntoStored, employeesCiudadStored, setEmployeesCiudadStored, getLocalStoreInfoByDate }}>
+        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, employeeData, employeesEspacioStored, setEmployeesEspacioStored, employeesPuntoStored, setEmployeesPuntoStored, employeesCiudadStored, setEmployeesCiudadStored, getLocalStoreInfoByDate, guardados }}>
             {children}
         </apiEmployee.Provider>
     )

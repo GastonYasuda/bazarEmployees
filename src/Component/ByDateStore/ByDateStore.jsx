@@ -10,31 +10,25 @@ import BottomMenuBar from '../BottomMenuBar/BottomMenuBar';
 const ByDateStore = () => {
 
     const { byDateId } = useParams()
-    const { mayPrimera, espacioEmployees, employeesEspacioStored, puntoEmployees, employeesPuntoStored, ciudadEmployees, employeesCiudadStored, getLocalStoreInfoByDate } = useContext(apiEmployee)
-
-
+    const { employees, mayPrimera, espacioEmployees, employeesEspacioStored, puntoEmployees, employeesPuntoStored, ciudadEmployees, employeesCiudadStored, getLocalStoreInfoByDate } = useContext(apiEmployee)
 
     const [isStored, setIsStored] = useState(false)
 
 
     useEffect(() => {
+        // console.log('1 arranco');
+        // console.log('ciudadEmployees', ciudadEmployees);
 
+        const exists = getLocalStoreInfoByDate(byDateId);
 
-        if (localStorage.length !== 0) {
-
-            for (let i = 0; i < localStorage.length; i++) {
-
-                if (localStorage.key(i) === byDateId) {
-
-                    getLocalStoreInfoByDate(byDateId)
-                    setIsStored(true)
-                }
-            }
-
+        if (exists) {
+            setIsStored(true);
+            // console.log(`estoy guardado con fecha ${byDateId}`);
         } else {
-            setIsStored(false)
+            setIsStored(false);
+            console.log('ciudadEmployees', ciudadEmployees);
+            // console.log(`seleccionaste ${byDateId} NO HAY NADA`);
         }
-
     }, []);
 
 
@@ -50,44 +44,23 @@ const ByDateStore = () => {
 
                 <h1>{mayPrimera(myNewDateId)} {byDateId}</h1>
 
-                {(
-                    (espacioEmployees.length !== 0 && puntoEmployees.length !== 0 && ciudadEmployees.length !== 0) ||
-                    (employeesEspacioStored.length !== 0 && employeesPuntoStored.length !== 0 && employeesCiudadStored.length !== 0)
-                ) &&
 
+                {isStored ? <h1>HAY GUARDADO</h1> : <h5>no hay nada</h5>}
+                {isStored &&
                     <section className='mainGraphicContainer'>
                         <Link to={`/${byDateId}/espacio`}>
                             <div className='showByStoreComponent'>
                                 <h3>Espacio</h3>
-                                <ScheduleGraphic
-                                    employeeData={isStored ? employeesEspacioStored : espacioEmployees}
-                                />
+                                <ScheduleGraphic employeeData={employeesEspacioStored} state={'byDateStore'} />
+
+
+                                {/* 
+                                <ScheduleGraphic isStored={isStored} date={byDateId} employeeData={isStored ? employeesEspacioStored : espacioEmployees} from={'espacio'} /> */}
+
                             </div>
                         </Link>
+                    </section>}
 
-
-                        <Link to={`/${byDateId}/punto`}>
-                            <div className='showByStoreComponent'>
-                                <h3>Punto</h3>
-                                <ScheduleGraphic
-                                    employeeData={isStored ? employeesPuntoStored : puntoEmployees}
-                                />
-                            </div>
-                        </Link>
-
-
-                        <Link to={`/${byDateId}/ciudad`}>
-                            <div className='showByStoreComponent'>
-                                <h3>Ciudad</h3>
-                                <ScheduleGraphic
-                                    employeeData={isStored ? employeesCiudadStored : ciudadEmployees}
-                                />
-                            </div>
-
-                        </Link>
-
-                    </section>
-                }
 
             </div>
             <BottomMenuBar />
@@ -97,3 +70,41 @@ const ByDateStore = () => {
 }
 
 export default ByDateStore
+
+
+
+// <section className='mainGraphicContainer'>
+//     <Link to={`/${byDateId}/espacio`}>
+//         <div className='showByStoreComponent'>
+//             <h3>Espacio</h3>
+//             {/* <ScheduleGraphic
+//                 employeeData={isStored ? employeesEspacioStored : espacioEmployees}
+//             /> */}
+//             <ScheduleGraphic isStored={isStored} date={byDateId} employeeData={isStored ? employeesEspacioStored : espacioEmployees} from={'espacio'} />
+
+//         </div>
+//     </Link>
+
+
+//     <Link to={`/${byDateId}/punto`}>
+//         <div className='showByStoreComponent'>
+//             <h3>Punto</h3>
+
+//             <ScheduleGraphic isStored={isStored} date={byDateId} employeeData={isStored ? employeesPuntoStored : puntoEmployees} from={'punto'} />
+
+//         </div>
+//     </Link>
+
+
+//     <Link to={`/${byDateId}/ciudad`}>
+//         <div className='showByStoreComponent'>
+//             <h3>Ciudad</h3>
+
+//             <ScheduleGraphic isStored={isStored} date={byDateId} employeeData={isStored ? employeesCiudadStored : ciudadEmployees} from={'ciudad'} />
+
+
+//         </div>
+
+//     </Link>
+
+// </section>

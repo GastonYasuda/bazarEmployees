@@ -6,9 +6,9 @@ import { apiEmployee } from '../../Context/EmployeeApiContext';
 import { useParams } from 'react-router-dom';
 
 
-const ShiftList = () => {
+const ShiftList = ({ employeeData }) => {
 
-    const { employees, saveInfo, espacioMorningEmployees, espacioAfternoonEmployees, puntoMorningEmployees, puntoAfternoonEmployees, ciudadMorningEmployees, ciudadAfternoonEmployees, shiftInfo, shiftInformationEspacio } = useContext(apiEmployee)
+    const { espacioMorningEmployees, espacioAfternoonEmployees } = useContext(apiEmployee)
     const { storeId } = useParams()
 
 
@@ -16,17 +16,27 @@ const ShiftList = () => {
     // console.log('shiftFix.length', shiftFix.length);
     // console.log('doubleShift.length', doubleShift.length);
 
+    useEffect(() => {
+        separateShift()
+    }, [employeeData])
 
+    const [morningEmployees, setMorningEmployees] = useState([])
+    const [afternoonEmployees, setAfternoonEmployees] = useState([])
+
+
+    const separateShift = () => {
+
+        const morning = employeeData.filter((employee) => employee.entry === 9 && employee.assist === true);
+        setMorningEmployees(morning)
+        const afternoon = employeeData.filter((employee) => employee.exit === 20 && employee.assist === true);
+        setAfternoonEmployees(afternoon)
+
+    }
 
 
 
     useEffect(() => {
 
-
-
-
-
-        //setEspacioFixMissing = los que trabajan a la tarde - los que hacen doble turno - los que coinciden turno manana y tarde
 
 
         traspasoTurnos()
@@ -39,12 +49,7 @@ const ShiftList = () => {
         //     traspasoTurnos(puntoMorningEmployees, puntoAfternoonEmployees)
         // } else if (storeId === 'ciudad') {
 
-        //     traspasoTurnos(ciudadMorningEmployees, ciudadAfternoonEmployees)
-        // }
-
-
-
-
+        //     traspasoTurnos(ciudadMorningEmployees, ciudadAfternoonEmployees)   // }
 
     }, [espacioMorningEmployees])
 
@@ -60,7 +65,7 @@ const ShiftList = () => {
         //los que trabajan a la manana que coinciden con los de la tarde-------------------------------------
         const usedEntries = new Set();
 
-        const shiftFix = espacioMorningEmployees
+        const shiftFix = morningEmployees
             .map((morningEmployee) => {
                 const match = espacioAfternoonEmployees.find(
                     (afternoonEmployee) =>
@@ -89,7 +94,7 @@ const ShiftList = () => {
 
         //los que trabajan doble turno----------------------------------------
         //si hace de 9 a 20 me lo sume en shiftFix.lenght 
-        const doubleShift = espacioMorningEmployees.filter((morningEmployee) => morningEmployee.entry === 9 && morningEmployee.exit === 20)
+        const doubleShift = morningEmployees.filter((morningEmployee) => morningEmployee.entry === 9 && morningEmployee.exit === 20)
 
         if (doubleShift !== undefined && doubleShift.length !== 0) {
 
@@ -108,7 +113,7 @@ const ShiftList = () => {
             // console.log('shiftFix.length', shiftFix.length);
             // console.log('doubleShift.length', doubleShift.length);
 
-            const missing = espacioAfternoonEmployees.length - shiftFix.length - doubleShift.length;
+            const missing = afternoonEmployees.length - shiftFix.length - doubleShift.length;
             // console.log('faltan fix de espacio', missing);
 
             if (missing > 0) {
@@ -120,54 +125,9 @@ const ShiftList = () => {
                 // shiftInfo('espacio', '')
             }
 
-        } else {
-            // missing = afternoonEmployees.length - shiftFix.length - doubleShift.length;
         }
 
 
-
-
-        // console.log('missing', missing);
-
-
-        // if (storeId === afternoonEmployees[0].store && missing > 0) {
-        // console.log('aca');
-        // console.log(missing);
-
-
-
-
-        // const txt = `${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio en ${storeId}`;
-
-        // toast(txt)
-        //console.log(txt);
-
-        // saveInfo(txt)
-        // shiftInfo(txt)
-        // }
-
-
-
-
-
-
-
-
-        // if (shiftFix.length < afternoonEmployees.length - doubleShift.length) {
-        //     console.log("diferencia", afternoonEmployees.length - shiftFix.length - doubleShift.length);
-
-
-        //     //el texto lo mande desde el context, asi si faltan 2 personas en ciudad me dice dos personas, y no dos veces la misma notificacion
-        //     //tambien si se resuelve me tiene que desaparecer la notificacion
-        //     toast(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio 1`)
-        //     // saveInfo(`${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio`, 'shiftFixMissing')
-
-        //     shiftInfo(store, `${missing === 1 ? 'Falta' : 'Faltan'} ${missing} ${missing === 1 ? 'persona' : 'personas'} para el cambio`)
-
-
-
-
-        // }
 
     }
 
@@ -177,8 +137,16 @@ const ShiftList = () => {
 
     return (
         <div className='shiftListComponent'>
-
             <section>
+                <ShiftListDetail shiftEmployeeList={morningEmployees} shift={"Mañana"} />
+                <br />
+
+                <ShiftListDetail shiftEmployeeList={afternoonEmployees} shift={"Tarde"} />
+                <br />
+
+            </section>
+
+            {/* <section>
                 {storeId === 'espacio' &&
                     <>
                         <ShiftListDetail shiftEmployeeList={espacioMorningEmployees} shift={"Mañana"} />
@@ -210,7 +178,7 @@ const ShiftList = () => {
                         <br />
                     </>
                 }
-            </section>
+            </section> */}
 
         </div >
     )

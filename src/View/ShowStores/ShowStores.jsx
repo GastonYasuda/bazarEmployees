@@ -2,7 +2,7 @@
 
 import { useParams } from "react-router-dom";
 import ShowByStore from "../../Component/ShowByStore/ShowByStore";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { apiEmployee } from "../../Context/EmployeeApiContext";
 import BottomMenuBar from "../../Component/BottomMenuBar/BottomMenuBar";
 import { Bounce, ToastContainer } from 'react-toastify';
@@ -10,38 +10,54 @@ import { Bounce, ToastContainer } from 'react-toastify';
 
 const ShowStores = () => {
 
-    const { espacioEmployees, puntoEmployees, ciudadEmployees } = useContext(apiEmployee)
+    const { espacioEmployees, puntoEmployees, ciudadEmployees, getLocalStoreInfoByDate, employeesEspacioStored, employeesPuntoStored, employeesCiudadStored, employees } = useContext(apiEmployee)
 
 
-    const { storeId } = useParams()
+    const { storeId, byDateId } = useParams()
+
+
+    const [isStored, setIsStored] = useState(false)
+
+
+
+    useEffect(() => {
+
+        getLocalStoreInfoByDate(byDateId)
+
+        const exists = getLocalStoreInfoByDate(byDateId);
+
+        if (exists) {
+            setIsStored(true);
+            // console.log('employeesCiudadStored', employeesCiudadStored);
+
+            // console.log(`estoy guardado con fecha ${byDateId}`);
+        } else {
+            setIsStored(false);
+            // console.log(`seleccionaste ${byDateId} NO HAY NADA`);
+        }
+
+
+
+    }, [byDateId]);
 
 
     return (
         <div className="App">
             <div className="mainContainer">
 
-                {espacioEmployees.length !== 0 && puntoEmployees.length !== 0 && ciudadEmployees.length !== 0 &&
+                {isStored ? <h1>HAY GUARDADO</h1> : <h5>no tengo nada</h5>}
+                {isStored &&
+                    <ShowByStore
+                        date={byDateId}
+                        isStored={isStored}
+                        employeeByStore={employeesEspacioStored}
 
-                    <>
-                        {storeId === 'espacio' &&
-                            <ShowByStore
-                                employee={espacioEmployees}
-                            />
-                        }
-
-                        {storeId === 'punto' &&
-                            <ShowByStore
-                                employee={puntoEmployees}
-                            />
-                        }
-
-                        {storeId === 'ciudad' &&
-                            <ShowByStore
-                                employee={ciudadEmployees}
-                            />
-                        }
-                    </>
+                    />
                 }
+
+
+
+
                 <BottomMenuBar />
 
                 <ToastContainer
@@ -64,3 +80,36 @@ const ShowStores = () => {
 };
 
 export default ShowStores;
+
+
+//   <>
+//                     {storeId === 'espacio' &&
+//                         <>
+//                             <ShowByStore
+//                                 date={byDateId}
+//                                 isStored={isStored}
+//                                 employeeByStore={isStored ? employeesEspacioStored : espacioEmployees}
+//                                 pruebaEmployees={pruebaEmployees} setPruebaEmployees={setPruebaEmployees}
+//                             />
+
+//                         </>
+
+//                     }
+
+//                     {storeId === 'punto' &&
+//                         <ShowByStore date={byDateId} isStored={isStored}
+//                             employeeByStore={isStored ? employeesPuntoStored : puntoEmployees}
+//                             pruebaEmployees={pruebaEmployees} setPruebaEmployees={setPruebaEmployees}
+
+//                         />
+//                     }
+
+//                     {storeId === 'ciudad' &&
+//                         <ShowByStore date={byDateId} isStored={isStored}
+//                             employeeByStore={isStored ? employeesCiudadStored : ciudadEmployees}
+//                             pruebaEmployees={pruebaEmployees} setPruebaEmployees={setPruebaEmployees}
+
+//                         />
+//                     }
+//                 </>
+

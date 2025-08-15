@@ -6,40 +6,55 @@ import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 
 
-const ChangeTime = ({ changeTimeEmployee }) => {
+const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) => {
 
-    const { saveInfo, formatHour, setEmployees, entryAllTime, exitAllTime, employees, employeeData } = useContext(apiEmployee)
-
-
-    const doubleShiftToday = (who) => {
-
-        employees.forEach(employee => {
-            if (employee.name === who) {
-                // console.log(`Hola! soy ${employee.name}`);
-
-                setEmployees(prev =>
-                    prev.map(emp =>
-                        emp.name === who ? { ...emp, entry: 9, exit: 20, doubleShift: true } : emp
-                    )
-                );
+    const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData, employeesEspacioStored } = useContext(apiEmployee)
 
 
-
-            }
-        });
-
-    }
 
 
     useEffect(() => {
 
-        //Mely hace doble siempre
-        doubleShiftToday('Mely')
-        // console.log('aca');
-        //console.log('puntoMorningEmployees', puntoMorningEmployees);
+        if (pruebaEmployees.length !== 0) {
+
+            console.log('pruebaEmployees changeTime', pruebaEmployees);
+            console.log('employeeByStore changeTime', employeeByStore);//me trae la posta
+            console.log('employeesEspacioStored changeTime', employeesEspacioStored);
+
+        }
 
 
-    }, [])
+
+    }, [pruebaEmployees])
+
+
+    // const doubleShiftToday = (who) => {
+
+    //     employees.forEach(employee => {
+    //         if (employee.name === who) {
+    //             // console.log(`Hola! soy ${employee.name}`);
+
+    //             setPruebaEmployees(prev =>
+    //                 prev.map(emp =>
+    //                     emp.name === who ? { ...emp, entry: 9, exit: 20, doubleShift: true } : emp
+    //                 )
+    //             );
+    //         }
+    //     });
+
+    // }
+
+
+    // useEffect(() => {
+
+    //     //Mely hace doble siempre
+    //     // doubleShiftToday('Mely')
+
+    //     // console.log('pruebaEmployees', pruebaEmployees);//me tiene que traer la nueva info, la misma que tiene schedule
+
+
+
+    // }, [])
 
 
     const handleEntryChange = (id, newEntryTime) => {
@@ -47,7 +62,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
         // console.log('dentro de habldeEntryChange');
 
 
-        changeTimeEmployee.forEach(changeTime => {
+        pruebaEmployees.forEach(changeTime => {
 
             if (changeTime.id === id) {
 
@@ -66,22 +81,18 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
                 } else {
 
-                    setEmployees(prev =>
+                    setPruebaEmployees(prev =>
                         prev.map(emp =>
                             emp.id === id ? { ...emp, entry: entryTime } : emp
                         )
                     );
 
 
-                    //me guarda en local store
-                    // const updatedEmployeeData = employees.map(e =>
-                    //     e.id === id ? { ...e, entry: entryTime } : e
-                    // );
-
-                    // localStorage.setItem(date, JSON.stringify({ employeeData: updatedEmployeeData }));
                 }
             }
         })
+        // console.log('pruebaEmployees changeTime', pruebaEmployees);
+        // console.log('employeeByStore changeTime', employeeByStore);
 
     };
 
@@ -91,7 +102,7 @@ const ChangeTime = ({ changeTimeEmployee }) => {
         // console.log('dentro de handleExitChange');
 
 
-        changeTimeEmployee.forEach(changeTime => {
+        pruebaEmployees.forEach(changeTime => {
 
             if (changeTime.id === id) {
 
@@ -109,15 +120,32 @@ const ChangeTime = ({ changeTimeEmployee }) => {
                     });
 
                 } else {
-                    setEmployees(prev =>
+                    setPruebaEmployees(prev =>
                         prev.map(emp =>
                             emp.id === id ? { ...emp, exit: exitTime } : emp
                         )
                     );
-                    // console.log('exit time es ', exitTime);
+                    console.log('exit time es ', exitTime);
+
+
+
+                    // const stored = localStorage.getItem(byDateId);
+                    // const parsed = stored ? JSON.parse(stored) : {};
+
+                    // const updatedEmployeeData = employees.map(e =>
+                    //     e.id === employees.id ? employee : e
+                    // );
+
+
+
+                    // localStorage.setItem(byDateId, JSON.stringify({
+                    //     ...parsed,
+                    //     employeeData: updatedEmployeeData
+                    // }));
 
 
                 }
+
 
             }
 
@@ -128,10 +156,10 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
     const handleChange = (id) => {
         //  console.log('id', id);
-        changeTimeEmployee.forEach(changeTime => {
+        pruebaEmployees.forEach(changeTime => {
 
             if (changeTime.id === id) {
-                setEmployees((prevEmployees) =>
+                setPruebaEmployees((prevEmployees) =>
                     prevEmployees.map((emp) =>
                         emp.id === id ? { ...emp, assist: !emp.assist } : emp
                     )
@@ -148,24 +176,20 @@ const ChangeTime = ({ changeTimeEmployee }) => {
 
     const handleChangeDT = (id) => {
 
-        changeTimeEmployee.forEach(changeDoubleShift => {
+        pruebaEmployees.forEach(changeDoubleShift => {
 
             if (changeDoubleShift.id === id) {
-                setEmployees((prevEmployees) =>
+                setPruebaEmployees((prevEmployees) =>
                     prevEmployees.map((emp) =>
                         emp.id === id ? { ...emp, doubleShift: !emp.doubleShift, entry: 9, exit: 20 } : emp
                     )
                 );
 
-                // console.log(changeDoubleShift.doubleShift);
-
-                // console.log(changeDoubleShift);
 
                 if (changeDoubleShift.doubleShift) {
 
-                    setEmployees((prevEmployees) =>
+                    setPruebaEmployees((prevEmployees) =>
                         prevEmployees.map((emp) =>
-
 
                             emp.id === id ? { ...emp, doubleShift: emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
                         ))
@@ -175,68 +199,73 @@ const ChangeTime = ({ changeTimeEmployee }) => {
         });
     }
 
+    // pruebaEmployeesModificado
+    // searchStore
+
     return (
         <section className='changeTimeContainer'>
-            {changeTimeEmployee.map(((employee) => {
-                return (
-                    <div className="employeeContainer" key={employee.id}>
-                        <Form.Label htmlFor="inputPassword5" className="employeeContainer_label">{employee.name}</Form.Label>
 
-                        <section className="selectContainer">
+            {
+                pruebaEmployees.map(((employee) => {
+                    return (
+                        <div className="employeeContainer" key={employee.id}>
+                            <Form.Label htmlFor="inputPassword5" className="employeeContainer_label">{employee.name}</Form.Label>
 
-                            <Form.Select
-                                aria-label="Default select example"
-                                disabled={!employee.assist}
-                                value={employee.entry}
-                                onChange={(e) => handleEntryChange(employee.id, parseFloat(e.target.value))}
-                            >
-                                <option>{formatHour(employee.entry)}</option>
+                            <section className="selectContainer">
 
-                                {entryAllTime.map((time, i) => {
-                                    return (
-                                        <option key={i} value={i}>  {formatHour(time.entryTime)}
-                                        </option>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    disabled={!employee.assist}
+                                    value={employee.entry}
+                                    onChange={(e) => handleEntryChange(employee.id, parseFloat(e.target.value))}
+                                >
+                                    <option>{formatHour(employee.entry)}</option>
 
-                                    )
-                                })}
-                            </Form.Select>
+                                    {entryAllTime.map((time, i) => {
+                                        return (
+                                            <option key={i} value={i}>  {formatHour(time.entryTime)}
+                                            </option>
 
-
-                            <Form.Select
-                                aria-label="Default select example"
-                                disabled={!employee.assist}
-                                value={employee.exit}
-                                onChange={(e) => handleExitChange(employee.id, parseFloat(e.target.value))}
-                            >
-                                <option>{formatHour(employee.exit)}</option>
-
-                                {exitAllTime.map((time, i) => {
-                                    return (
-                                        <option key={i} value={i}>{formatHour(time.exitTime)}</option>
-
-                                    )
-                                })}
-                            </Form.Select>
+                                        )
+                                    })}
+                                </Form.Select>
 
 
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    disabled={!employee.assist}
+                                    value={employee.exit}
+                                    onChange={(e) => handleExitChange(employee.id, parseFloat(e.target.value))}
+                                >
+                                    <option>{formatHour(employee.exit)}</option>
+
+                                    {exitAllTime.map((time, i) => {
+                                        return (
+                                            <option key={i} value={i}>{formatHour(time.exitTime)}</option>
+
+                                        )
+                                    })}
+                                </Form.Select>
 
 
-                            <div className="checkBox">
-                                <Form.Check
-                                    type="checkbox"
-                                    checked={employee.assist}
-                                    onChange={() => handleChange(employee.id)}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    checked={employee.doubleShift}
-                                    onChange={() => handleChangeDT(employee.id)}
-                                />
-                            </div>
-                        </section >
-                    </div>
-                )
-            }))
+
+
+                                <div className="checkBox">
+                                    <Form.Check
+                                        type="checkbox"
+                                        checked={employee.assist}
+                                        onChange={() => handleChange(employee.id)}
+                                    />
+                                    <Form.Check
+                                        type="checkbox"
+                                        checked={employee.doubleShift}
+                                        onChange={() => handleChangeDT(employee.id)}
+                                    />
+                                </div>
+                            </section >
+                        </div>
+                    )
+                }))
             }
 
         </section>

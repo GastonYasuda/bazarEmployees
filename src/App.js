@@ -24,7 +24,7 @@ function App() {
           <Route path='*' element={<MainApp />} />
 
 
-          <Route path='/:storeId' element={<ShowStores />} />
+          {/* <Route path='/:storeId' element={<ShowStores />} /> */}
 
 
 
