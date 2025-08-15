@@ -10,15 +10,10 @@ import { Bounce, ToastContainer } from 'react-toastify';
 
 const ShowStores = () => {
 
-    const { espacioEmployees, puntoEmployees, ciudadEmployees, getLocalStoreInfoByDate, employeesEspacioStored, employeesPuntoStored, employeesCiudadStored, employees } = useContext(apiEmployee)
+    const { getLocalStoreInfoByDate, employeesEspacioStored } = useContext(apiEmployee)
 
-
-    const { storeId, byDateId } = useParams()
-
-
+    const { byDateId } = useParams()
     const [isStored, setIsStored] = useState(false)
-
-
 
     useEffect(() => {
 
@@ -28,15 +23,9 @@ const ShowStores = () => {
 
         if (exists) {
             setIsStored(true);
-            // console.log('employeesCiudadStored', employeesCiudadStored);
-
-            // console.log(`estoy guardado con fecha ${byDateId}`);
         } else {
             setIsStored(false);
-            // console.log(`seleccionaste ${byDateId} NO HAY NADA`);
         }
-
-
 
     }, [byDateId]);
 
@@ -51,12 +40,8 @@ const ShowStores = () => {
                         date={byDateId}
                         isStored={isStored}
                         employeeByStore={employeesEspacioStored}
-
                     />
                 }
-
-
-
 
                 <BottomMenuBar />
 
@@ -80,36 +65,4 @@ const ShowStores = () => {
 };
 
 export default ShowStores;
-
-
-//   <>
-//                     {storeId === 'espacio' &&
-//                         <>
-//                             <ShowByStore
-//                                 date={byDateId}
-//                                 isStored={isStored}
-//                                 employeeByStore={isStored ? employeesEspacioStored : espacioEmployees}
-//                                 pruebaEmployees={pruebaEmployees} setPruebaEmployees={setPruebaEmployees}
-//                             />
-
-//                         </>
-
-//                     }
-
-//                     {storeId === 'punto' &&
-//                         <ShowByStore date={byDateId} isStored={isStored}
-//                             employeeByStore={isStored ? employeesPuntoStored : puntoEmployees}
-//                             pruebaEmployees={pruebaEmployees} setPruebaEmployees={setPruebaEmployees}
-
-//                         />
-//                     }
-
-//                     {storeId === 'ciudad' &&
-//                         <ShowByStore date={byDateId} isStored={isStored}
-//                             employeeByStore={isStored ? employeesCiudadStored : ciudadEmployees}
-//                             pruebaEmployees={pruebaEmployees} setPruebaEmployees={setPruebaEmployees}
-
-//                         />
-//                     }
-//                 </>
 

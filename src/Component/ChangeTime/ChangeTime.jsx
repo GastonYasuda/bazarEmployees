@@ -10,9 +10,6 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
 
     const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData, employeesEspacioStored } = useContext(apiEmployee)
 
-
-
-
     useEffect(() => {
 
         if (pruebaEmployees.length !== 0) {
@@ -20,47 +17,13 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
             console.log('pruebaEmployees changeTime', pruebaEmployees);
             console.log('employeeByStore changeTime', employeeByStore);//me trae la posta
             console.log('employeesEspacioStored changeTime', employeesEspacioStored);
-
         }
-
-
 
     }, [pruebaEmployees])
 
 
-    // const doubleShiftToday = (who) => {
-
-    //     employees.forEach(employee => {
-    //         if (employee.name === who) {
-    //             // console.log(`Hola! soy ${employee.name}`);
-
-    //             setPruebaEmployees(prev =>
-    //                 prev.map(emp =>
-    //                     emp.name === who ? { ...emp, entry: 9, exit: 20, doubleShift: true } : emp
-    //                 )
-    //             );
-    //         }
-    //     });
-
-    // }
-
-
-    // useEffect(() => {
-
-    //     //Mely hace doble siempre
-    //     // doubleShiftToday('Mely')
-
-    //     // console.log('pruebaEmployees', pruebaEmployees);//me tiene que traer la nueva info, la misma que tiene schedule
-
-
-
-    // }, [])
-
-
     const handleEntryChange = (id, newEntryTime) => {
         const { entryTime } = entryAllTime[newEntryTime]
-        // console.log('dentro de habldeEntryChange');
-
 
         pruebaEmployees.forEach(changeTime => {
 
@@ -91,16 +54,11 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
                 }
             }
         })
-        // console.log('pruebaEmployees changeTime', pruebaEmployees);
-        // console.log('employeeByStore changeTime', employeeByStore);
-
     };
 
 
     const handleExitChange = (id, newExitTime) => {
         const { exitTime } = exitAllTime[newExitTime]
-        // console.log('dentro de handleExitChange');
-
 
         pruebaEmployees.forEach(changeTime => {
 
@@ -126,36 +84,13 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
                         )
                     );
                     console.log('exit time es ', exitTime);
-
-
-
-                    // const stored = localStorage.getItem(byDateId);
-                    // const parsed = stored ? JSON.parse(stored) : {};
-
-                    // const updatedEmployeeData = employees.map(e =>
-                    //     e.id === employees.id ? employee : e
-                    // );
-
-
-
-                    // localStorage.setItem(byDateId, JSON.stringify({
-                    //     ...parsed,
-                    //     employeeData: updatedEmployeeData
-                    // }));
-
-
                 }
-
-
             }
-
-
         });
 
     };
 
     const handleChange = (id) => {
-        //  console.log('id', id);
         pruebaEmployees.forEach(changeTime => {
 
             if (changeTime.id === id) {
@@ -199,8 +134,6 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
         });
     }
 
-    // pruebaEmployeesModificado
-    // searchStore
 
     return (
         <section className='changeTimeContainer'>
@@ -247,9 +180,6 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
                                     })}
                                 </Form.Select>
 
-
-
-
                                 <div className="checkBox">
                                     <Form.Check
                                         type="checkbox"
@@ -267,9 +197,7 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
                     )
                 }))
             }
-
         </section>
-
     )
 }
 
