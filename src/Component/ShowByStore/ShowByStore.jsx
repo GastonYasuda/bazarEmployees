@@ -42,8 +42,7 @@ const ShowByStore = ({ employeeByStore, isStored, date }) => {
     const saveDateInfo = () => {
         const txt =
             <div>
-                TODAVÍA NO ANDA ESTA FUNCIÓN!<br />
-                Pero se va a guardar la info de<br /><strong>{storeId}</strong> de la fecha <strong>{date}</strong>
+                Se guardo la modificación de<br /><strong>{storeId}</strong> de la fecha <strong>{date}</strong>
             </div>;
 
         toast(txt)
