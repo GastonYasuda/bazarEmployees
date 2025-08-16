@@ -10,9 +10,9 @@ import { Bounce, ToastContainer } from 'react-toastify';
 
 const ShowStores = () => {
 
-    const { getLocalStoreInfoByDate, employeesEspacioStored } = useContext(apiEmployee)
+    const { getLocalStoreInfoByDate, employeesEspacioStored, employeesPuntoStored, employeesCiudadStored } = useContext(apiEmployee)
 
-    const { byDateId } = useParams()
+    const { byDateId, storeId } = useParams()
     const [isStored, setIsStored] = useState(false)
 
     useEffect(() => {
@@ -33,15 +33,29 @@ const ShowStores = () => {
     return (
         <div className="App">
             <div className="mainContainer">
-
-                {isStored ? <h1>HAY GUARDADO</h1> : <h5>no tengo nada</h5>}
-                {isStored &&
+                {isStored && storeId === 'espacio' &&
                     <ShowByStore
                         date={byDateId}
                         isStored={isStored}
                         employeeByStore={employeesEspacioStored}
                     />
                 }
+                {isStored && storeId === 'punto' &&
+                    <ShowByStore
+                        date={byDateId}
+                        isStored={isStored}
+                        employeeByStore={employeesPuntoStored}
+                    />
+                }
+                {isStored && storeId === 'ciudad' &&
+                    <ShowByStore
+                        date={byDateId}
+                        isStored={isStored}
+                        employeeByStore={employeesCiudadStored}
+                    />
+                }
+
+
 
                 <BottomMenuBar />
 

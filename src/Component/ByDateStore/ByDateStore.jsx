@@ -44,22 +44,34 @@ const ByDateStore = () => {
 
                 <h1>{mayPrimera(myNewDateId)} {byDateId}</h1>
 
-
-                {isStored ? <h1>HAY GUARDADO</h1> : <h5>no hay nada</h5>}
                 {isStored &&
-                    <section className='mainGraphicContainer'>
-                        <Link to={`/${byDateId}/espacio`}>
-                            <div className='showByStoreComponent'>
-                                <h3>Espacio</h3>
-                                <ScheduleGraphic employeeData={employeesEspacioStored} state={'byDateStore'} />
+                    <>
+                        <section className='mainGraphicContainer'>
+                            <Link to={`/${byDateId}/espacio`}>
+                                <div className='showByStoreComponent'>
+                                    <h3>Espacio</h3>
+                                    <ScheduleGraphic employeeData={employeesEspacioStored} state={'byDateStore'} />
+                                </div>
+                            </Link>
+                        </section>
+                        <section className='mainGraphicContainer'>
+                            <Link to={`/${byDateId}/punto`}>
+                                <div className='showByStoreComponent'>
+                                    <h3>Punto</h3>
+                                    <ScheduleGraphic employeeData={employeesPuntoStored} state={'byDateStore'} />
+                                </div>
+                            </Link>
+                        </section>
+                        <section className='mainGraphicContainer'>
+                            <Link to={`/${byDateId}/ciudad`}>
+                                <div className='showByStoreComponent'>
+                                    <h3>Ciudad</h3>
+                                    <ScheduleGraphic employeeData={employeesCiudadStored} state={'byDateStore'} />
+                                </div>
+                            </Link>
+                        </section>
+                    </>}
 
-
-                                {/* 
-                                <ScheduleGraphic isStored={isStored} date={byDateId} employeeData={isStored ? employeesEspacioStored : espacioEmployees} from={'espacio'} /> */}
-
-                            </div>
-                        </Link>
-                    </section>}
 
 
             </div>
