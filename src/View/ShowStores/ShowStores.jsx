@@ -10,13 +10,12 @@ import { Bounce, ToastContainer } from 'react-toastify';
 
 const ShowStores = () => {
 
-    const { getLocalStoreInfoByDate, employeesEspacioStored, employeesPuntoStored, employeesCiudadStored } = useContext(apiEmployee)
+    const { getLocalStoreInfoByDate, employeesEspacioStored, employeesPuntoStored, employeesCiudadStored, espacioEmployees, puntoEmployees, ciudadEmployees } = useContext(apiEmployee)
 
     const { byDateId, storeId } = useParams()
     const [isStored, setIsStored] = useState(false)
 
     useEffect(() => {
-
         getLocalStoreInfoByDate(byDateId)
 
         const exists = getLocalStoreInfoByDate(byDateId);
@@ -27,34 +26,60 @@ const ShowStores = () => {
             setIsStored(false);
         }
 
-    }, [byDateId]);
+    }, [byDateId, storeId]);
 
 
     return (
         <div className="App">
             <div className="mainContainer">
-                {isStored && storeId === 'espacio' &&
-                    <ShowByStore
-                        date={byDateId}
-                        isStored={isStored}
-                        employeeByStore={employeesEspacioStored}
-                    />
-                }
-                {isStored && storeId === 'punto' &&
-                    <ShowByStore
-                        date={byDateId}
-                        isStored={isStored}
-                        employeeByStore={employeesPuntoStored}
-                    />
-                }
-                {isStored && storeId === 'ciudad' &&
-                    <ShowByStore
-                        date={byDateId}
-                        isStored={isStored}
-                        employeeByStore={employeesCiudadStored}
-                    />
-                }
 
+                <>
+                    {!isStored && storeId === 'espacio' &&
+                        <ShowByStore
+                            date={byDateId}
+                            isStored={isStored}
+                            employeeByStore={espacioEmployees}
+                        />
+                    }
+                    {!isStored && storeId === 'punto' &&
+                        <ShowByStore
+                            date={byDateId}
+                            isStored={isStored}
+                            employeeByStore={puntoEmployees}
+                        />
+                    }
+                    {!isStored && storeId === 'ciudad' &&
+                        <ShowByStore
+                            date={byDateId}
+                            isStored={isStored}
+                            employeeByStore={ciudadEmployees}
+                        />
+                    }
+                </>
+
+                <>
+                    {isStored && storeId === 'espacio' &&
+                        <ShowByStore
+                            date={byDateId}
+                            isStored={isStored}
+                            employeeByStore={employeesEspacioStored}
+                        />
+                    }
+                    {isStored && storeId === 'punto' &&
+                        <ShowByStore
+                            date={byDateId}
+                            isStored={isStored}
+                            employeeByStore={employeesPuntoStored}
+                        />
+                    }
+                    {isStored && storeId === 'ciudad' &&
+                        <ShowByStore
+                            date={byDateId}
+                            isStored={isStored}
+                            employeeByStore={employeesCiudadStored}
+                        />
+                    }
+                </>
 
 
                 <BottomMenuBar />

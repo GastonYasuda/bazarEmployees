@@ -10,20 +10,66 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
 
     const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData, employeesEspacioStored } = useContext(apiEmployee)
 
+    // useEffect(() => {
+
+    //     if (pruebaEmployees.length !== 0) {
+
+    //         console.log('pruebaEmployees changeTime', pruebaEmployees);
+    //         console.log('employeeByStore changeTime', employeeByStore);//me trae la posta
+    //         console.log('employeesEspacioStored changeTime', employeesEspacioStored);
+    //     }
+
+    // }, [pruebaEmployees])
+
     useEffect(() => {
+
 
         if (pruebaEmployees.length !== 0) {
 
-            console.log('pruebaEmployees changeTime', pruebaEmployees);
-            console.log('employeeByStore changeTime', employeeByStore);//me trae la posta
-            console.log('employeesEspacioStored changeTime', employeesEspacioStored);
+            console.log('pruebaEmployees', pruebaEmployees);
         }
 
-    }, [pruebaEmployees])
+
+    }, [])
 
 
     const handleEntryChange = (id, newEntryTime) => {
         const { entryTime } = entryAllTime[newEntryTime]
+
+        setPruebaEmployees((prevEmployees) =>
+            prevEmployees.map((emp) => {
+                if (emp.id !== id) return emp;
+
+                // 🚫 validar que no sean iguales entrada y salida
+                if (entryTime === emp.entry) {
+                    toast.error(
+                        `No puede tener la misma hora de entrada y salida de ${emp.name}!`,
+                        {
+                            position: "top-center",
+                            autoClose: 6000,
+                            hideProgressBar: false,
+                            closeOnClick: false,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                            transition: Bounce,
+                        }
+                    );
+                    return emp; // no lo modifico
+                }
+
+                // ✅ actualizo salida y calculo doubleShift en el mismo paso
+                return {
+                    ...emp,
+                    entry: entryTime,
+                    doubleShift: entryTime === 9 && emp.exit === 20,
+                };
+            })
+        );
+
+
+
 
         pruebaEmployees.forEach(changeTime => {
 
@@ -56,44 +102,49 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
         })
     };
 
-
     const handleExitChange = (id, newExitTime) => {
-        const { exitTime } = exitAllTime[newExitTime]
+        const { exitTime } = exitAllTime[newExitTime];
 
-        pruebaEmployees.forEach(changeTime => {
+        setPruebaEmployees((prevEmployees) =>
+            prevEmployees.map((emp) => {
+                if (emp.id !== id) return emp;
 
-            if (changeTime.id === id) {
-
-                if (exitTime === changeTime.entry) {
-                    toast.error(`No puede tener la misma hora de entrada y salida de ${changeTime.name}!`, {
-                        position: "top-center",
-                        autoClose: 6000,
-                        hideProgressBar: false,
-                        closeOnClick: false,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Bounce,
-                    });
-
-                } else {
-                    setPruebaEmployees(prev =>
-                        prev.map(emp =>
-                            emp.id === id ? { ...emp, exit: exitTime } : emp
-                        )
+                // 🚫 validar que no sean iguales entrada y salida
+                if (exitTime === emp.entry) {
+                    toast.error(
+                        `No puede tener la misma hora de entrada y salida de ${emp.name}!`,
+                        {
+                            position: "top-center",
+                            autoClose: 6000,
+                            hideProgressBar: false,
+                            closeOnClick: false,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                            transition: Bounce,
+                        }
                     );
-                    console.log('exit time es ', exitTime);
+                    return emp; // no lo modifico
                 }
-            }
-        });
 
+                // ✅ actualizo salida y calculo doubleShift en el mismo paso
+                return {
+                    ...emp,
+                    exit: exitTime,
+                    doubleShift: emp.entry === 9 && exitTime === 20,
+                };
+            })
+        );
     };
 
+
     const handleChange = (id) => {
+
         pruebaEmployees.forEach(changeTime => {
 
             if (changeTime.id === id) {
+
                 setPruebaEmployees((prevEmployees) =>
                     prevEmployees.map((emp) =>
                         emp.id === id ? { ...emp, assist: !emp.assist } : emp
@@ -110,6 +161,8 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
 
 
     const handleChangeDT = (id) => {
+
+        //si entrada es 9 y salida es 20 doubleShift que sea true
 
         pruebaEmployees.forEach(changeDoubleShift => {
 

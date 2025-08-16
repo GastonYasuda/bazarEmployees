@@ -19,10 +19,17 @@ const ShowByStore = ({ employeeByStore, isStored, date }) => {
 
 
     useEffect(() => {
-        const byStore = employees.filter((employee) => employee.store === storeId)
+        //    console.log(pruebaEmployees);
 
-        setPruebaEmployees(byStore)
-        traigoGuardadoConDiaStore()
+
+        if (!isStored) {
+            const byStore = employees.filter((employee) => employee.store === storeId)
+
+            setPruebaEmployees(byStore)
+        } else {
+            traigoGuardadoConDiaStore()//me trae el dato que tiene guardado
+        }
+
 
     }, [])
 

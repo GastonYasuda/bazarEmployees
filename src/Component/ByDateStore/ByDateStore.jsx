@@ -2,47 +2,48 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { apiEmployee } from '../../Context/EmployeeApiContext'
-// import ShowByStore from '../ShowByStore/ShowByStore'
 import ScheduleGraphic from "../../Component/ScheduleGraphic/ScheduleGraphic";
 import BottomMenuBar from '../BottomMenuBar/BottomMenuBar';
+import ShowByDateStoreGraphic from '../ShowByDateStoreGraphic/ShowByDateStoreGraphic';
 
 
 const ByDateStore = () => {
 
     const { byDateId } = useParams()
-    const { employees, mayPrimera, espacioEmployees, employeesEspacioStored, puntoEmployees, employeesPuntoStored, ciudadEmployees, employeesCiudadStored, getLocalStoreInfoByDate } = useContext(apiEmployee)
+    const { mayPrimera, employeesEspacioStored, employeesPuntoStored, espacioEmployees, ciudadEmployees, puntoEmployees, employeesCiudadStored, getLocalStoreInfoByDate } = useContext(apiEmployee)
+
+    const myNewDateId = new Date(byDateId).toLocaleDateString("es-ES", { weekday: "long" })
 
     const [isStored, setIsStored] = useState(false)
 
 
     useEffect(() => {
-        // console.log('1 arranco');
-        // console.log('ciudadEmployees', ciudadEmployees);
-
         const exists = getLocalStoreInfoByDate(byDateId);
 
         if (exists) {
             setIsStored(true);
-            // console.log(`estoy guardado con fecha ${byDateId}`);
+
         } else {
             setIsStored(false);
             console.log('ciudadEmployees', ciudadEmployees);
-            // console.log(`seleccionaste ${byDateId} NO HAY NADA`);
+
         }
     }, []);
-
-
-
-
-
-    const myNewDateId = new Date(byDateId).toLocaleDateString("es-ES", { weekday: "long" })
-
 
     return (
         <div className="App">
             <div className="mainContainer">
 
                 <h1>{mayPrimera(myNewDateId)} {byDateId}</h1>
+                {!isStored && espacioEmployees && puntoEmployees && ciudadEmployees &&
+                    <>
+                        <ShowByDateStoreGraphic byDateId={byDateId} storedEmployee={espacioEmployees} state={'byDateStore'} />
+
+                        <ShowByDateStoreGraphic byDateId={byDateId} storedEmployee={puntoEmployees} state={'byDateStore'} />
+
+                        <ShowByDateStoreGraphic byDateId={byDateId} storedEmployee={ciudadEmployees} state={'byDateStore'} />
+
+                    </>}
 
                 {isStored &&
                     <>
@@ -70,9 +71,8 @@ const ByDateStore = () => {
                                 </div>
                             </Link>
                         </section>
-                    </>}
-
-
+                    </>
+                }
 
             </div>
             <BottomMenuBar />
