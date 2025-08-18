@@ -174,11 +174,14 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                             emp.id === id ? { ...emp, doubleShift: emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
                         ))
 
+                    setShowCutModal(false)
+                } else {
+
+                    setShowCutModal(true)
                 }
             }
         });
 
-        setShowCutModal(true)
     }
 
 
