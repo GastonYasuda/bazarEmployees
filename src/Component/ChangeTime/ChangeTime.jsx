@@ -1,25 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from 'react'
-import { Form } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from 'react'
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Bounce, toast } from 'react-toastify';
 import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 
 
-const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) => {
+const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
 
-    const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData, employeesEspacioStored } = useContext(apiEmployee)
+    const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData } = useContext(apiEmployee)
 
-    // useEffect(() => {
-
-    //     if (pruebaEmployees.length !== 0) {
-
-    //         console.log('pruebaEmployees changeTime', pruebaEmployees);
-    //         console.log('employeeByStore changeTime', employeeByStore);//me trae la posta
-    //         console.log('employeesEspacioStored changeTime', employeesEspacioStored);
-    //     }
-
-    // }, [pruebaEmployees])
 
     useEffect(() => {
 
@@ -28,7 +18,6 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
 
             console.log('pruebaEmployees', pruebaEmployees);
         }
-
 
     }, [])
 
@@ -159,6 +148,9 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
         });
     };
 
+    const [showCutModal, setShowCutModal] = useState(false)
+    const handleClose = () => setShowCutModal(false);
+    const handleShow = () => showCutModal(true);
 
     const handleChangeDT = (id) => {
 
@@ -185,7 +177,22 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
                 }
             }
         });
+
+        setShowCutModal(true)
     }
+
+
+
+
+
+    const handleSubmit = (e, id) => {
+        e.preventDefault();
+        console.log('jola');
+
+
+        const emp = pruebaEmployees.find((emp) => emp.id === id);
+        console.log("Guardado:", emp.name, emp.cutStart, emp.cutEnd);
+    };
 
 
     return (
@@ -195,62 +202,165 @@ const ChangeTime = ({ employeeByStore, pruebaEmployees, setPruebaEmployees }) =>
                 pruebaEmployees.map(((employee) => {
                     return (
                         <div className="employeeContainer" key={employee.id}>
-                            <Form.Label htmlFor="inputPassword5" className="employeeContainer_label">{employee.name}</Form.Label>
 
-                            <section className="selectContainer">
+                            <section className='employeeContainer_info'>
+                                <Form.Label className="employeeContainer_label">{employee.name}</Form.Label>
 
-                                <Form.Select
-                                    aria-label="Default select example"
-                                    disabled={!employee.assist}
-                                    value={employee.entry}
-                                    onChange={(e) => handleEntryChange(employee.id, parseFloat(e.target.value))}
-                                >
-                                    <option>{formatHour(employee.entry)}</option>
+                                <section className="selectContainer">
 
-                                    {entryAllTime.map((time, i) => {
-                                        return (
-                                            <option key={i} value={i}>  {formatHour(time.entryTime)}
-                                            </option>
+                                    <Form.Select
+                                        aria-label="Default select example"
+                                        disabled={!employee.assist}
+                                        value={employee.entry}
+                                        onChange={(e) => handleEntryChange(employee.id, parseFloat(e.target.value))}
+                                    >
+                                        <option>{formatHour(employee.entry)}</option>
 
-                                        )
-                                    })}
-                                </Form.Select>
+                                        {entryAllTime.map((time, i) => {
+                                            return (
+                                                <option key={i} value={i}>  {formatHour(time.entryTime)}
+                                                </option>
+
+                                            )
+                                        })}
+                                    </Form.Select>
 
 
-                                <Form.Select
-                                    aria-label="Default select example"
-                                    disabled={!employee.assist}
-                                    value={employee.exit}
-                                    onChange={(e) => handleExitChange(employee.id, parseFloat(e.target.value))}
-                                >
-                                    <option>{formatHour(employee.exit)}</option>
+                                    <Form.Select
+                                        aria-label="Default select example"
+                                        disabled={!employee.assist}
+                                        value={employee.exit}
+                                        onChange={(e) => handleExitChange(employee.id, parseFloat(e.target.value))}
+                                    >
+                                        <option>{formatHour(employee.exit)}</option>
 
-                                    {exitAllTime.map((time, i) => {
-                                        return (
-                                            <option key={i} value={i}>{formatHour(time.exitTime)}</option>
+                                        {exitAllTime.map((time, i) => {
+                                            return (
+                                                <option key={i} value={i}>{formatHour(time.exitTime)}</option>
 
-                                        )
-                                    })}
-                                </Form.Select>
+                                            )
+                                        })}
+                                    </Form.Select>
 
-                                <div className="checkBox">
-                                    <Form.Check
-                                        type="checkbox"
-                                        checked={employee.assist}
-                                        onChange={() => handleChange(employee.id)}
-                                    />
-                                    <Form.Check
-                                        type="checkbox"
-                                        checked={employee.doubleShift}
-                                        onChange={() => handleChangeDT(employee.id)}
-                                    />
-                                </div>
-                            </section >
+                                    <div className="checkBox">
+                                        <Form.Check
+                                            type="checkbox"
+                                            checked={employee.assist}
+                                            onChange={() => handleChange(employee.id)}
+                                        />
+                                        <Form.Check
+                                            type="checkbox"
+                                            checked={employee.doubleShift}
+                                            onChange={() => handleChangeDT(employee.id)}
+                                        />
+                                    </div>
+                                </section >
+                            </section>
+
+
+
+
+                            <section className='doubleShiftCutTime'>
+                                <Form key={employee.id} onSubmit={(e) => handleSubmit(e)}>
+                                    <Row>
+                                        <Col>
+                                            <Form.Control
+                                                placeholder="Cut Start"
+                                                value={employee.cutStart || ""}
+                                                onChange={(e) =>
+                                                    setPruebaEmployees((prev) =>
+                                                        prev.map((emp) =>
+                                                            emp.id === employee.id
+                                                                ? { ...emp, cutStart: e.target.value }
+                                                                : emp
+                                                        )
+                                                    )
+                                                }
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Form.Control
+                                                placeholder="Cut End"
+                                                value={employee.cutEnd || ""}
+                                                onChange={(e) =>
+                                                    setPruebaEmployees((prev) =>
+                                                        prev.map((emp) =>
+                                                            emp.id === employee.id
+                                                                ? { ...emp, cutEnd: e.target.value }
+                                                                : emp
+                                                        )
+                                                    )
+                                                }
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Form>
+
+                            </section>
+
+
+                            <>
+
+                                <Modal show={showCutModal} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Modal heading</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <Form key={employee.id} onSubmit={(e) => handleSubmit(e)}>
+                                            <Row>
+                                                <Col>
+                                                    <Form.Control
+                                                        placeholder="Cut Start"
+                                                        value={employee.cutStart || ""}
+                                                        onChange={(e) =>
+                                                            setPruebaEmployees((prev) =>
+                                                                prev.map((emp) =>
+                                                                    emp.id === employee.id
+                                                                        ? { ...emp, cutStart: e.target.value }
+                                                                        : emp
+                                                                )
+                                                            )
+                                                        }
+                                                    />
+                                                </Col>
+                                                <Col>
+                                                    <Form.Control
+                                                        placeholder="Cut End"
+                                                        value={employee.cutEnd || ""}
+                                                        onChange={(e) =>
+                                                            setPruebaEmployees((prev) =>
+                                                                prev.map((emp) =>
+                                                                    emp.id === employee.id
+                                                                        ? { ...emp, cutEnd: e.target.value }
+                                                                        : emp
+                                                                )
+                                                            )
+                                                        }
+                                                    />
+                                                </Col>
+                                            </Row>
+                                        </Form>
+
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleClose}>
+                                            Close
+                                        </Button>
+                                        <Button variant="primary" onClick={handleClose}>
+                                            Save Changes
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                            </>
+
+
                         </div>
                     )
                 }))
             }
-        </section>
+
+
+        </section >
     )
 }
 

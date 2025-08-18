@@ -101,7 +101,6 @@ const ShowByStore = ({ employeeByStore, isStored, date }) => {
 
 
                 <ChangeTime
-                    employeeByStore={employeeByStore}
                     pruebaEmployees={pruebaEmployees}
                     setPruebaEmployees={setPruebaEmployees} />
 
