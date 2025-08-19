@@ -150,7 +150,6 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
 
     const [showCutModal, setShowCutModal] = useState(false)
     const handleClose = () => setShowCutModal(false);
-    const handleShow = () => showCutModal(true);
 
     const handleChangeDT = (id) => {
 
@@ -306,7 +305,7 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
 
                                 <Modal show={showCutModal} onHide={handleClose}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Modal heading</Modal.Title>
+                                        <Modal.Title>TODAVIA NO GUARDA DESDE ACA!</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <Form key={employee.id} onSubmit={(e) => handleSubmit(e)}>

@@ -16,6 +16,8 @@ const EmployeeScheduleChart = ({ employeeData, state, guardoDatoDelStoreParaMost
 
 
 
+
+
     const [infoOption, setInfoOption] = useState([]);
 
     useEffect(() => {
@@ -32,9 +34,16 @@ const EmployeeScheduleChart = ({ employeeData, state, guardoDatoDelStoreParaMost
     }, [employeeData, guardoDatoDelStoreParaMostrar])
 
     const labels = infoOption.map((e) => e.name);
+    const entryTimes = infoOption.map(e => e.assist ? e.entry : 0);
 
-    const entryTimes = infoOption.map((e) => e.assist ? e.entry : 0);
-    const workedHours = infoOption.map((e) => e.assist ? e.exit - e.entry : 0);
+    // horas hasta el inicio del corte
+    const beforeCut = infoOption.map(e => e.assist ? e.cutStart - e.entry : 0);
+
+    // duración del corte
+    const cutHours = infoOption.map(e => e.assist ? e.cutEnd - e.cutStart : 0);
+
+    // horas después del corte
+    const afterCut = infoOption.map(e => e.assist ? e.exit - e.cutEnd : 0);
 
     const data = {
         labels,
@@ -42,15 +51,27 @@ const EmployeeScheduleChart = ({ employeeData, state, guardoDatoDelStoreParaMost
             {
                 label: 'Inicio',
                 data: entryTimes,
-                backgroundColor: 'rgba(0,0,0,0)', // Invisible
+                backgroundColor: 'rgba(0, 0, 0, 0)', // offset invisible
             },
             {
-                label: 'Turno trabajado',
-                data: workedHours,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                label: 'Trabajo antes del corte',
+                data: beforeCut,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)', // celeste
+            },
+            {
+                label: 'Corte',
+                data: cutHours,
+                backgroundColor: 'rgba(100, 254, 17, 0.89)', // verde
+            },
+            {
+                label: 'Trabajo después del corte',
+                data: afterCut,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)', // mismo celeste
             },
         ],
     };
+
+
 
     const options = {
         indexAxis: 'y',
