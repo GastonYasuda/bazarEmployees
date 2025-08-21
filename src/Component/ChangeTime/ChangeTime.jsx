@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import React, { useContext, useEffect } from 'react'
+import { Form } from "react-bootstrap";
 import { Bounce, toast } from 'react-toastify';
 import { apiEmployee } from "../../Context/EmployeeApiContext";
 
@@ -10,7 +10,6 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
 
     const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData } = useContext(apiEmployee)
 
-    const [showCutTime, setShowCutTime] = useState(false)
 
     useEffect(() => {
 
@@ -178,10 +177,8 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                             emp.id === id ? { ...emp, doubleShift: emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
                         ))
 
-                    setShowCutTime(false)
                 } else {
 
-                    setShowCutTime(true)
                 }
             }
         });
