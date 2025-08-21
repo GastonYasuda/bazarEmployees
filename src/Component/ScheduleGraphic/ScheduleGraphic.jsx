@@ -21,6 +21,7 @@ const EmployeeScheduleChart = ({ employeeData, state, guardoDatoDelStoreParaMost
     const [infoOption, setInfoOption] = useState([]);
 
     useEffect(() => {
+        // const doubles = employeeData.filter(e => e.doubleShift);
 
 
         if (state === 'byDateStore') {
@@ -28,49 +29,85 @@ const EmployeeScheduleChart = ({ employeeData, state, guardoDatoDelStoreParaMost
 
         } else if (state === 'showByStore') {
             setInfoOption(employeeData)//me lo muestra en directo employeeData === pruebaEmployees en showByStore
+
+            // if (doubles.length !== 0) {
+
+            //     doubleShiftCut()
+            // }
         }
+
+
+
+
+
+
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [employeeData, guardoDatoDelStoreParaMostrar])
 
-    const labels = infoOption.map((e) => e.name);
-    const entryTimes = infoOption.map(e => e.assist ? e.entry : 0);
 
-    // horas hasta el inicio del corte
-    const beforeCut = infoOption.map(e => e.assist ? e.cutStart - e.entry : 0);
 
-    // duración del corte
-    const cutHours = infoOption.map(e => e.assist ? e.cutEnd - e.cutStart : 0);
 
-    // horas después del corte
-    const afterCut = infoOption.map(e => e.assist ? e.exit - e.cutEnd : 0);
 
-    const data = {
-        labels,
-        datasets: [
-            {
-                label: 'Inicio',
-                data: entryTimes,
-                backgroundColor: 'rgba(0, 0, 0, 0)', // offset invisible
-            },
-            {
-                label: 'Trabajo antes del corte',
-                data: beforeCut,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)', // celeste
-            },
-            {
-                label: 'Corte',
-                data: cutHours,
-                backgroundColor: 'rgba(100, 254, 17, 0.89)', // verde
-            },
-            {
-                label: 'Trabajo después del corte',
-                data: afterCut,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)', // mismo celeste
-            },
-        ],
+    const generateChartData = () => {
+        const labels = infoOption.map(e => e.name);
+
+        // Creamos datasets iniciales vacíos
+        const inicio = [];
+        const trabajoAntes = [];
+        const corte = [];
+        const trabajoDespues = [];
+
+        infoOption.forEach(e => {
+            if (e.assist) {
+                if (e.doubleShift) {
+                    // Empleado con corte
+                    inicio.push(e.entry);
+                    trabajoAntes.push(e.cutStart - e.entry);
+                    corte.push(e.cutEnd - e.cutStart);
+                    trabajoDespues.push(e.exit - e.cutEnd);
+                } else {
+                    // Empleado sin corte
+                    inicio.push(e.entry);
+                    trabajoAntes.push(e.exit - e.entry); // todo el turno en "trabajoAntes"
+                    corte.push(0); // no tiene corte
+                    trabajoDespues.push(0); // no tiene después del corte
+                }
+            } else {
+                // Si no asistió, todo 0
+                inicio.push(0);
+                trabajoAntes.push(0);
+                corte.push(0);
+                trabajoDespues.push(0);
+            }
+        });
+
+        return {
+            labels,
+            datasets: [
+                {
+                    label: 'Inicio',
+                    data: inicio,
+                    backgroundColor: 'rgba(0,0,0,0)', // offset invisible
+                },
+                {
+                    label: 'Trabajo antes del corte',
+                    data: trabajoAntes,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                },
+                {
+                    label: 'Corte',
+                    data: corte,
+                    backgroundColor: 'rgba(100, 254, 17, 0.89)',
+                },
+                {
+                    label: 'Trabajo después del corte',
+                    data: trabajoDespues,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                },
+            ],
+        };
     };
-
 
 
     const options = {
@@ -120,7 +157,8 @@ const EmployeeScheduleChart = ({ employeeData, state, guardoDatoDelStoreParaMost
             // height: `${employeeData.length * 40}px`,
             margin: '0 auto'
         }}>
-            <Bar data={data} options={options} />
+
+            <Bar data={generateChartData()} options={options} />
         </div>
 
 
