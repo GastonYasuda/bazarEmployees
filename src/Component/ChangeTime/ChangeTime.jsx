@@ -10,6 +10,7 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
 
     const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData } = useContext(apiEmployee)
 
+    const [showCutTime, setShowCutTime] = useState(false)
 
     useEffect(() => {
 
@@ -18,6 +19,7 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
 
             console.log('pruebaEmployees', pruebaEmployees);
         }
+
 
     }, [])
 
@@ -148,8 +150,11 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
         });
     };
 
-    const [showCutModal, setShowCutModal] = useState(false)
-    const handleClose = () => setShowCutModal(false);
+
+
+
+
+
 
     const handleChangeDT = (id) => {
 
@@ -173,10 +178,10 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                             emp.id === id ? { ...emp, doubleShift: emp.doubleShift, entry: employeeData[id].entry, exit: employeeData[id].exit } : emp
                         ))
 
-                    setShowCutModal(false)
+                    setShowCutTime(false)
                 } else {
 
-                    setShowCutModal(true)
+                    setShowCutTime(true)
                 }
             }
         });
@@ -200,11 +205,12 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
     return (
         <section className='changeTimeContainer'>
 
+
             {
                 pruebaEmployees.map(((employee) => {
                     return (
-                        <div className="employeeContainer" key={employee.id}>
 
+                        <div className="employeeContainer" key={employee.id}>
                             <section className='employeeContainer_info'>
                                 <Form.Label className="employeeContainer_label">{employee.name}</Form.Label>
 
@@ -228,6 +234,7 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                                     </Form.Select>
 
 
+
                                     <Form.Select
                                         aria-label="Default select example"
                                         disabled={!employee.assist}
@@ -244,6 +251,12 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                                         })}
                                     </Form.Select>
 
+
+
+
+
+
+
                                     <div className="checkBox">
                                         <Form.Check
                                             type="checkbox"
@@ -257,58 +270,60 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                                         />
                                     </div>
                                 </section >
-                            </section>
-
-
-
-
-                            <section className='doubleShiftCutTime'>
-                                <Form key={employee.id} onSubmit={(e) => handleSubmit(e)}>
-                                    <Row>
-                                        <Col>
-                                            <Form.Control
-                                                placeholder="Cut Start"
-                                                value={employee.cutStart || ""}
-                                                onChange={(e) =>
-                                                    setPruebaEmployees((prev) =>
-                                                        prev.map((emp) =>
-                                                            emp.id === employee.id
-                                                                ? { ...emp, cutStart: e.target.value }
-                                                                : emp
-                                                        )
-                                                    )
-                                                }
-                                            />
-                                        </Col>
-                                        <Col>
-                                            <Form.Control
-                                                placeholder="Cut End"
-                                                value={employee.cutEnd || ""}
-                                                onChange={(e) =>
-                                                    setPruebaEmployees((prev) =>
-                                                        prev.map((emp) =>
-                                                            emp.id === employee.id
-                                                                ? { ...emp, cutEnd: e.target.value }
-                                                                : emp
-                                                        )
-                                                    )
-                                                }
-                                            />
-                                        </Col>
-                                    </Row>
-                                </Form>
 
                             </section>
 
+                            {employee.doubleShift &&
+                                <section className='doubleShiftCutTime'>
+                                    <Form key={employee.id} onSubmit={(e) => handleSubmit(e)}>
 
+                                        <Form.Control
+                                            placeholder="Cut Start"
+                                            value={employee.cutStart || ""}
+                                            onChange={(e) =>
+                                                setPruebaEmployees((prev) =>
+                                                    prev.map((emp) =>
+                                                        emp.id === employee.id
+                                                            ? { ...emp, cutStart: e.target.value }
+                                                            : emp
+                                                    )
+                                                )
+                                            }
+                                        />
+
+                                        <Form.Control
+                                            placeholder="Cut End"
+                                            value={employee.cutEnd || ""}
+                                            onChange={(e) =>
+                                                setPruebaEmployees((prev) =>
+                                                    prev.map((emp) =>
+                                                        emp.id === employee.id
+                                                            ? { ...emp, cutEnd: e.target.value }
+                                                            : emp
+                                                    )
+                                                )
+                                            }
+                                        />
+
+
+                                    </Form>
+                                </section>
+                            }
+
+
+
+
+
+
+                            {/* 
                             <>
 
-                                <Modal show={showCutModal} onHide={handleClose}>
-                                    <Modal.Header closeButton>
+                                <Modal show={showCutModal} >
+                                    <Modal.Header>
                                         <Modal.Title>TODAVIA NO GUARDA DESDE ACA!</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <Form key={employee.id} onSubmit={(e) => handleSubmit(e)}>
+                                        <Form key={employee.id} >
                                             <Row>
                                                 <Col>
                                                     <Form.Control
@@ -348,12 +363,12 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                                         <Button variant="secondary" onClick={handleClose}>
                                             Close
                                         </Button>
-                                        <Button variant="primary" onClick={handleClose}>
+                                        <Button variant="primary" onClick={handleTest} >
                                             Save Changes
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
-                            </>
+                            </> */}
 
 
                         </div>
