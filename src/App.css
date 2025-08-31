@@ -27,6 +27,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 35px 0 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-link {

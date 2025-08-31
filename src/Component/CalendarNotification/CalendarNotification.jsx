@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from 'react-calendar';
-import { FaCircle, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from "react-router-dom";
-import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 
 
@@ -54,7 +53,7 @@ const CalendarNotification = () => {
     //primero que busque si la fecha seleccionada existe, si no existe crearla. Y si existe agregarle.
 
     const addInfoToSelectDate = (date) => {
-        console.log('hola date', date);
+        //console.log('hola date', date);
 
         const dateJson = date.toISOString().split("T")[0]
         navigate(`/${dateJson}`);

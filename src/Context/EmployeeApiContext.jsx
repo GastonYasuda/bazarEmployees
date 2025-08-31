@@ -164,9 +164,7 @@ const EmployeeApiContext = ({ children }) => {
     };
 
     const [specialDates, setSpecialDates] = useState([
-        // new Date(2025, 7, 8),
-        // new Date(Date.UTC(2025, 8, 25)), // 25 de julio 2025
-        // new Date(2025, (6 + 1), 12),
+
     ])
 
     const addSpecialDate = (newDate, store) => {
@@ -195,7 +193,6 @@ const EmployeeApiContext = ({ children }) => {
         allDates.push(newSpecialDate);
         localStorage.setItem('allSpecialDates', JSON.stringify(allDates));
 
-        console.log('Fecha agregada:', newSpecialDate);
     }
 
 
