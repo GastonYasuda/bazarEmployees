@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Calendar from 'react-calendar';
 import { FaCircle, FaTimes } from 'react-icons/fa';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from "react-router-dom";
+import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 
 
 const CalendarNotification = () => {
 
-    const specialDates = [
-        new Date(2025, 8, 5),
-        new Date(2025, 7, 25)
-    ];
-
+    const { specialDates } = useContext(apiEmployee)
 
 
 

@@ -92,7 +92,6 @@ const ShowByStore = ({ employeeByStore, isStored, date }) => {
                     </div>
                 </button>
 
-
                 <ScheduleGraphic isStored={isStored} date={date}
                     employeeByStore={employeeByStore}
                     employeeData={pruebaEmployees} from={''} state={'showByStore'} />

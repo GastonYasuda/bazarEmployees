@@ -164,11 +164,16 @@ const EmployeeApiContext = ({ children }) => {
     };
 
 
+    const specialDates = [
+        new Date(2025, 7, 8),
+        new Date(Date.UTC(2025, 8, 25)), // 25 de julio 2025
+        new Date(2025, (6 + 1), 12),
 
+    ];
 
 
     return (
-        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, employeeData, employeesEspacioStored, setEmployeesEspacioStored, employeesPuntoStored, setEmployeesPuntoStored, employeesCiudadStored, setEmployeesCiudadStored, getLocalStoreInfoByDate, guardados }}>
+        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, employeeData, employeesEspacioStored, setEmployeesEspacioStored, employeesPuntoStored, setEmployeesPuntoStored, employeesCiudadStored, setEmployeesCiudadStored, getLocalStoreInfoByDate, guardados, specialDates }}>
             {children}
         </apiEmployee.Provider>
     )
