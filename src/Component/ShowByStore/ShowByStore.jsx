@@ -11,14 +11,16 @@ import { toast } from 'react-toastify';
 
 const ShowByStore = ({ employeeByStore, isStored, date }) => {
 
-    const { mayPrimera, employees, getLocalStoreInfoByDate, guardados } = useContext(apiEmployee)
-    const { storeId } = useParams()
+    const { mayPrimera, employees, getLocalStoreInfoByDate, guardados, addSpecialDate } = useContext(apiEmployee)
+    const { storeId, byDateId } = useParams()
     const [pruebaEmployees, setPruebaEmployees] = useState([])
 
     const myNewDateId = new Date(date).toLocaleDateString("es-ES", { weekday: "long" })
 
 
     useEffect(() => {
+        //  console.log(byDateId);
+
 
         if (!isStored) {
             const byStore = employees.filter((employee) => employee.store === storeId)
@@ -74,6 +76,7 @@ const ShowByStore = ({ employeeByStore, isStored, date }) => {
         }));
 
         getLocalStoreInfoByDate(date)
+        addSpecialDate(byDateId, storeId)//esta funcion del context tiene que guardar la fecha
     }
 
 

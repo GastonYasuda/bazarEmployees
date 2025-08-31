@@ -131,7 +131,7 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                 );
 
                 if (changeTime.assist) {
-                    toast(`Falta ${changeTime.name} en ${changeTime.store}`)
+                    // toast(`Falta ${changeTime.name} en ${changeTime.store}`)
                     saveInfo(`Falta ${changeTime.name} en ${changeTime.store}`, 'missingEmployee')
                 }
             }
@@ -295,68 +295,6 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
                                     </Form>
                                 </section>
                             }
-
-
-
-
-
-
-                            {/* 
-                            <>
-
-                                <Modal show={showCutModal} >
-                                    <Modal.Header>
-                                        <Modal.Title>TODAVIA NO GUARDA DESDE ACA!</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        <Form key={employee.id} >
-                                            <Row>
-                                                <Col>
-                                                    <Form.Control
-                                                        placeholder="Cut Start"
-                                                        value={employee.cutStart || ""}
-                                                        onChange={(e) =>
-                                                            setPruebaEmployees((prev) =>
-                                                                prev.map((emp) =>
-                                                                    emp.id === employee.id
-                                                                        ? { ...emp, cutStart: e.target.value }
-                                                                        : emp
-                                                                )
-                                                            )
-                                                        }
-                                                    />
-                                                </Col>
-                                                <Col>
-                                                    <Form.Control
-                                                        placeholder="Cut End"
-                                                        value={employee.cutEnd || ""}
-                                                        onChange={(e) =>
-                                                            setPruebaEmployees((prev) =>
-                                                                prev.map((emp) =>
-                                                                    emp.id === employee.id
-                                                                        ? { ...emp, cutEnd: e.target.value }
-                                                                        : emp
-                                                                )
-                                                            )
-                                                        }
-                                                    />
-                                                </Col>
-                                            </Row>
-                                        </Form>
-
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleClose}>
-                                            Close
-                                        </Button>
-                                        <Button variant="primary" onClick={handleTest} >
-                                            Save Changes
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
-                            </> */}
-
-
                         </div>
                     )
                 }))

@@ -163,17 +163,45 @@ const EmployeeApiContext = ({ children }) => {
         return true;
     };
 
+    const [specialDates, setSpecialDates] = useState([
+        // new Date(2025, 7, 8),
+        // new Date(Date.UTC(2025, 8, 25)), // 25 de julio 2025
+        // new Date(2025, (6 + 1), 12),
+    ])
 
-    const specialDates = [
-        new Date(2025, 7, 8),
-        new Date(Date.UTC(2025, 8, 25)), // 25 de julio 2025
-        new Date(2025, (6 + 1), 12),
+    const addSpecialDate = (newDate, store) => {
 
-    ];
+        // Convertir string a Date
+        const [year, month, day] = newDate.split("-").map(Number);
+        const fixedDate = new Date(year, month - 1, day); // mes 0-based
+
+        // Crear objeto de la fecha
+        const newSpecialDate = {
+            specialDateData: fixedDate,
+            specialDateStore: store
+        };
+
+        // Actualizar state
+        setSpecialDates(prev => [...prev, newSpecialDate]);
+
+
+        // Guardar en localStorage
+        const stored = localStorage.getItem('allSpecialDates');
+        let allDates = stored ? JSON.parse(stored) : [];
+
+        // Si solo hay un objeto guardado, aseguramos que sea array
+        if (!Array.isArray(allDates)) allDates = [allDates];
+
+        allDates.push(newSpecialDate);
+        localStorage.setItem('allSpecialDates', JSON.stringify(allDates));
+
+        console.log('Fecha agregada:', newSpecialDate);
+    }
+
 
 
     return (
-        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, employeeData, employeesEspacioStored, setEmployeesEspacioStored, employeesPuntoStored, setEmployeesPuntoStored, employeesCiudadStored, setEmployeesCiudadStored, getLocalStoreInfoByDate, guardados, specialDates }}>
+        <apiEmployee.Provider value={{ mayPrimera, infoMissingMorning, infoMissingAfternoon, infoShiftFixMissing, infoMissingEmployee, saveInfo, formatHour, employees, setEmployees, espacioEmployees, entryAllTime, exitAllTime, puntoEmployees, ciudadEmployees, notAssistEmployeesState, employeeData, employeesEspacioStored, setEmployeesEspacioStored, employeesPuntoStored, setEmployeesPuntoStored, employeesCiudadStored, setEmployeesCiudadStored, getLocalStoreInfoByDate, guardados, specialDates, addSpecialDate }}>
             {children}
         </apiEmployee.Provider>
     )

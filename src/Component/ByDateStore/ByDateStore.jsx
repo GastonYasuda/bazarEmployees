@@ -25,7 +25,7 @@ const ByDateStore = () => {
 
         } else {
             setIsStored(false);
-            console.log('ciudadEmployees', ciudadEmployees);
+            // console.log('ciudadEmployees', ciudadEmployees);
 
         }
     }, []);

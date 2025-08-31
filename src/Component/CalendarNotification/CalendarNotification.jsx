@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Calendar from 'react-calendar';
 import { FaCircle, FaTimes } from 'react-icons/fa';
 import 'react-calendar/dist/Calendar.css';
@@ -9,8 +9,31 @@ import { apiEmployee } from "../../Context/EmployeeApiContext";
 
 const CalendarNotification = () => {
 
-    const { specialDates } = useContext(apiEmployee)
 
+    const [showSpecialDates, setShowSpecialDates] = useState([])
+
+    useEffect(() => {
+        toLocalMidnight()
+
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+
+
+    function toLocalMidnight() {
+        const stored = localStorage.getItem('allSpecialDates');
+        if (!stored) return;
+
+        const parsed = JSON.parse(stored);
+
+        const normalized = parsed.map(element => ({
+            specialDateData: new Date(element.specialDateData), // objeto Date
+            specialDateStore: element.specialDateStore // la propiedad para el color
+        }));
+
+        setShowSpecialDates(normalized);
+    }
 
 
 
@@ -31,6 +54,8 @@ const CalendarNotification = () => {
     //primero que busque si la fecha seleccionada existe, si no existe crearla. Y si existe agregarle.
 
     const addInfoToSelectDate = (date) => {
+        console.log('hola date', date);
+
         const dateJson = date.toISOString().split("T")[0]
         navigate(`/${dateJson}`);
         const esta = saveInfoToSelectDate.includes(dateJson);
@@ -43,18 +68,57 @@ const CalendarNotification = () => {
     return (
         <div>
             <section className="calendarNotification_container">
+
                 <Calendar
                     onChange={addInfoToSelectDate}
                     locale="es-ES"
-                    tileContent={({ date }) =>
-                        specialDates.some((d) => isSameDay(d, date)) ? (
-                            <div style={{ textAlign: 'right', fontSize: '0.75rem' }}>
-                                <FaCircle color="red" />
-                                <FaTimes color="red" />
+                    tileContent={({ date }) => {
+                        // obtener todos los objetos que coincidan con la fecha
+                        const matchedDates = showSpecialDates.filter(d => isSameDay(d.specialDateData, date));
+                        if (matchedDates.length === 0) return null;
+
+                        return (
+                            <div
+                                style={{
+                                    textAlign: 'right',
+                                    fontSize: '0.75rem',
+                                    display: 'flex',
+                                    gap: '2px',
+                                    justifyContent: 'flex-end'
+                                }}
+                            >
+                                {matchedDates.map((d, index) => {
+                                    // asignar color según specialDateStore
+                                    let color;
+                                    switch (d.specialDateStore) {
+                                        case 'espacio':
+                                            color = 'violet';
+                                            break;
+                                        case 'punto':
+                                            color = 'red';
+                                            break;
+                                        case 'ciudad':
+                                            color = 'orange';
+                                            break;
+                                        default:
+                                            color = 'gray';
+                                    }
+
+                                    return <FaTimes key={index} color={color} />;
+                                })}
                             </div>
-                        ) : null
-                    }
+                        );
+                    }}
                 />
+
+
+
+            </section>
+
+            <section className="refSection">
+                <span> <FaTimes color={'violet'} />Espacio</span>
+                <span> <FaTimes color={'red'} />Punto</span>
+                <span><FaTimes color={'orange'} />Ciudad</span>
 
             </section>
 

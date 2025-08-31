@@ -158,3 +158,11 @@ code {
     color: inherit;
   }
 }
+
+.refSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+  margin: 25px auto;
+}
