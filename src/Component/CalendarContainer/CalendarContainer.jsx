@@ -15,9 +15,6 @@ const CalendarContainer = () => {
 
             <div className="mainContainer">
 
-
-
-
                 {!showMainCalendarNotification &&
 
                     <CalendarNotification />

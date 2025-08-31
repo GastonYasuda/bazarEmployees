@@ -19,8 +19,6 @@ const ShowByStore = ({ employeeByStore, isStored, date }) => {
 
 
     useEffect(() => {
-        //    console.log(pruebaEmployees);
-
 
         if (!isStored) {
             const byStore = employees.filter((employee) => employee.store === storeId)

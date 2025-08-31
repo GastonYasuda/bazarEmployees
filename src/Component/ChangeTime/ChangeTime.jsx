@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Form } from "react-bootstrap";
 import { Bounce, toast } from 'react-toastify';
 import { apiEmployee } from "../../Context/EmployeeApiContext";
@@ -10,17 +10,6 @@ const ChangeTime = ({ pruebaEmployees, setPruebaEmployees }) => {
 
     const { saveInfo, formatHour, entryAllTime, exitAllTime, employeeData } = useContext(apiEmployee)
 
-
-    useEffect(() => {
-
-
-        if (pruebaEmployees.length !== 0) {
-
-            console.log('pruebaEmployees', pruebaEmployees);
-        }
-
-
-    }, [])
 
 
     const handleEntryChange = (id, newEntryTime) => {
