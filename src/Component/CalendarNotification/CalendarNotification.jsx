@@ -77,6 +77,9 @@ const CalendarNotification = () => {
                         const matchedDates = showSpecialDates.filter(d => isSameDay(d.specialDateData, date));
                         if (matchedDates.length === 0) return null;
 
+                        // obtener solo specialDateStore únicos
+                        const uniqueStores = [...new Set(matchedDates.map(d => d.specialDateStore))];
+
                         return (
                             <div
                                 style={{
@@ -87,10 +90,9 @@ const CalendarNotification = () => {
                                     justifyContent: 'flex-end'
                                 }}
                             >
-                                {matchedDates.map((d, index) => {
-                                    // asignar color según specialDateStore
+                                {uniqueStores.map((store, index) => {
                                     let color;
-                                    switch (d.specialDateStore) {
+                                    switch (store) {
                                         case 'espacio':
                                             color = 'violet';
                                             break;
@@ -98,18 +100,18 @@ const CalendarNotification = () => {
                                             color = 'red';
                                             break;
                                         case 'ciudad':
-                                            color = 'orange';
+                                            color = 'yellow';
                                             break;
                                         default:
                                             color = 'gray';
                                     }
-
                                     return <FaTimes key={index} color={color} />;
                                 })}
                             </div>
                         );
                     }}
                 />
+
 
 
 
